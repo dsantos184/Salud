@@ -54,6 +54,11 @@ body
     padding: 33px;
 }
 
+.container-passo
+{
+    text-align: center;
+}
+
 .texto-passos
 {
     width: 310px;
@@ -85,6 +90,7 @@ body
     border: 1px dashed #fff;
     border-radius: 50%;
     padding: 10px;
+    display: inline-block;
 }
 
 .icone-passos img
