@@ -1,0 +1,652 @@
+.container-body
+{
+    margin: 0 8%;
+}
+
+.container-header
+{
+    width: 100%;
+    height:100vh;
+    padding: 2% 10%;
+    background-image: url("../img/bg-header.jpg");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    box-sizing: border-box;
+    
+}
+
+.container-barra-superior
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.link-logo > .img-logo
+{
+    object-fit: cover;
+    width: 150px;
+}
+
+.container-barra-superior > .lista-menu
+{
+    color: #fff;
+    margin-left: 15%;
+}
+
+.container-barra-superior > .menu-mobile
+{
+   display: none;
+}
+
+
+.lista-menu > .link-menu:not(:last-child)
+{
+    margin-right: 1.830vw;
+}
+
+.lista-sociais
+{
+    display: flex;    
+}
+
+.lista-sociais > .lista-link-sociais:not(:last-child)
+{
+    margin-right: 10%;
+}
+
+.link-sociais:not(:last-child)
+{
+    margin-right: 20px
+}
+
+.container-sociais .link-sociais img
+{
+    width: 36px;
+}
+
+.container-titulo-header
+{
+    width: 466px;
+    margin-top: 10%;
+}
+
+.titulo-header
+{
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 51px;
+}
+
+.container-btn
+{
+    margin-top: 20px;;
+}
+
+.btn
+{
+    border-radius: 20px;
+    font-size: 0.75em;
+    color: #fff;
+    /*width: 14.131vw;*/
+    width: 193px;
+    display: flex;    
+    align-items: center;
+    justify-content: center;
+    float: left;
+    padding: 10px 2%;
+    text-transform: uppercase;
+}
+
+.btn-azul
+{
+    background-color: #35b7c5;
+}
+
+.btn-degrade
+{
+    background-image: linear-gradient(-90deg,#f6454a, #ff8f4f );
+    margin-right: 5%;
+}
+
+.wrapper-quadrados
+{
+    width: 100%;
+    margin: 5% 0;
+    display: inline-block;
+}
+
+.container-quadrados
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.quadrado
+{
+    font-size: 0.875em;
+    color:#fff;
+    width: 165px;
+    height: 165px;
+    display: flex;
+    float: left;
+    align-items: center;
+    text-align: center;
+    padding: 0 0.5%;
+    border-radius: 8px;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(204,204,204,1);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(204,204,204,1);
+    box-shadow: 10px 10px 5px 0px rgba(204,204,204,1);
+}
+
+.quadrado:not(:last-child)
+{
+    margin-right: 2%;
+}
+
+.quadrado-azul
+{
+    background-color: #35b7c5;
+}
+
+.quadrado-laranja
+{
+    background-color: #fe742c;
+}
+
+.titulo-container
+{
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.texto-conheca
+{
+    font-size: 0.875em;
+    line-height: 25px;
+}
+
+.container-conheca
+{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10%;
+    padding: 5% 10%;
+    background-color: #edf0f7;
+}
+
+.container-img-conheca
+{
+    margin-right: 50px;
+}
+
+.texto-conheca
+{
+    margin-bottom: 15px;
+}
+
+.container-precadastro
+{
+    text-align: center;
+    margin-bottom: 10%;
+}
+
+.wrapper-precadastros
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.wrapper-precadastros > .container-cadastro-cliente
+{
+    margin-right: 10%;
+}
+
+.container-cadastro-cliente, .container-cadastro-prestador
+{
+    width: 423px;
+}
+
+
+
+.precadastro
+{
+    /*width: 400px;*/
+    border-radius: 8px;
+    padding: 5%;
+    margin-top: 15px;
+    line-height: 33px;
+    color: #fff;
+}
+
+.precadastro-cliente
+{
+    background-color: #fe742c;
+}
+
+.precadastro-prestador
+{
+    background-color: #35b7c5;
+}
+
+.titulo-pre-cadastro
+{
+    font-size: 22px;
+    font-weight: bold;
+    display: block;
+}
+
+.container-beneficios
+{
+    background-image: url('../img/bg-beneficios.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 134.008vh;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-titulo-beneficios
+{
+    margin-bottom: 30px;
+}
+
+.titulo-beneficios
+{
+    font-size: 42px;
+    font-family: 'Montserrat', sans-serif ;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.icon-beneficios
+{
+    width: 40px;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.container-quadrados-beneficios
+{
+    width: 780px;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+.quadrado-beneficios
+{
+    width: 145px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px;
+    font-size: 12px;
+    float: left;
+    -webkit-box-shadow: 4px 6px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 6px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 4px 6px 5px 0px rgba(0,0,0,0.75);
+}
+
+.container-btn-regulamentos
+{
+    text-align: center;
+}
+
+.btn-regulamento
+{
+    background-color: #1c45a8;
+    font-size: 12px;
+    color: #fff;
+    text-transform: uppercase;
+    border-radius: 8px;
+    padding: 5px 20px;
+}
+
+.container-siganos
+{
+    height: 300px;
+    background-color: #1c45a8;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10%;
+}
+
+.container-footer
+{
+    background-color: #1c45a8;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0 40px 0 ;
+}
+
+#Layer_1
+{
+    position: absolute;
+    bottom: -1px;
+}
+
+.container-text-siganos
+{
+    margin-right: 150px;
+}
+
+.container-icon-siganos
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo-siganos
+{
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.icon-siganos
+{
+    object-fit: cover;
+    width: 220px;;
+}
+
+/******** MOBILE *******/
+
+@media(max-width: 1299px)
+{
+    .container-header
+    {
+        height: auto;
+    }
+    
+    .container-btn
+    {
+        display: inline-block;
+    }
+
+    .btn-degrade
+    {
+        margin: 0;
+    }
+
+    .btn-azul
+    {
+       margin-top: 15px;
+    }
+
+    .wrapper-precadastros
+    {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .wrapper-precadastros > .container-cadastro-cliente
+    {
+       margin: 0 0 50px 0; 
+    }
+}
+
+@media(max-width: 1145px)
+{
+    .container-img-conheca
+    {
+        margin: 0 0 30px 0;
+    }
+    
+    .container-conheca
+    {
+        flex-direction: column;
+    }
+
+    .container-conteudo-conheca
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .img-conheca
+    {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+@media(max-width: 1033px)
+{
+    .container-body
+    {
+        margin: 0;
+    }
+
+    .container-barra-superior > .lista-sociais
+    {
+        display: none;
+    }
+}
+
+@media(max-width: 840px)
+{
+    .container-quadrados-beneficios
+    {
+        width: 586px;
+    }
+
+    .container-siganos
+    {
+        flex-direction: column;
+    }
+
+    .container-siganos > .container-text-siganos
+    {
+        margin-right: 0;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .container-icon-siganos
+    {
+        flex-direction: row;
+    }
+}
+
+@media(max-width: 768px)
+{
+    .container-barra-superior > .lista-menu
+    {
+        display: none;
+    }
+
+    .container-barra-superior > .menu-mobile
+    {
+        display: block;
+        margin-right: 30px;
+    }
+
+    .container-barra-superior
+    {
+        justify-content: normal;
+    }
+
+    .menu-mobile > .link-icon-menu
+    {
+        width: 36px;
+        height: 36px;
+        display: block;
+        cursor: pointer;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .icon-menu-mobile
+    {
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .menu-mobile > .lista-menu-mobile
+    {
+        width: 150px;
+        background-color: #35b7c5;
+        color: #fff;
+        padding: 30px 60px 30px 15px;
+        position: absolute;
+        margin-top: -6px;
+        display: none;
+    }
+
+    .link-menu-close
+    {
+        display: block;
+        color: #fff;
+        font-size: 24px;
+        cursor: pointer;
+        float:right;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .lista-menu-close
+    {
+        margin-bottom: 12px;
+    }
+
+    .lista-menu-mobile > .lista-link-mobile
+    {
+        padding: 10px 0 ;
+        border-width: 1px 0;
+        border-style: solid;
+        border-color: #ffffff91;
+    }
+
+    .menu-ativo
+    {
+        display: block !important;
+    }
+
+    .container-quadrados
+    {
+        display: block;
+        width: 380px;
+        margin: 0 auto;
+    }
+
+    .quadrado
+    {
+        margin: 10px !important;
+    }
+}
+
+@media(max-width:675px)
+{
+
+    .container-cadastro-cliente, .container-cadastro-prestador
+    {
+        width: 323px;
+    }
+
+    .precadastro
+    {
+        line-height: 24px;
+    }
+
+    .precadastro a
+    {
+        font-size: 14px;
+    }
+
+    .titulo-pre-cadastro
+    {
+        font-size: 1em;
+    }
+    
+    
+    .container-quadrados-beneficios
+    {
+        width: 285px;
+    }
+
+    .quadrado-beneficios
+    {
+        width: 100px;
+        height: 60px;
+        margin: 5px;
+        font-size: 11px;
+    }
+
+    .btn-regulamento
+    {
+        width: 235px;
+        display: block;
+    }
+
+    .container-text-siganos p
+    {
+        font-size: 12px;
+    }
+
+    .titulo-siganos
+    {
+        font-size: 22px;
+    }
+
+    .icon-siganos
+    {
+        width: 170px;
+    }
+}
+
+@media(max-width: 535px)
+{
+    .container-titulo-header
+    {
+        width: auto;
+    }
+
+    .titulo-header
+    {
+        font-size: 22px;
+        line-height: 31px;
+    }
+}
+
+@media(max-width: 400px)
+{
+    .container-quadrados
+    {
+        width: 337px;
+    }
+
+    .quadrado
+    {
+        width: 145px;
+        height: 145px;
+    }
+}
