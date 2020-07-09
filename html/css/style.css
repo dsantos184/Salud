@@ -56,13 +56,16 @@ body
 
 .texto-passos
 {
+    width: 310px;
     border-color: #fff;
     border-width: 0 2px 0 0;
-    border-style: dashed;
-    flex: 3;
+    border-style: dashed;   
+    padding-right: 33px;
+    margin-right: 33px;
 }
 
-.passos
+.texto-passos h2
 {
-    flex: 4;
+    font-size: 22px;
+    font-weight: 700;
 }
