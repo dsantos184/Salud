@@ -1,14 +1,68 @@
+body
+{
+    font-family: 'Montserrat', sans-serif !important;
+}
+
 .btn
 {
-    border-radius: 15px !important;
+    border-radius: 50em !important;
+    font-weight: 500;
+}
+
+.btn-lg
+{
+    font-size: 14px;    
+}
+
+.btn-sm
+{
+    font-size: 13px;
 }
 
 .bg-red
 {
-    background: #d50043;
+    background-color: #d50043;
+}
+
+.bg-light-blue
+{
+    background-color: #06cccd ;
+}
+
+.bg-dark-blue
+{
+    background-color:#121b44 ;
 }
 
 .color-white
 {
     color: #fff;
+}
+
+.color-dark-blue
+{
+    color: #121b44 ;
+}
+
+.container-passos
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 274px;
+    border-radius: 20px;
+    padding: 33px;
+}
+
+.texto-passos
+{
+    border-color: #fff;
+    border-width: 0 2px 0 0;
+    border-style: dashed;
+    flex: 3;
+}
+
+.passos
+{
+    flex: 4;
 }
