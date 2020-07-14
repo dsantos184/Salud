@@ -36,18 +36,45 @@ body
 
 .color-white
 {
-    color: #fff;
+    color: #fff !important;
 }
 
 .color-red
 {
-    color: #d50043;
+    color: #d50043 !important;
 }
 
 .color-dark-blue
 {
-    color: #121b44 ;
+    color: #121b44 !important;
 }
+
+.jumbotron
+{
+    background-image: linear-gradient(
+        to right,
+        #0a1b35, #271b63
+    );
+}
+
+.navbar
+{
+    background-color: transparent !important;
+}
+
+.img-logo
+{
+    object-fit: cover;
+    height: 45px;
+}
+
+
+.continer-carousel-empresa
+{
+
+}
+
+
 
 .container-passos
 {
