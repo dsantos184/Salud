@@ -26,7 +26,7 @@ body
 
 .bg-light-blue
 {
-    background-color: #06cccd ;
+    background-color: #44c5c0 ;
 }
 
 .bg-dark-blue
@@ -84,6 +84,8 @@ body
 .passos
 {
     display: flex;
+    flex: 4;
+    justify-content: space-between;
 }
 
 .icone-passos
@@ -117,7 +119,7 @@ body
     font-size: 14px;
     font-weight: 500;
     position: absolute;
-    left: 17px;
+    left: 8px;
 }
 
 #primeiro-passo::before
