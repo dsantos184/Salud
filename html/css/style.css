@@ -133,6 +133,14 @@ body
     width: 100% !important;
 }
 
+.container-carousel-familia
+{
+    background: url('../imagens/para-sua-familia.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 .container-passos
 {
     display: flex;
@@ -237,12 +245,6 @@ body
     font-size: 13px;
     font-weight: 700;
 }
-
-.descricao-passo > .etapa
-{
-
-}
-
 
 .texto-institucional-home{ padding: 155px 0 0 0; }
 .texto-institucional-home h2 { font-size:13px; }
