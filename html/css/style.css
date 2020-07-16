@@ -49,6 +49,11 @@ body
     color: #121b44 !important;
 }
 
+.color-light-blue
+{
+    color: #44c5c0;
+}
+
 .jumbotron
 {
     background-image: linear-gradient(
@@ -60,6 +65,11 @@ body
 .navbar
 {
     background-color: transparent !important;
+}
+
+.btn-white
+{
+    border: 2px solid #fff;
 }
 
 .img-logo
@@ -74,13 +84,54 @@ body
     width: 32px;
 }
 
-
-.continer-carousel-empresa
+.titulo
 {
+    font-size: 38px;
+    font-weight: 700;
+}
 
+.carousel-indicators
+{
+    display: inline-block;
+    left: auto;
+}
+
+.carousel-indicators li
+{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background-color: transparent;
+}
+
+.carousel-indicators li:not(:last-child)
+{
+    margin-bottom: 40px;
+}
+
+.carousel-indicators li:not(:last-child)::before
+{
+    display: block;
+    content: '';
+    width: 2px;
+    height: 43px;
+    background-color: #fff;
+    position: absolute;
+    left: 48%;
+    top: 22px;
 }
 
 
+.carousel-indicators .active
+{
+    background-color: #44c5c0 ;
+}
+
+.carousel
+{
+    width: 100% !important;
+}
 
 .container-passos
 {
