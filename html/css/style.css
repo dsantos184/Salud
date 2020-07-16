@@ -330,6 +330,15 @@ body
     background: linear-gradient(to right,  #020087 0%,#90009f 50%,#ea1c80 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#020087', endColorstr='#ea1c80',GradientType=1 ); /* IE6-9 */
 }
+
+ 
+.bg-grad-azul{/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#0a1b35+0,261a62+100 */
+    background: #0a1b35; /* Old browsers */
+    background: -moz-linear-gradient(left,  #0a1b35 0%, #261a62 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #0a1b35 0%,#261a62 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #0a1b35 0%,#261a62 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a1b35', endColorstr='#261a62',GradientType=1 ); /* IE6-9 */
+    }
 .btn-planos-home{width: auto; height: 38px; line-height: 38px; border-radius: 50em !important; border:0; font-size: 16px; padding:0 20px; margin:20px auto 0 auto;}
 .titulo-topo-plano{position: absolute; left:0; top:0; right: 0; margin:0 auto; color:#fff; 
 font-weight: bold; font-size:22px; text-transform: uppercase; margin-top:50px;}
@@ -345,8 +354,50 @@ ul.lista-plano {border: 1px solid #B9C8D3}
 .slide-beneficios-home{text-align: center;}
 .slide-beneficios-home h2 { font-size:13px; margin:70px 0 0 0; }
 .slide-beneficios-home h3{font-size:32px; font-weight: bold; margin-bottom: 50px; }
+ 
+ul.slide-menu-items { padding-right: 10px; height: 400px; overflow: auto; }
+ul.slide-menu-items li {padding:5px; box-sizing: border-box; display: flex; background-color: #DFF6FC; border-bottom:3px dashed #CFF3F9;}
+ul.slide-menu-items li:hover{ 
+    border-bottom:3px dashed #121b44;   
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#0a1b35+0,261a62+100 */
+    background: #0a1b35; /* Old browsers */
+    background: -moz-linear-gradient(left,  #0a1b35 0%, #261a62 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #0a1b35 0%,#261a62 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #0a1b35 0%,#261a62 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a1b35', endColorstr='#261a62',GradientType=1 ); /* IE6-9 */
+    }
+.img-icone-slide-home {width: 60px;}
+.texto-item-slide-home {font-size: 14px; text-align: left; font-weight: bold; padding-top: 5px; margin-left:10px;}
+ul.slide-menu-items li:hover .texto-item-slide-home{color:white !important;}
 
-ul.slide-menu-items {background-color: #DFF6FC;}
-ul.slide-menu-items li {padding: 10px; box-sizing: border-box; display: flex; border-bottom:3px dashed #CFF3F9;}
-.img-icone-slide-home {width: 50px;}
-.texto-item-slide-home {font-size: 14px; text-align: left; font-weight: bold; padding-top: 5px;}
+.exibe-slide-container{background-color: #DFF6FC; border-radius: 20px; height: 400px;}
+
+.conteudo-slide-home{display: flex;}
+.conteudo-slide-home .img-slide-box{height: 240px; width: 240px;}
+.conteudo-slide-home .passo{font-weight: bold; font-size: 13px;}
+.conteudo-slide-home h4{font-size: 25px; font-weight: bold;}
+
+
+/* scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #ccc; 
+    background-color: #ccc;
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #d50043; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #d50043; 
+  }
