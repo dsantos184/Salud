@@ -59,12 +59,19 @@ body
     color: #000;
 }
 
-.jumbotron
+.container-header
 {
     background-image: linear-gradient(
         to right,
         #0a1b35, #271b63
     );
+
+    height: 600px;
+}
+
+.jumbotron
+{
+    background: transparent;
 }
 
 .navbar
@@ -136,14 +143,6 @@ body
 .carousel
 {
     width: 100% !important;
-}
-
-.container-carousel-familia
-{
-    background: url('../imagens/para-sua-familia.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
 }
 
 .container-passos
