@@ -61,12 +61,15 @@ body
 
 .container-header
 {
-    background-image: linear-gradient(
-        to right,
-        #0a1b35, #271b63
-    );
-
     height: 600px;
+    background-image: 
+        url('../imagens/para-sua-familia.png'),
+        linear-gradient(
+            to right,
+            #0a1b35, #271b63
+        );
+    background-repeat: no-repeat;
+    background-position: bottom;
 }
 
 .jumbotron
@@ -153,6 +156,8 @@ body
     height: 274px;
     border-radius: 20px;
     padding: 33px;
+    position: relative;
+    margin-top: -15%;
 }
 
 .container-passo
