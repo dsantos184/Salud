@@ -263,12 +263,12 @@ body
 .img-institucional-home{width: 600px;}
 
 section.planos-home{position: relative; top:-120px; margin-bottom: -120px;}
-.container-beneficios{background-color: #121b44; position: relative; padding:0px 0 60px 0; }
+.container-beneficios{background-color: #121b44; position: relative; padding:0px 0 10px 0; }
 .container-beneficios h2 { font-size:13px; }
 .container-beneficios h3{color:white; font-size:32px; font-weight: bold; margin-bottom: 70px; }
 #svg-topo-planos{margin-bottom: -1px;}
 
-.box-plano{width: 255px; position: relative; z-index: 0; display: block; text-align: center; }
+.box-plano{width: 255px; position: relative; z-index: 0; display: block; text-align: center; margin-bottom: 50px; }
 .topo-plano{position: relative;}
 .circulo-topo-plano{background-color: white; border-radius:50%; width: 65px; height: 65px; position: absolute; top:-25px; left:0; right:0; margin:0 auto; box-shadow:0 0 10px #333; }
 .circulo-topo-plano .texto { margin-top:14px; }
@@ -379,18 +379,18 @@ ul.slide-menu-items li:hover{
 .texto-item-slide-home {font-size: 14px; text-align: left; font-weight: bold; padding-top: 5px; margin-left:10px;}
 ul.slide-menu-items li:hover .texto-item-slide-home{color:white !important;}
 
-.exibe-slide-container{background-color: #DFF6FC; border-radius: 20px; height: 330px;}
+.exibe-slide-container{background-color: #DFF6FC; border-radius: 20px; min-height: 330px;}
 
-.conteudo-slide-home{display: flex;box-sizing: content-box; padding: 25px;}
-.conteudo-slide-home .img-slide-box img{width: 280px; height: 280px; }
+.conteudo-slide-home{/*display: flex;*/box-sizing: content-box; padding: 25px;}
+/*.conteudo-slide-home .img-slide-box img{width: 280px; height: 280px; }*/
 .conteudo-slide-home .texto-slide-box{margin:0 0 0 10px;}
-.conteudo-slide-home .texto-slide-box .passo{font-weight: bold; font-size: 13px;}
+.conteudo-slide-home .texto-slide-box .passo{font-weight: bold; font-size: 13px; display: block;}
 .conteudo-slide-home .texto-slide-box h4{font-size: 20px; font-weight: bold;}
 .conteudo-slide-home .texto-slide-box p{font-size: 12px; line-height: 14px;}
 .conteudo-slide-home .texto-slide-box p.frase-final{font-size: 14px; color:#05CCCB; font-weight: bold;}
 
 .newsletter-home{background-color: #06C7CC; padding:70px 0; margin: 80px 0 0 0; border-bottom: 1px solid #C0EDF2;}
-.newsletter-home .container, .newsletter-home .container > div {display: flex;} 
+/*.newsletter-home .container, .newsletter-home .container > div {display: flex;} */
 .newsletter-home img{width: 80px; height:80px;} 
 .newsletter-home .texto-newsletter {margin:0 0 0 15px;}
 .newsletter-home .texto-newsletter h2 {font-size: 13px; font-weight: bold; margin: 10px 0 5px 0;}
@@ -400,7 +400,7 @@ ul.slide-menu-items li:hover .texto-item-slide-home{color:white !important;}
 .newsletter-home .form-newsletter .btn-newsletter {height: 38px; margin-left: -20px; padding: 0 25px; font-size:12px; font-weight: normal; background-color: #121b44; color:white; z-index: 4; border:none}
 
 
-section.footer .container {display: flex; padding: 40px 0;}
+section.footer .container {padding: 40px 0;}
 section.footer .container .logo-footer {width: 150px;} 
 section.footer .container p {font-size:11px; margin:10px 0 0 0;} 
 section.footer .container .contato-footer {font-size: 11px; margin-top: 5px;}
@@ -413,7 +413,7 @@ section.footer .container ul.menu-footer li{float: left; width: 50%; margin-bott
 section.footer .container ul.menu-footer li a{font-size: 12px; font-weight: 100;}
 
 section.footer .container .btn-entre-contato{display: inline-block; font-weight: bold; clear: both; margin-top: 20px;}
-section.footer .container .redes-sociais ul.navbar-nav{display: block;}
+section.footer .container .redes-sociais ul.navbar-nav{display: inline-block;}
 section.footer .container .redes-sociais ul.navbar-nav li{float: left; margin-right: 10px; }
 section.footer .container .redes-sociais ul.navbar-nav li a{display: inline; float: left;}
 
@@ -442,3 +442,12 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
   ::-webkit-scrollbar-thumb:hover {
     background: #d50043; 
   }
+
+
+
+  @media (max-width: 767px) {
+    *{text-align: center !important;}
+    .newsletter-home{margin-top: 0;}
+    .menu-footer, .redes-sociais{margin-top: 30px;}
+    section.footer .container ul.menu-footer{width: auto;}
+}
