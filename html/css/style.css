@@ -84,11 +84,32 @@ body
     border: 2px solid #fff;
 }
 
+.link-logo
+{
+    margin-right: 5%;
+}
+
 .img-logo
 {
     object-fit: cover;
     height: 45px;
 }
+
+.container-menu
+{
+    margin-right: 10%;
+}
+
+.container-btn-header
+{
+    margin-right: 2%;
+}
+
+.container-btn-header .nav-item:not(:last-child)
+{
+    margin-right: 15px;
+}
+
 
 .icone-sociais
 {
@@ -105,7 +126,10 @@ body
 .carousel-indicators
 {
     display: inline-block;
+    top: 20%;
     left: auto;
+    bottom: auto;
+    margin: 0;
 }
 
 .carousel-indicators li
