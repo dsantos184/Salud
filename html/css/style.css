@@ -61,25 +61,22 @@ body
 
 .container-header
 {
-    height: 600px;
     background-image: 
-        url('../imagens/para-sua-familia.png'),
         linear-gradient(
             to right,
             #0a1b35, #271b63
         );
-    background-repeat: no-repeat;
-    background-position: 81% 198%;
 }
 
-.jumbotron
+.container-header, .container-carousel, .carousel, .carousel-item
 {
-    background: transparent;
+    height: 600px;
 }
 
 .navbar
 {
     background-color: transparent !important;
+    padding: 4% 5%;
 }
 
 .btn-white
@@ -87,11 +84,32 @@ body
     border: 2px solid #fff;
 }
 
+.link-logo
+{
+    margin-right: 5%;
+}
+
 .img-logo
 {
     object-fit: cover;
     height: 45px;
 }
+
+.container-menu
+{
+    margin-right: 10%;
+}
+
+.container-btn-header
+{
+    margin-right: 2%;
+}
+
+.container-btn-header .nav-item:not(:last-child)
+{
+    margin-right: 15px;
+}
+
 
 .icone-sociais
 {
@@ -108,7 +126,10 @@ body
 .carousel-indicators
 {
     display: inline-block;
+    top: 20%;
     left: auto;
+    bottom: auto;
+    margin: 0;
 }
 
 .carousel-indicators li
@@ -137,7 +158,6 @@ body
     top: 22px;
 }
 
-
 .carousel-indicators .active
 {
     background-color: #44c5c0 ;
@@ -148,16 +168,46 @@ body
     width: 100% !important;
 }
 
+
+.institucional-carousel
+{
+    width: 37%;
+    margin-top: 5%;
+}
+
+.container-carousel-familia, .container-carousel-empresa
+{
+    background-repeat: no-repeat;
+    background-position: 100% 12%;
+}
+
+.container-carousel-familia
+{
+    background-image: url('../imagens/para-sua-familia.png');    
+}
+
+.container-carousel-empresa
+{
+    background-image: url('../imagens/para-sua-empresa.png');
+}
+
+.lead
+{
+    font-size: 28px;
+    font-weight: 500;
+}
+
 .container-passos
 {
-    display: flex;
+    /*display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: center;*/
     height: 274px;
     border-radius: 20px;
     padding: 33px;
     position: relative;
-    margin-top: -15%;
+    margin-top: -16%;
+
 }
 
 .container-passo

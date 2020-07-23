@@ -14,7 +14,7 @@
 <body>
   <header class="container-header">
     <nav class="col navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand link-logo" href="#">
         <img class="img-logo" src="./imagens/logo.png" alt="Salud">
       </a>
 
@@ -22,7 +22,7 @@
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="container-menu collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
             <a class="nav-link color-white" href="#">Institucional <span class="sr-only">(current)</span></a>
@@ -36,7 +36,7 @@
         </ul>
       </div>
 
-      <div class="collapse navbar-collapse container-cadastre-se" id="navbarNav">
+      <div class="container-btn-header collapse navbar-collapse container-cadastre-se" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item active">
             <a class="btn bg-red color-white btn-sm" href="#">Cadastre-se grátis <span
@@ -76,21 +76,23 @@
         </ul>
       </div>
     </nav>
-    <section class="container-carousel">
-      <div class="jumbotron jumbotron-fluid">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div class="carousel-item container-carousel-familia active">
+    <section class="container container-carousel">      
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item container-carousel-familia active">
+            <div class="institucional-carousel">
               <h1 class="display-4 color-light-blue titulo">Para Você</h1>
               <p class="lead color-white">Saúde e proteção para o bem de todos da sua família</p>
               <a class="btn bg-light-blue color-white btn-lg" href="#">Como funciona?</a>
               <a class="btn bg-red color-white btn-lg" href="#">Escolha o seu plano</a>
             </div>
-            <div class="carousel-item container-carousel-empresa">
+          </div>
+          <div class="carousel-item container-carousel-empresa">
+            <div class="institucional-carousel">
               <h1 class="display-4 color-light-blue titulo">Para sua empresa</h1>
               <p class="lead color-white">Saúde e proteção para o bem de todos os seus colaboradores</p>
               <a class="btn bg-light-blue color-white btn-lg" href="#">Como funciona?</a>
@@ -98,7 +100,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>      
     </section>
   </header>
 
