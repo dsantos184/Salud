@@ -207,9 +207,14 @@ body
 
 .container-passo
 {
+    width: 145px;
     text-align: center;
     position: relative;
-    float: left;
+    float: left;   
+}
+
+.container-passo:not(:last-child)
+{
     margin-right: 4%;
 }
 
@@ -510,7 +515,9 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
 
     .container-passo
     {
-        margin-right: 3%; 
+        margin-right: 3%;
+        float: none;
+        display: inherit;
     }
   }
 
@@ -529,4 +536,22 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
     {
         border-radius: 0;
     }
+}
+
+@media (max-width: 386px)
+{
+    .container-passos
+    {
+        padding: 70px 20px;
+    }
+
+   .container-passo
+   {
+       margin-right: 2% !important;
+   }
+
+   .descricao-passo, .etapa
+   {
+       font-size: 13px !important;
+   }
 }
