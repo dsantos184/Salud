@@ -200,16 +200,21 @@ body
 .container-passos
 {
     border-radius: 20px;
-    padding: 33px;
+    padding: 70px 33px;
     position: relative;
     margin-top: -16%;
 }
 
 .container-passo
 {
+    width: 145px;
     text-align: center;
     position: relative;
-    float: left;
+    float: left;   
+}
+
+.container-passo:not(:last-child)
+{
     margin-right: 4%;
 }
 
@@ -492,6 +497,29 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
     background: #d50043; 
   }
 
+  @media (max-width: 992px ){
+    .container-btn-header, .container-sociais{display: none;}
+    .container-menu{text-align: center;}
+    .texto-passos{
+        display: block;
+        width: 100%;
+        text-align: center;
+        border-width: 0 0 2px 0;
+        margin-bottom: 10%;
+    }
+    .passos
+    {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .container-passo
+    {
+        margin-right: 3%;
+        float: none;
+        display: inherit;
+    }
+  }
 
 
   @media (max-width: 767px) {
@@ -501,4 +529,29 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
     section.footer .container ul.menu-footer{width: auto;}
     .newsletter-home .conteudo-newsletter{display: inline-block;}
     .img-slide-box{width: 58%; margin: 0 auto;}
+}
+
+@media (max-width: 576px) {
+    .container-passos
+    {
+        border-radius: 0;
+    }
+}
+
+@media (max-width: 386px)
+{
+    .container-passos
+    {
+        padding: 70px 20px;
+    }
+
+   .container-passo
+   {
+       margin-right: 2% !important;
+   }
+
+   .descricao-passo, .etapa
+   {
+       font-size: 13px !important;
+   }
 }
