@@ -519,6 +519,23 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
         float: none;
         display: inherit;
     }
+
+    .container-carousel
+    {
+        margin:0 ;
+    }
+
+    .institucional-carousel
+    {
+        width: 100%;
+        text-align: center;
+    }
+
+    .container-carousel-familia, .container-carousel-empresa
+    {
+        background-position: center;
+        background-size: cover;
+    }
   }
 
 
@@ -535,6 +552,21 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
     .container-passos
     {
         border-radius: 0;
+    }
+
+    .carousel-indicators
+    {
+        display: flex;
+        top: 15px;
+        left: unset;
+    }
+
+    .carousel-indicators li:not(:last-child)::before
+    {
+        width: 43px;
+        height: 2px;
+        left: 19%;
+        top: 10px; 
     }
 }
 
