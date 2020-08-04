@@ -546,9 +546,7 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
     section.footer .container ul.menu-footer{width: auto;}
     .newsletter-home .conteudo-newsletter{display: inline-block;}
     .img-slide-box{width: 58%; margin: 0 auto;}
-}
 
-@media (max-width: 576px) {
     .container-passos
     {
         border-radius: 0;
@@ -558,7 +556,7 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
     {
         display: flex;
         top: 15px;
-        right: 44%;
+        right: 38%;
         left: unset;        
     }
 
@@ -573,6 +571,42 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
         height: 2px;
         left: 25%;
         top: 10px; 
+    }
+
+    .carousel-inner
+    {
+        display: inline-block;
+        margin-top: 60px;
+    }
+}
+
+@media (max-width: 576px) {
+    
+    .container-carousel
+    {
+        padding: 0;
+    }
+       
+    .container-carousel-familia, .container-carousel-empresa
+    {
+        padding: 0 30px;    
+    }
+
+    .titulo
+    {
+        font-size: 28px;
+    }
+
+    .lead
+    {
+        font-size: 23px;
+    }
+
+    .carousel-item .btn
+    {
+        font-size: 13px;
+        padding: .25rem .5rem;
+        line-height: 1.5;
     }
 }
 
