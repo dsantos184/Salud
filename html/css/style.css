@@ -558,14 +558,20 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
     {
         display: flex;
         top: 15px;
-        left: unset;
+        right: 44%;
+        left: unset;        
+    }
+
+    .carousel-indicators li:not(:last-child)
+    {
+        margin: 0 37px 0 0 ;
     }
 
     .carousel-indicators li:not(:last-child)::before
     {
         width: 43px;
         height: 2px;
-        left: 19%;
+        left: 25%;
         top: 10px; 
     }
 }
