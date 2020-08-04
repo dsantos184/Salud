@@ -588,6 +588,12 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
         display: inline-block;
         margin-top: 60px;
     }
+
+    .texto-institucional-home
+    {
+        padding-top: 50px;
+    }
+
 }
 
 @media (max-width: 576px) {
