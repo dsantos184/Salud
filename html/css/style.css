@@ -547,6 +547,16 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
     .newsletter-home .conteudo-newsletter{display: inline-block;}
     .img-slide-box{width: 58%; margin: 0 auto;}
 
+    .navbar-light .navbar-toggler-icon
+    {
+        background-image: url('../imagens//btn-menu-mobile.png');
+    }
+
+    .navbar-light .navbar-toggler
+    {
+        color: unset;
+    }
+
     .container-passos
     {
         border-radius: 0;
