@@ -509,6 +509,15 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
     .container-btn-header .navbar-nav .nav-item
     {
         border-bottom: 1px solid #ffffff6b ;
+        margin: 0;
+    }
+
+    .container-btn-header .navbar-nav .nav-item .btn
+    {
+        border: none;
+        font-size: 16px !important;
+        font-weight: normal;        
+        padding: .5rem 1rem;
     }
 
     .container-btn-header .navbar-nav .nav-btn-red
@@ -575,18 +584,6 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
     {
         width: 100%;
         border-radius: unset !important ;
-    }
-
-    .container-btn-header .navbar-nav .nav-item
-    {
-        margin: 0 0 16px 0;
-    }
-
-    .container-btn-header .navbar-nav .nav-item .btn
-    {
-        border: none;
-        font-size: 16px !important;
-        font-weight: normal;
     }
   }
 
