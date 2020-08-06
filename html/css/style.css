@@ -498,8 +498,51 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
   }
 
   @media (max-width: 992px ){
-    .container-btn-header, .container-sociais{display: none;}
-    .container-menu{text-align: center;}
+    
+    .navbar-light .navbar-toggler-icon
+    {
+        background-image: url('../imagens//btn-menu-mobile.png');
+    }
+    
+    .container-sociais{display: none;}
+    
+    .container-btn-header .navbar-nav .nav-item
+    {
+        border-bottom: 1px solid #ffffff6b ;
+        margin: 0;
+    }
+
+    .container-btn-header .navbar-nav .nav-item .btn
+    {
+        border: none;
+        font-size: 16px !important;
+        font-weight: normal;        
+        padding: .5rem 1rem;
+    }
+
+    .container-btn-header .navbar-nav .nav-btn-red
+    {
+        border-bottom: none;
+    }
+
+    .container-btn-header .btn:hover
+    {
+        border: none !important;
+        background-color: unset !important;
+    }
+
+    .container-menu, .container-btn-header{text-align: center; margin: 0;}
+
+    .container-menu .navbar-nav .nav-item:not(:last-child)
+    {
+        border-bottom: 1px solid #ffffff6b ;
+    }
+
+    .container-carousel-familia, .container-carousel-empresa
+    {
+        background-size: 120% !important;
+    }
+
     .texto-passos{
         display: block;
         width: 100%;
@@ -536,6 +579,12 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
         background-position: center;
         background-size: cover;
     }
+
+    .container-btn-header .bg-red
+    {
+        width: 100%;
+        border-radius: unset !important ;
+    }
   }
 
 
@@ -546,11 +595,6 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
     section.footer .container ul.menu-footer{width: auto;}
     .newsletter-home .conteudo-newsletter{display: inline-block;}
     .img-slide-box{width: 58%; margin: 0 auto;}
-
-    .navbar-light .navbar-toggler-icon
-    {
-        background-image: url('../imagens//btn-menu-mobile.png');
-    }
 
     .navbar-light .navbar-toggler
     {
@@ -588,6 +632,12 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
         display: inline-block;
         margin-top: 60px;
     }
+
+    .texto-institucional-home
+    {
+        padding-top: 50px;
+    }
+
 }
 
 @media (max-width: 576px) {
