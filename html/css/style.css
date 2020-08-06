@@ -428,7 +428,7 @@ ul.slide-menu-items li:hover{
     background: linear-gradient(to right,  #0a1b35 0%,#261a62 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0a1b35', endColorstr='#261a62',GradientType=1 ); /* IE6-9 */
     }
-.img-icone-slide-home {width: 60px;}
+.img-icone-slide-home {width: 60px; height:60px;}
 .texto-item-slide-home {font-size: 14px; text-align: left; font-weight: bold; padding-top: 5px; margin-left:10px;}
 ul.slide-menu-items li:hover .texto-item-slide-home{color:white !important;}
 
