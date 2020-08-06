@@ -498,6 +498,12 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
   }
 
   @media (max-width: 992px ){
+    
+    .navbar-light .navbar-toggler-icon
+    {
+        background-image: url('../imagens//btn-menu-mobile.png');
+    }
+    
     .container-sociais{display: none;}
     
     .container-btn-header .navbar-nav .nav-item
@@ -510,18 +516,24 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
         border-bottom: none;
     }
 
+    .container-btn-header .btn:hover
+    {
+        border: none !important;
+        background-color: unset !important;
+    }
 
-    .container-menu{text-align: center; margin: 0;}
+    .container-menu, .container-btn-header{text-align: center; margin: 0;}
 
     .container-menu .navbar-nav .nav-item:not(:last-child)
     {
         border-bottom: 1px solid #ffffff6b ;
     }
 
-    .container-btn-header
+    .container-carousel-familia, .container-carousel-empresa
     {
-        margin: 0;
+        background-size: 120% !important;
     }
+
     .texto-passos{
         display: block;
         width: 100%;
@@ -586,11 +598,6 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
     section.footer .container ul.menu-footer{width: auto;}
     .newsletter-home .conteudo-newsletter{display: inline-block;}
     .img-slide-box{width: 58%; margin: 0 auto;}
-
-    .navbar-light .navbar-toggler-icon
-    {
-        background-image: url('../imagens//btn-menu-mobile.png');
-    }
 
     .navbar-light .navbar-toggler
     {
