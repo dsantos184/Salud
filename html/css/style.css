@@ -498,8 +498,30 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
   }
 
   @media (max-width: 992px ){
-    .container-btn-header, .container-sociais{display: none;}
-    .container-menu{text-align: center;}
+    .container-sociais{display: none;}
+    
+    .container-btn-header .navbar-nav .nav-item
+    {
+        border-bottom: 1px solid #ffffff6b ;
+    }
+
+    .container-btn-header .navbar-nav .nav-btn-red
+    {
+        border-bottom: none;
+    }
+
+
+    .container-menu{text-align: center; margin: 0;}
+
+    .container-menu .navbar-nav .nav-item:not(:last-child)
+    {
+        border-bottom: 1px solid #ffffff6b ;
+    }
+
+    .container-btn-header
+    {
+        margin: 0;
+    }
     .texto-passos{
         display: block;
         width: 100%;
@@ -535,6 +557,24 @@ section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; f
     {
         background-position: center;
         background-size: cover;
+    }
+
+    .container-btn-header .bg-red
+    {
+        width: 100%;
+        border-radius: unset !important ;
+    }
+
+    .container-btn-header .navbar-nav .nav-item
+    {
+        margin: 0 0 16px 0;
+    }
+
+    .container-btn-header .navbar-nav .nav-item .btn
+    {
+        border: none;
+        font-size: 16px !important;
+        font-weight: normal;
     }
   }
 
