@@ -7,7 +7,6 @@ import instagranIcon from '../../imagens/icone-instagram.png'
 import twitterIcon from '../../imagens/icone-twitter.png'
 import linkedinIcon from '../../imagens/icone-linkedin.png'
 
-
 export default class Header extends Component
 {
     render()

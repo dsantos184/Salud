@@ -26,3 +26,38 @@ body
 {
     color: #000;
 }
+
+.btn-white
+{
+    border: 2px solid #fff;
+}
+.btn
+{
+    border-radius: 50em !important;
+    font-weight: 500;
+}
+
+.btn-lg
+{
+    font-size: 14px;    
+}
+
+.btn-sm
+{
+    font-size: 13px;
+}
+
+.bg-red
+{
+    background-color: #d50043;
+}
+
+.bg-light-blue
+{
+    background-color: #44c5c0 ;
+}
+
+.bg-dark-blue
+{
+    background-color:#121b44 ;
+}
