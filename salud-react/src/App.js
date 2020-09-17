@@ -3,11 +3,12 @@ import './css/reset.css'
 import './css/geral.css'
 
 import Header from './components/Header'
+import Routes from './Routes';
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      <Routes />
     </div>
   );
 }
