@@ -1,0 +1,28 @@
+body
+{
+    font-family: 'Montserrat', sans-serif !important;
+}
+.color-white
+{
+    color: #fff !important;
+}
+
+.color-red
+{
+    color: #d50043 !important;
+}
+
+.color-dark-blue
+{
+    color: #121b44 !important;
+}
+
+.color-light-blue
+{
+    color: #44c5c0;
+}
+
+.color-black
+{
+    color: #000;
+}
