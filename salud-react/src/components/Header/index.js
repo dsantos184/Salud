@@ -1,23 +1,16 @@
 import React, {Component, Fragment} from 'react'
 import './style.css'
 
-import Logo from '../../imagens/logo.png'
-import facebookIcon from '../../imagens/icone-facebook.png'
-import instagranIcon from '../../imagens/icone-instagram.png'
-import twitterIcon from '../../imagens/icone-twitter.png'
-import linkedinIcon from '../../imagens/icone-linkedin.png'
-
-
 export default class Header extends Component
 {
     render()
     {
         return(
-            <Fragment>
+            <Fragment> 
                 <header className="container-header">
                     <nav className="col navbar navbar-expand-lg navbar-light bg-light">
                         <a className="navbar-brand link-logo" href="#">
-                            <img className="img-logo" src={Logo} alt="Salud" />
+                            <img className="img-logo" src='/imagens/logo.png' alt="Salud" />
                         </a>
             
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -58,22 +51,22 @@ export default class Header extends Component
                             <ul className="navbar-nav">
                                 <li className="nav-item active">
                                     <a className="nav-link" href="#">
-                                        <img className="icone-sociais" src={facebookIcon}/>
+                                        <img className="icone-sociais" src='/imagens/icone-facebook.png'/>
                                     </a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="#">
-                                        <img className="icone-sociais" src={instagranIcon} alt="Instagram"/>
+                                        <img className="icone-sociais" src='/imagens/icone-instagram.png' alt="Instagram"/>
                                     </a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="#">
-                                        <img className="icone-sociais" src={twitterIcon} alt="Twitter" />
+                                        <img className="icone-sociais" src='/imagens/icone-twitter.png' alt="Twitter" />
                                     </a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="#">
-                                        <img className="icone-sociais" src={linkedinIcon} alt="Linkedin" />
+                                        <img className="icone-sociais" src='/imagens/icone-linkedin.png' alt="Linkedin" />
                                     </a>
                                 </li>
                             </ul>
