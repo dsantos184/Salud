@@ -1,11 +1,11 @@
 import React from 'react'
 import { Router, Route, Redirect, HashRouter } from 'react-router-dom'
 
-import Header from '../components/Header'
+import Home from '../paginas/externas/Home'
 
 export default props => (
     <HashRouter>
-        <Route path="/" component={Header} />
+        <Route path="/" component={Home} />
         <Route path="/contato" component={''} />
         <Redirect from="*" to='/erro' />
     </HashRouter>
