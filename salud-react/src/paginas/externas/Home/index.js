@@ -5,9 +5,72 @@ import Etapas from '../../../components/Etapas'
 import EtapaItem from '../../../components/EtapaItem'
 import Institucional from '../../../components/Institucional'
 import Planos from  '../../../components/Planos'
+import Combo from '../../../components/Combo'
 
 export default class Home extends Component
 {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            combos: [
+                {
+                    id: 1,
+                    plano: 'plano individual',
+                    valor: '19,90',
+                    beneficios: [
+                        'Exames e consultas',
+                        'Seguro para morte acidental',
+                        'Invalidez total ou parcial por acidente',
+                        'Assistência Funeral',
+                        'Assistência Residencial',
+                        'Assistência Nutriline',
+                        'Assistência Personal Fitness',
+                        'Desconto em medicamentos',
+                        'Clube de Vantagens',
+                        'Sorteio Mensal - R$ 5.000,00'
+                    ]
+                },
+                {
+                    id: 2,
+                    plano: 'plano familiar',
+                    valor: '26,90',
+                    beneficios: [
+                        'Exames e consultas',
+                        'Seguro para morte acidental',
+                        'Invalidez total ou parcial por acidente',
+                        'Assistência Funeral',
+                        'Assistência Residencial',
+                        'Assistência Nutriline',
+                        'Assistência Personal Fitness',
+                        'Desconto em medicamentos',
+                        'Clube de Vantagens',
+                        'Sorteio Mensal - R$ 5.000,00'
+                    ]
+                },
+                {
+                    id: 3,
+                    plano: 'master familiar',
+                    valor: '32,90',
+                    beneficios: [
+                        'Exames e consultas',
+                        'Seguro para morte acidental',
+                        'Invalidez total ou parcial por acidente',
+                        'Assistência Funeral',
+                        'Assistência Residencial',
+                        'Assistência Nutriline',
+                        'Assistência Personal Fitness',
+                        'Desconto em medicamentos',
+                        'Clube de Vantagens',
+                        'Sorteio Mensal - R$ 5.000,00',
+                        'Assistência PET',
+                        'Assistência 24h - Auto e Moto'
+                    ]
+                }
+            ]
+        }
+    }
+
     render()
     {
         return(
@@ -47,7 +110,18 @@ export default class Home extends Component
                     <Institucional />
                     
                     <Planos>
-                    
+                        {
+                            this.state.combos.map(combo=>{
+                                return(
+                                    <Combo
+                                        comboId ={`bg-svg-topo-plano-${combo.id}`}
+                                        valor = {combo.valor}
+                                        titulo = {combo.plano}
+                                        beneficios = {combo.beneficios}
+                                    />
+                                )
+                            })
+                        }
                     </Planos>
                 </main>
             </Fragment>
