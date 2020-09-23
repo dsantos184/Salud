@@ -138,6 +138,7 @@ export default class Home extends Component
 
                     <Footer /> 
                 </main>
+                <Footer />
             </Fragment>
         )
     }

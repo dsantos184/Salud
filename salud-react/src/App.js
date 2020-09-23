@@ -5,8 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './css/geral.css'
 import 'bootstrap/dist/js/bootstrap'
 
-
-import Header from './components/Header'
 import Routes from './Routes';
 
 function App() {
