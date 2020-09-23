@@ -7,6 +7,6 @@ export default props => (
     <HashRouter>
         <Route path="/" component={Home} />
         <Route path="/contato" component={''} />
-        <Redirect from="*" to='/erro' />
+        {/*<Redirect from="*" to='/erro' /> */}
     </HashRouter>
 )
