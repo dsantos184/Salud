@@ -7,6 +7,7 @@ import Institucional from '../../../components/Institucional'
 import Planos from  '../../../components/Planos'
 import Combo from '../../../components/Combo'
 import SlideBeneficios from '../../../components/SlideBeneficios'
+import Footer from '../../../components/Footer'
 
 export default class Home extends Component
 {
@@ -84,7 +85,7 @@ export default class Home extends Component
         return(
             <Fragment>
                 <Header/>
-                <main class="container-principal">
+                <main className="container-principal">
                     <Etapas>
                         <EtapaItem 
                             etapaId="primeiro-passo" 
@@ -119,9 +120,10 @@ export default class Home extends Component
                     
                     <Planos>
                         {
-                            this.state.combos.map(combo=>{
+                            this.state.combos.map( combo=>{
                                 return(
                                     <Combo
+                                        key={combo.id}
                                         comboId ={combo.id}
                                         valor = {combo.valor}
                                         titulo = {combo.plano}
@@ -134,6 +136,7 @@ export default class Home extends Component
 
                     <SlideBeneficios/>
                 </main>
+                <Footer />
             </Fragment>
         )
     }

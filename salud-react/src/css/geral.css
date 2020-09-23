@@ -342,7 +342,15 @@ section.planos-home{position: relative; top:-120px; margin-bottom: -120px;}
     -webkit-filter: drop-shadow( 0px 0px 20px rgba(0, 0, 0, .7));
     filter: drop-shadow( 0px 0px 20px rgba(0, 0, 0, .7));
     /* Similar syntax to box-shadow */
-  }
+}
+
+.cls-1 {
+fill: none;
+}
+
+.cls-2 {
+clip-path: url(#clip-path);
+}
 
 #bg-svg-topo-plano-1 {
     --color-stop-1: #e14452;

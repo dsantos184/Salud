@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router, Route, Redirect, HashRouter } from 'react-router-dom'
+import { Route, Redirect, HashRouter } from 'react-router-dom'
 
 import Home from '../paginas/externas/Home'
 
