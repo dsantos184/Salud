@@ -6,6 +6,7 @@ import EtapaItem from '../../../components/EtapaItem'
 import Institucional from '../../../components/Institucional'
 import Planos from  '../../../components/Planos'
 import Combo from '../../../components/Combo'
+import SlideBeneficios from '../../../components/SlideBeneficios'
 
 export default class Home extends Component
 {
@@ -130,6 +131,8 @@ export default class Home extends Component
                             })
                         }
                     </Planos>
+
+                    <SlideBeneficios/>
                 </main>
             </Fragment>
         )

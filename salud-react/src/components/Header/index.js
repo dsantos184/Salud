@@ -30,7 +30,7 @@ export default class Header extends Component
                                 </li>
                             </ul>
                         </div>
-            
+                         
                         <div className="container-btn-header collapse navbar-collapse container-cadastre-se" id="navbarNav">
                             <ul className="navbar-nav">
                                 <li className="nav-item active nav-btn-red">
