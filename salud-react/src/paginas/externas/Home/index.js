@@ -20,6 +20,7 @@ export default class Home extends Component
                     plano: 'plano individual',
                     valor: '19,90',
                     beneficios: [
+                        '',
                         'Exames e consultas',
                         'Seguro para morte acidental',
                         'Invalidez total ou parcial por acidente',
@@ -29,7 +30,9 @@ export default class Home extends Component
                         'Assistência Personal Fitness',
                         'Desconto em medicamentos',
                         'Clube de Vantagens',
-                        'Sorteio Mensal - R$ 5.000,00'
+                        'Sorteio Mensal - R$ 5.000,00',
+                        '',
+                        ''
                     ]
                 },
                 {
@@ -37,6 +40,7 @@ export default class Home extends Component
                     plano: 'plano familiar',
                     valor: '26,90',
                     beneficios: [
+                        '',
                         'Exames e consultas',
                         'Seguro para morte acidental',
                         'Invalidez total ou parcial por acidente',
@@ -46,7 +50,9 @@ export default class Home extends Component
                         'Assistência Personal Fitness',
                         'Desconto em medicamentos',
                         'Clube de Vantagens',
-                        'Sorteio Mensal - R$ 5.000,00'
+                        'Sorteio Mensal - R$ 5.000,00',
+                        '',
+                        ''
                     ]
                 },
                 {
@@ -54,6 +60,7 @@ export default class Home extends Component
                     plano: 'master familiar',
                     valor: '32,90',
                     beneficios: [
+                        '',
                         'Exames e consultas',
                         'Seguro para morte acidental',
                         'Invalidez total ou parcial por acidente',
@@ -77,7 +84,7 @@ export default class Home extends Component
         return(
             <Fragment>
                 <Header/>
-                <main class="container-principal">
+                <main className="container-principal">
                     <Etapas>
                         <EtapaItem 
                             etapaId="primeiro-passo" 
@@ -112,10 +119,11 @@ export default class Home extends Component
                     
                     <Planos>
                         {
-                            this.state.combos.map(combo=>{
+                            this.state.combos.map( combo=>{
                                 return(
                                     <Combo
-                                        comboId ={`bg-svg-topo-plano-${combo.id}`}
+                                        key={combo.id}
+                                        comboId ={combo.id}
                                         valor = {combo.valor}
                                         titulo = {combo.plano}
                                         beneficios = {combo.beneficios}

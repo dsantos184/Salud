@@ -2,19 +2,19 @@ import React, { Component } from 'react'
 
 const Planos = (props) => {
     return (
-        <section class="planos-home">
+        <section className="planos-home">
             {/*Aqui Vai um SVG*/}
 
-            <div class="container-beneficios">
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <h2 class="color-red text-center">Benefícios</h2>
-                            <h3 class="color-white text-center">Escolha o seu plano:</h3>
+            <div className="container-beneficios">
+                <div className="container">
+                    <div className="row">
+                        <div className="col">
+                            <h2 className="color-red text-center">Benefícios</h2>
+                            <h3 className="color-white text-center">Escolha o seu plano:</h3>
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div className="row">
                         {props.children}
                     </div>
                 </div>

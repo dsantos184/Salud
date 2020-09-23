@@ -121,21 +121,21 @@ export default class SlideBeneficios extends Component
     render()
     {
         return ( 
-            <section class="beneficios-home">
-                <div class="container">
-                    <div class="slide-beneficios-home">
-                    <h2 class="color-red">Benefícios</h2>
-                    <h3 class="color-dark-blue">Conheça nossos benefícios:</h3>
+            <section className="beneficios-home">
+                <div className="container">
+                    <div className="slide-beneficios-home">
+                    <h2 className="color-red">Benefícios</h2>
+                    <h3 className="color-dark-blue">Conheça nossos benefícios:</h3>
 
-                    <div class="row">
-                        <div class="col-lg-4 col-sm-12">
-                        <ul class="slide-menu-items">
+                    <div className="row">
+                        <div className="col-lg-4 col-sm-12">
+                        <ul className="slide-menu-items">
                             {
-                                this.state.beneficios.map( beneficio => {
+                                this.state.beneficios.map( (beneficio, index) => {
                                     return (
-                                        <li class="slide-menu-items-1" key={beneficio.id}>
-                                            <img class="img-icone-slide-home" src={`/imagens/${beneficio.icone}`} />
-                                            <span class="texto-item-slide-home color-dark-blue">
+                                        <li className="slide-menu-items-1" key={index}>
+                                            <img className="img-icone-slide-home" src={`/imagens/${beneficio.icone}`} />
+                                            <span className="texto-item-slide-home color-dark-blue">
                                                 {beneficio.titulo}
                                             </span>
                                         </li>
@@ -146,32 +146,32 @@ export default class SlideBeneficios extends Component
                         </ul>
                         </div>
 
-                        <div class="col-lg-8 col-sm-12" style={{padding: 0}}>
-                        <div class="exibe-slide-container">
-                            <div class="conteudo-slide-home">                   
+                        <div className="col-lg-8 col-sm-12" style={{padding: 0}}>
+                        <div className="exibe-slide-container">
+                            <div className="conteudo-slide-home">                   
                             {
-                                this.state.beneficios.map( (beneficio, k) => {
+                                this.state.beneficios.map( (beneficio, index) => {
                                     return (
-                                        <div class="row" key={beneficio.id}>
-                                        <div class="col-lg-4 col-sm-12">
-                                        <div class="img-slide-box">
-                                            <img class="img-fluid" src={`/imagens/slide-beneficios/${beneficio.img}`} />
-                                        </div>
-                                        </div>
-                                        <div class="col-lg-8 col-sm-12">
-                                        <div class="texto-slide-box text-left">
-                                            <span class="passo color-red">{k} de {this.state.beneficios.length}</span>
-                                            <h4 class="color-dark-blue">{beneficio.titulo}</h4>
-                                            <p>{beneficio.descricao}</p>
+                                        <div className="row" key={index}>
+                                            <div className="col-lg-4 col-sm-12">
+                                            <div className="img-slide-box">
+                                                <img className="img-fluid" src={`/imagens/slide-beneficios/${beneficio.img}`} />
+                                            </div>
+                                            </div>
+                                            <div className="col-lg-8 col-sm-12">
+                                            <div className="texto-slide-box text-left">
+                                                <span className="passo color-red">{index} de {this.state.beneficios.length}</span>
+                                                <h4 className="color-dark-blue">{beneficio.titulo}</h4>
+                                                <p>{beneficio.descricao}</p>
 
-                                            (beneficio.comum_todos == 1 ) ? (
-                                                <p class="frase-final">Benefício presente em todos os combos</p>
-                                            ) 
-                                            
+                                                (beneficio.comum_todos == 1 ) ? (
+                                                    <p className="frase-final">Benefício presente em todos os combos</p>
+                                                ) 
+                                                
 
-                                            <a class="btn bg-btn-plano-1 color-white btn-lg" href="#">Escolha o seu combo</a>
-                                            <a class="btn bg-light-blue color-white btn-lg" href={`${beneficio.link}`}>Regulamento</a>
-                                        </div>
+                                                <a className="btn bg-btn-plano-1 color-white btn-lg" href="#">Escolha o seu combo</a>
+                                                <a className="btn bg-light-blue color-white btn-lg" href={`${beneficio.link}`}>Regulamento</a>
+                                            </div>
                                         </div>
                                     </div>
                                     )
