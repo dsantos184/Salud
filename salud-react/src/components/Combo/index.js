@@ -33,7 +33,7 @@ export default class Combo extends Component {
                     </div>
                     <ul class="lista-plano">                        
                         {
-                            this.props.beneficios.map(beneficio=>{
+                            this.props.beneficios.map((beneficio, key)=>{
                                 return(
                                     <li>{beneficio}</li>
                                 )
