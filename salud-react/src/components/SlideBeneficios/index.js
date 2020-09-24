@@ -5,7 +5,7 @@ export default class SlideBeneficios extends Component
 
     constructor(props){
         super(props);
-        this.state = {
+        this.state = { 
             beneficios : [
                 { 
                     nome: 'Exames e consultas',
@@ -118,6 +118,19 @@ export default class SlideBeneficios extends Component
             ]           
         }
     }
+
+    beneficioClicado( index ){
+        const rows = document.getElementsByClassName('rowSlideBeneficio')
+
+        for (var i = 0; i < rows.length; i++) {
+            if( index == i ){
+                rows[i].style.display = 'flex'
+            }else{
+                rows[i].style.display = 'none'
+            } 
+        } 
+    }
+
     render()
     {
         return ( 
@@ -133,7 +146,7 @@ export default class SlideBeneficios extends Component
                             {
                                 this.state.beneficios.map( (beneficio, index) => {
                                     return (
-                                        <li className="slide-menu-items-1" key={index}>
+                                        <li className="slide-menu-items-1" key={index} onClick={ () => this.beneficioClicado(index) } >
                                             <img className="img-icone-slide-home" src={`/imagens/${beneficio.icone}`} />
                                             <span className="texto-item-slide-home color-dark-blue">
                                                 {beneficio.titulo}
@@ -151,8 +164,11 @@ export default class SlideBeneficios extends Component
                             <div className="conteudo-slide-home">                   
                             {
                                 this.state.beneficios.map( (beneficio, index) => {
+                                    let cont =  index + 1
+                                    let display = ( index == 0 ) ? {display: "flex"} : {/**/}
                                     return (
-                                        <div className="row" key={index}>
+                                        
+                                        <div className="row rowSlideBeneficio" key={index} style={display}> 
                                             <div className="col-lg-4 col-sm-12">
                                             <div className="img-slide-box">
                                                 <img className="img-fluid" src={`/imagens/slide-beneficios/${beneficio.img}`} />
@@ -160,17 +176,17 @@ export default class SlideBeneficios extends Component
                                             </div>
                                             <div className="col-lg-8 col-sm-12">
                                             <div className="texto-slide-box text-left">
-                                                <span className="passo color-red">{index} de {this.state.beneficios.length}</span>
+                                                <span className="passo color-red">{cont} de {this.state.beneficios.length}</span>
                                                 <h4 className="color-dark-blue">{beneficio.titulo}</h4>
                                                 <p>{beneficio.descricao}</p>
-
-                                                (beneficio.comum_todos == 1 ) ? (
-                                                    <p className="frase-final">Benefício presente em todos os combos</p>
-                                                ) 
-                                                
+                                                {
+                                                    (beneficio.comum_todos == 1 ) ? (
+                                                        <p className="frase-final">Benefício presente em todos os combos</p>
+                                                    ) : ''
+                                                }
 
                                                 <a className="btn bg-btn-plano-1 color-white btn-lg" href="#">Escolha o seu combo</a>
-                                                <a className="btn bg-light-blue color-white btn-lg" href={`${beneficio.link}`}>Regulamento</a>
+                                                <a className="btn bg-light-blue color-white btn-lg" target="_blank" href={`${beneficio.link}`}>Regulamento</a>
                                             </div>
                                         </div>
                                     </div>

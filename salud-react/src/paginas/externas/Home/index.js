@@ -135,6 +135,8 @@ export default class Home extends Component
                     </Planos>
 
                     <SlideBeneficios/>
+
+                    <Footer /> 
                 </main>
                 <Footer />
             </Fragment>
