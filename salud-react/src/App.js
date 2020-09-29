@@ -4,13 +4,18 @@ import './css/reset.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './css/geral.css'
 import 'bootstrap/dist/js/bootstrap'
+import {BrowserRouter as Router} from 'react-router-dom'
+
 
 import Routes from './Routes';
+
 
 function App() {
   return (
     <div className="App">
-      <Routes />
+      <Router>
+        <Routes />
+      </Router>
     </div>
   );
 }

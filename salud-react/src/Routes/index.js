@@ -1,12 +1,20 @@
 import React from 'react'
-import { Route, Redirect, HashRouter } from 'react-router-dom'
+import {Redirect, Route, Switch } from 'react-router-dom'
 
 import Home from '../paginas/externas/Home'
+import Contato from '../paginas/externas/Contato'
 
-export default props => (
-    <HashRouter>
-        <Route path="/" component={Home} />
-        <Route path="/contato" component={''} />
-        {/*<Redirect from="*" to='/erro' /> */}
-    </HashRouter>
+const Routes = (props) => (
+
+    <Switch>
+        <Route exact path="/">
+            <Home />
+        </Route>
+
+        <Route exact path="/contato">
+            <Contato />
+        </Route>
+    </Switch>
 )
+
+export default Routes
