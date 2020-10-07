@@ -1,9 +1,10 @@
 import React from 'react'
 import Navbar from '../Navbar'
 
-const HeaderInterno = () => {
+
+const HeaderInterno = ( props ) => {
     return (
-        <header class="container-header">
+        <header class="container-header" style={{height:"auto"}}>
             <Navbar />
 
             <div class="titulo-pagina">

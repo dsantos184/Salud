@@ -4,10 +4,24 @@ export default class Combo extends Component {
    
     constructor(props)
     {
-        super(props)
+        super(props) 
     }   
 
+    montaLiBeneficios(){
+        let rows = [<li></li>]
+        for(var i=0; i<this.props.totalBeneficios; i++){ 
+            if( this.props.beneficios[i] != undefined ){
+                let nome  = this.props.beneficios[i].nome
+                rows.push(<li key={i}>{nome}</li>)
+            }else{
+                rows.push(<li></li>)
+            }         
+        } 
+        return rows
+    }
+ 
     render() {
+
         return (
             <div className="col-lg-4 col-md-6">
                 <div className="box-plano">
@@ -31,14 +45,10 @@ export default class Combo extends Component {
                         </div>
                         <span className="titulo-topo-plano">{this.props.titulo}</span>
                     </div>
-                    <ul className="lista-plano">                        
-                            {
-                                this.props.beneficios.map( (beneficio, index) =>{
-                                    return(
-                                        <li key={index}>{beneficio}</li>
-                                    )
-                                })
-                            }
+                    <ul id="lista-plano" className="lista-plano">  
+                                              
+                            { this.montaLiBeneficios() }
+                        
                         <li>
                             <a href="" className={`btn-planos-home bg-btn-plano-${this.props.comboId} color-white`}>Quero este plano!</a>
                         </li>

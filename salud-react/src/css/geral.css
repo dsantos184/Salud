@@ -423,7 +423,7 @@ clip-path: url(#clip-path);
 .titulo-topo-plano{position: absolute; left:0; top:0; right: 0; margin:0 auto; color:#fff; 
 font-weight: bold; font-size:24px; text-transform: uppercase; margin-top:60px;}
 
-ul.lista-plano {display: block; position: relative; width: 250px; left:0; right:0; top:0; margin:-20px auto 0 auto; z-index:-1}
+ul.lista-plano {display: block; position: relative; width: 250px; padding: 0; left:0; right:0; top:0; margin:-20px auto 0 auto; z-index:-1}
 ul.lista-plano li{ display: flex; justify-content: center; align-items: center; width:100%; line-height: 13px; height: 30px; font-size: 13px; color:#000; text-align: center; }
 
 ul.lista-plano li:nth-child(even) {background: #DFF6FC}

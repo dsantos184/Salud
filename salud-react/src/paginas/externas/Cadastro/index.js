@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react'
 import HeaderInterno from '../../../components/HeaderInterno'
-import Footer from '../../../components/Footer'
-import { waitForElementToBeRemoved } from '@testing-library/react'
+import Footer from '../../../components/Footer' 
 
-const Contato = ( props ) => {
+const Cadastro = ( props ) => {
  
     return (
         <Fragment>
