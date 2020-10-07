@@ -1,5 +1,5 @@
 import React from 'react'
-import {Redirect, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import Home from '../paginas/externas/Home'
 import Contato from '../paginas/externas/Contato'
