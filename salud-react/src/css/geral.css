@@ -310,12 +310,12 @@ body
     font-weight: 700;
 }
 
-.titulo-pagina{background-color: #2e2c7a; padding: 0 0 60px 0;}
-.titulo-pagina h1{font-size:38px; font-weight: bold; text-transform: uppercase; margin-top: 50px;}
+.titulo-pagina{background-color: #2e2c7a; padding: 0 0 50px 0;}
+.titulo-pagina h1{font-size:38px; font-weight: bold; text-transform: uppercase; margin-top: 40px;}
 
 .breadcrumbs {padding-top: 10px;}
 .breadcrumbs span{text-transform: capitalize; font-size:11px;}
-.breadcrumbs span.anterior{background: url('/imagens/icone-seta-breadcrumbs.png') no-repeat right center; padding: 0 10px 0 0;}
+.breadcrumbs span.anterior{background: url('/imagens/icone-seta-breadcrumbs.png') no-repeat right center; padding: 0 10px 0 0; margin-right:3px;}
 .breadcrumbs span.anterior:hover{text-decoration: underline; cursor: pointer;}
 
 .texto-institucional-home{ padding: 155px 0 0 0; }
@@ -451,6 +451,8 @@ ul.slide-menu-items li:hover{
 .img-icone-slide-home {width: 60px; height:60px;}
 .texto-item-slide-home {font-size: 14px; text-align: left; font-weight: bold; padding-top: 5px; margin-left:10px;}
 ul.slide-menu-items li:hover .texto-item-slide-home{color:white !important;}
+
+.container-pagina-interna{ padding: 20px 0;}
 
 .exibe-slide-container{background-color: #DFF6FC; border-radius: 20px; min-height: 330px;}
 

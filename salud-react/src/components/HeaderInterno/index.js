@@ -1,19 +1,19 @@
 import React from 'react'
 import Navbar from '../Navbar'
+import Breadcrumbs from '../Breadcrumbs'
 
 
 const HeaderInterno = ( props ) => {
     return (
-        <header class="container-header" style={{height:"auto"}}>
+        
+        <header className="container-header" style={{height:"auto"}}> 
+ 
             <Navbar />
-
-            <div class="titulo-pagina">
-                <section class="container">
-                    <div class="breadcrumbs">
-                        <span class="anterior color-light-blue">home</span>
-                        <span class="atual color-white">formulário de cadastro</span>
-                    </div>
-                    <h1 class="color-white">formulário de cadastro</h1>
+            
+            <div className="titulo-pagina">
+                <section className="container">
+                    <Breadcrumbs/>
+                    <h1 className="color-white">{props.titulo}</h1>
                 </section>
             </div>
         </header>
