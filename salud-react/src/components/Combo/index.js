@@ -46,7 +46,7 @@ export default class Combo extends Component {
                         <span className="titulo-topo-plano">{this.props.titulo}</span>
                     </div>
                     <ul id="lista-plano" className="lista-plano">  
-                                              
+                                         
                             { this.montaLiBeneficios() }
                         
                         <li>
