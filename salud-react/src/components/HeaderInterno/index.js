@@ -13,7 +13,7 @@ const HeaderInterno = ( props ) => {
                         <span class="anterior color-light-blue">home</span>
                         <span class="atual color-white">formulário de cadastro</span>
                     </div>
-                    <h1 class="color-white">formulário de cadastro</h1>
+                    <h1 class="color-white">{props.tituloHeader}</h1>
                 </section>
             </div>
         </header>

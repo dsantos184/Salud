@@ -7,10 +7,10 @@ const Contato = ( props ) => {
  
     return (
         <Fragment>
-            <HeaderInterno />
+            <HeaderInterno tituloHeader="Formulário de Contato" />
 
             <div className="container">
-                <section>
+                <section className="container-form">
                     <form className="clearfix" method="POST" action="envia.php">
                         <div className="form-group">
                             <label for="inputPessoa">Desejo adquirir para: </label><br />
