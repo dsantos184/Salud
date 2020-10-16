@@ -7,6 +7,7 @@ export default class Contato extends Component {
 
     constructor(props) {
         super(props)
+ 
         this.state = {
             inputPara: '',
             inputNome: '',
@@ -47,6 +48,8 @@ export default class Contato extends Component {
         if (name == 'inputPara' && value == 'Minha Empresa') {
             document.getElementById("divInputQtdeFuncionarios").style.display = 'block'
         }
+ 
+ 
     }
 
 
@@ -85,7 +88,6 @@ export default class Contato extends Component {
                                     <input className="form-check-input" type="radio" name="inputPara" id="inputParaMinhaEmpresa" value="Minha Empresa" onChange={this.handleChange} required />
                                     <label className="form-check-label" htmlFor="inputParaMinhaEmpresa">Minha Empresa</label>
                                 </div>
-
                             </div>
 
                             <div className="form-group">
