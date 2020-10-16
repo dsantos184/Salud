@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Combo from "../Combo/index"
 import axios from 'axios'
-
+import cors from 'cors'
 
 
 export default class Planos extends Component {
@@ -35,7 +35,7 @@ export default class Planos extends Component {
     render(){
  
         return (
-            <section id="planos-home" className="planos-home">
+            <section id="combos-home" className="planos-home">
     
                 <svg id="svg-topo-planos" data-name="svg-topo-planos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 236.77">
                     <defs>
@@ -54,7 +54,7 @@ export default class Planos extends Component {
                         <div className="row">
                             <div className="col">
                                 <h2 className="color-red text-center">Benefícios</h2>
-                                <h3 className="color-white text-center">Escolha o seu plano:</h3>
+                                <h3 className="color-white text-center">Escolha o seu combo:</h3>
                             </div>
                         </div>
     

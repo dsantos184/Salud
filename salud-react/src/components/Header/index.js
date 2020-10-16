@@ -22,15 +22,15 @@ export default class Header extends Component
                                         <h1 className="display-4 color-light-blue titulo">Para Você</h1>
                                         <p className="lead color-white">Saúde e proteção para o bem de todos da sua família</p>
                                         <a className="btn bg-light-blue color-white btn-lg" href="/#como-funciona">Como funciona?</a>
-                                        <a className="btn bg-red color-white btn-lg" href="#planos-home">Escolha o seu plano</a>
+                                        <a className="btn bg-red color-white btn-lg" href="#combos-home">Escolha o seu combo</a>
                                     </div>
                                 </div>
                                 <div className="carousel-item container-carousel-empresa">
                                     <div className="institucional-carousel">
                                         <h1 className="display-4 color-light-blue titulo">Para sua empresa</h1>
                                         <p className="lead color-white">Saúde e proteção para o bem de todos os seus colaboradores</p>
-                                        <a className="btn bg-light-blue color-white btn-lg" href="#">Como funciona?</a>
-                                        <a className="btn bg-red color-white btn-lg" href="#">Entre em contato</a>
+                                        <a className="btn bg-light-blue color-white btn-lg" href="#como-funciona">Como funciona?</a>
+                                        <a className="btn bg-red color-white btn-lg" href="/contato">Entre em contato</a>
                                     </div>
                                 </div>
                             </div>
