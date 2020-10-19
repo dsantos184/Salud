@@ -9,25 +9,6 @@ export default class Contato extends Component {
         super(props)
         this.state = {inputNome: ''}
  
-<<<<<<< HEAD
-    return (
-        <Fragment>
-            <HeaderInterno tituloHeader="Formulário de Contato" />
-
-            <div className="container">
-                <section className="container-form">
-                    <form className="clearfix" method="POST" action="envia.php">
-                        <div className="form-group">
-                            <label for="inputPessoa">Desejo adquirir para: </label><br />
-
-                            <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="radio" name="inputPara" id="inputParaMinhaFamilia" value="Minha Familia" checked="" required="" />
-                                <label className="form-check-label" for="inputParaMinhaFamilia">Minha Família</label>
-                            </div>
-                            <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="radio" name="inputPara" id="inputParaMinhaEmpresa" value="Minha Empresa" required="" />
-                                <label className="form-check-label" for="inputParaMinhaEmpresa">Minha Empresa</label>
-=======
     }
 
     handleSubmit(event) { 
@@ -52,7 +33,7 @@ export default class Contato extends Component {
         return (
 
             <Fragment>
-                <HeaderInterno titulo="Contato" />
+                <HeaderInterno tituloHeader="Contato" />
 
                 <div className="container container-pagina-interna">
                     <section>
@@ -69,7 +50,6 @@ export default class Contato extends Component {
                                     <label className="form-check-label" htmlFor="inputParaMinhaEmpresa">Minha Empresa</label>
                                 </div>
 
->>>>>>> f3fde136e5cc747d331536fb38784a9d03dabc56
                             </div>
 
                             <div className="form-group">
