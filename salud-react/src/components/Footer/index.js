@@ -33,9 +33,9 @@ const Footer = () => {
                             <h3 className="color-light-blue">Explore</h3>
                             <ul className="menu-footer">
                                 <li><a className="color-white" href="">Página Inicial</a></li>
-                                <li><a className="color-white" href="">Benefícios</a></li>
-                                <li><a className="color-white" href="">Institucional</a></li>
-                                <li><a className="color-white" href="">Planos</a></li>
+                                <li><a className="color-white" href="#beneficios">Benefícios</a></li>
+                                <li><a className="color-white" href="#instituicional">Institucional</a></li>
+                                <li><a className="color-white" href="#combos-home">Combos</a></li>
                             </ul>
 
                             <a className="btn bg-btn-plano-2 color-black btn-lg btn-entre-contato" href="contato.html">Entre em contato conosco</a>

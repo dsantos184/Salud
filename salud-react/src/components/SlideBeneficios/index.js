@@ -40,7 +40,7 @@ export default class SlideBeneficios extends Component {
     render() {       
            
         return (
-            <section className="beneficios-home">
+            <section id="beneficios" className="beneficios-home">
                 <div className="container">
                     <div className="slide-beneficios-home">
                         <h2 className="color-red">Benefícios</h2>

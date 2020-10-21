@@ -50,7 +50,7 @@ export default class Combo extends Component {
                             { this.montaLiBeneficios() }
                         
                         <li>
-                            <a href="" className={`btn-planos-home bg-btn-plano-${this.props.comboId} color-white`}>Quero este plano!</a>
+                            <a href="" className={`btn-planos-home bg-btn-plano-${this.props.comboId} color-white`}>Quero este combo!</a>
                         </li>
                     </ul>
                 </div>

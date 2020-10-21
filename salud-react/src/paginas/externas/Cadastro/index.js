@@ -2,6 +2,7 @@ import React, { Fragment, Component } from 'react'
 import HeaderInterno from '../../../components/HeaderInterno'
 import Card from '../../../components/Card'
 import Footer from '../../../components/Footer'
+import consultaCep from '../../../Utils'
 
 export default class Cadastro extends Component
 {
@@ -53,6 +54,8 @@ export default class Cadastro extends Component
         this.setDadosSegurado = this.setDadosSegurado.bind(this)
         this.setDadosEndereco = this.setDadosEndereco.bind(this)
         this.setDadosContato = this.setDadosContato.bind(this)
+        this.preencheEndereco = this.preencheEndereco.bind(this)
+
     }
 
     setDadosSegurado(event)
@@ -74,6 +77,21 @@ export default class Cadastro extends Component
         const estado = this.state
         estado.dadosForm.contatos[event.target.name] = event.target.value
         this.setState(estado)
+    }
+
+    preencheEndereco(event, cep)
+    {
+        event.preventDefault()
+
+        consultaCep(cep).then(resp=>{
+            const estado = this.state
+            estado.dadosForm.endereco.bairro = resp.bairro
+            estado.dadosForm.endereco.endereco = resp.logradouro
+            estado.dadosForm.endereco.cidade = resp.localidade
+            estado.dadosForm.endereco.uf = resp.uf
+
+            this.setState(estado)
+        })
     }
 
     render()
@@ -324,7 +342,14 @@ export default class Cadastro extends Component
                                                     onChange={this.setDadosEndereco}
                                                 />
                                                 <span className="input-group-btn">
-                                                    <a href="#" className="btn btn-warning input-sm btn-quadrado" id="preencherCep">Pesquisar</a>
+                                                    <a 
+                                                        href="#"
+                                                        className="btn btn-warning input-sm btn-quadrado"
+                                                        id="preencherCep"
+                                                        onClick={(e)=>this.preencheEndereco(e, this.state.dadosForm.endereco.cep)}
+                                                    >
+                                                        Pesquisar
+                                                    </a>
                                                 </span>
                                             </div>
                                         </div>
