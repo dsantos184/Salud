@@ -4,13 +4,15 @@ import Card from '../../../components/Card'
 import Footer from '../../../components/Footer'
 import consultaCep from '../../../Utils'
 
-export default class Cadastro extends Component
+import { connect } from 'react-redux'
+
+export class Cadastro extends Component
 {
     constructor(props)
     {
         super(props)
 
-        this.state = {
+        /*this.state = {
             dadosForm:{
                 segurado:{
                     cpf: "",
@@ -49,34 +51,10 @@ export default class Cadastro extends Component
                     {cpf:"", nomeDependente:"", nascDependente: "", parentesco:""},
                 ]
             } 
-        }
+        }*/
 
-        this.setDadosSegurado = this.setDadosSegurado.bind(this)
-        this.setDadosEndereco = this.setDadosEndereco.bind(this)
-        this.setDadosContato = this.setDadosContato.bind(this)
         this.preencheEndereco = this.preencheEndereco.bind(this)
 
-    }
-
-    setDadosSegurado(event)
-    {
-        const estado = this.state
-        estado.dadosForm.segurado[event.target.name] = event.target.value
-        this.setState(estado)   
-    }
-
-    setDadosEndereco(event)
-    {
-        const estado = this.state
-        estado.dadosForm.endereco[event.target.name] = event.target.value
-        this.setState(estado)
-    }
-
-    setDadosContato(event)
-    {
-        const estado = this.state
-        estado.dadosForm.contatos[event.target.name] = event.target.value
-        this.setState(estado)
     }
 
     preencheEndereco(event, cep)
@@ -108,13 +86,13 @@ export default class Cadastro extends Component
                                     <div className="col-xs-12 col-lg-2">
                                         <div className="form-group">
                                             <label>CPF: </label>
-                                            <label>{this.state.dadosForm.segurado.cpf}</label>
+                                            <label>{this.props.cpf}</label>
                                             <input 
                                                 type="number" 
                                                 className="form-control input-sm cpf_valido" 
                                                 name="cpf" id="cpf" required="required" 
                                                 placeholder="CPF" 
-                                                value={this.state.dadosForm.segurado.cpf}
+                                                value={this.props.cpf}
                                                 onChange={this.setDadosSegurado}
                                             />
                                             
@@ -131,7 +109,7 @@ export default class Cadastro extends Component
                                                 id="data_nasc" 
                                                 required="required" 
                                                 placeholder="Data de Nascimento"
-                                                value={this.state.dadosForm.segurado.dataNasc} 
+                                                value={this.props.dataNasc} 
                                                 onChange={this.setDadosSegurado}
                                             />
                                         </div>
@@ -146,7 +124,7 @@ export default class Cadastro extends Component
                                                 name="nome" id="nome" 
                                                 required="required" 
                                                 placeholder="Nome Completo"
-                                                value={this.state.dadosForm.segurado.nome} 
+                                                value={this.props.nome} 
                                                 onChange={this.setDadosSegurado}
                                             />
                                         </div>
@@ -161,7 +139,7 @@ export default class Cadastro extends Component
                                                 name="nomeMae" id="nome_mae"
                                                 required="required"
                                                 placeholder="Nome da Mãe"
-                                                value={this.state.dadosForm.segurado.nomeMae} 
+                                                value={this.props.nomeMae} 
                                                 onChange={this.setDadosSegurado}
                                             />
                                         </div>
@@ -176,7 +154,7 @@ export default class Cadastro extends Component
                                                 className="form-control input-sm" 
                                                 name="sexo" 
                                                 id="sexo"
-                                                value={this.state.dadosForm.segurado.sexo}
+                                                value={this.props.sexo}
                                                 onChange={this.setDadosSegurado}
                                             >
                                                 <option value="">SELECIONE </option>
@@ -196,7 +174,7 @@ export default class Cadastro extends Component
                                                 name="nacionalidade" 
                                                 id="nacionalidade" 
                                                 placeholder="Nacionalidade" 
-                                                value={this.state.dadosForm.segurado.nacionalidade}
+                                                value={this.props.nacionalidade}
                                                 required=""
                                                 aria-invalid="false"
                                                 onChange={this.setDadosSegurado}
@@ -212,7 +190,7 @@ export default class Cadastro extends Component
                                                 name="estadoCivil" 
                                                 id="estado_civil" 
                                                 required=""
-                                                value={this.state.dadosForm.segurado.estadoCivil}
+                                                value={this.props.estadoCivil}
                                                 onChange={this.setDadosSegurado}
                                             >
                                                 <option value="">SELECIONE</option>
@@ -232,7 +210,7 @@ export default class Cadastro extends Component
                                                 className="form-control input-sm "
                                                 name="tipoDoc"
                                                 id="tipo_doc"
-                                                value={this.state.dadosForm.segurado.tipoDoc}
+                                                value={this.props.tipoDoc}
                                                 onChange={this.setDadosSegurado}
                                             >
                                                 <option value="">SELECIONE</option>
@@ -253,7 +231,7 @@ export default class Cadastro extends Component
                                                 name="identificacao"
                                                 id="numero_identificacao"
                                                 placeholder="Nº de Identificação"
-                                                value={this.state.dadosForm.segurado.identificacao}
+                                                value={this.props.identificacao}
                                                 onChange={this.setDadosSegurado}
                                             />
                                         </div>
@@ -268,7 +246,7 @@ export default class Cadastro extends Component
                                                 name="orgaoExpedidor"
                                                 id="orgao_expedidor"
                                                 placeholder="Orgão Expedidor"
-                                                value={this.state.dadosForm.segurado.orgaoExpedidor}
+                                                value={this.props.orgaoExpedidor}
                                                 onChange={this.setDadosSegurado}
                                             />
                                         </div>
@@ -285,7 +263,7 @@ export default class Cadastro extends Component
                                                 name="dataExpedicao"
                                                 id="data_expedicao"
                                                 placeholder="Data de Expediçao"
-                                                value={this.state.dadosForm.segurado.dataExpedicao}
+                                                value={this.props.dataExpedicao}
                                                 onChange={this.setDadosSegurado}
                                             />
                                         </div>
@@ -300,7 +278,7 @@ export default class Cadastro extends Component
                                                 name="profissao"
                                                 id="profissao"
                                                 placeholder="Profissão"
-                                                value={this.state.dadosForm.segurado.profissao}
+                                                value={this.props.profissao}
                                                 onChange={this.setDadosSegurado}
                                             />
                                         </div>
@@ -315,7 +293,7 @@ export default class Cadastro extends Component
                                                 name="rendaMensal" 
                                                 id="renda_mensal" 
                                                 placeholder="Renda Mensal em Real R$"
-                                                value={this.state.dadosForm.segurado.rendaMensal} 
+                                                value={this.props.rendaMensal} 
                                                 onChange={this.setDadosSegurado} 
                                                 required="" />
                                         </div>
@@ -338,7 +316,7 @@ export default class Cadastro extends Component
                                                     required="required" 
                                                     placeholder="Digite seu cep" 
                                                     aria-invalid="false"
-                                                    value={this.state.dadosForm.endereco.cep}
+                                                    value={this.props.cep}
                                                     onChange={this.setDadosEndereco}
                                                 />
                                                 <span className="input-group-btn">
@@ -346,7 +324,7 @@ export default class Cadastro extends Component
                                                         href="#"
                                                         className="btn btn-warning input-sm btn-quadrado"
                                                         id="preencherCep"
-                                                        onClick={(e)=>this.preencheEndereco(e, this.state.dadosForm.endereco.cep)}
+                                                        onClick={(e)=>this.preencheEndereco(e, this.props.cep)}
                                                     >
                                                         Pesquisar
                                                     </a>
@@ -367,7 +345,7 @@ export default class Cadastro extends Component
                                                 id="logradouro"
                                                 placeholder="Endereco"
                                                 aria-invalid="false"
-                                                value={this.state.dadosForm.endereco.endereco}
+                                                value={this.props.endereco}
                                                 onChange={this.setDadosEndereco}
                                             />
                                         </div>
@@ -383,7 +361,7 @@ export default class Cadastro extends Component
                                                 id="numero"
                                                 placeholder="Nº"
                                                 required=""
-                                                value={this.state.dadosForm.endereco.numero}
+                                                value={this.props.numero}
                                                 onChange={this.setDadosEndereco}    
                                             />
                                         </div>
@@ -398,7 +376,7 @@ export default class Cadastro extends Component
                                                 name="complemento"
                                                 id="complemento"
                                                 placeholder="Complemento"
-                                                value={this.state.dadosForm.endereco.complemento}
+                                                value={this.props.complemento}
                                                 onChange={this.setDadosEndereco}    
                                             />
                                         </div>
@@ -416,7 +394,7 @@ export default class Cadastro extends Component
                                                 id="bairro"
                                                 placeholder="Bairro"
                                                 aria-invalid="false"
-                                                value={this.state.dadosForm.endereco.bairro}
+                                                value={this.props.bairro}
                                                 onChange={this.setDadosEndereco}
                                             />
                                         </div>
@@ -432,7 +410,7 @@ export default class Cadastro extends Component
                                                 id="uf"
                                                 placeholder="UF"
                                                 aria-invalid="false"
-                                                value={this.state.dadosForm.endereco.uf}
+                                                value={this.props.uf}
                                                 onChange={this.setDadosEndereco}
                                             />
                                         </div>
@@ -448,7 +426,7 @@ export default class Cadastro extends Component
                                                 id="cidade"
                                                 placeholder="Cidade"
                                                 aria-invalid="false"
-                                                value={this.state.dadosForm.endereco.cidade}
+                                                value={this.props.cidade}
                                                 onChange={this.setDadosEndereco}
                                             />
                                         </div>
@@ -468,7 +446,7 @@ export default class Cadastro extends Component
                                                 id="email"
                                                 required="required"
                                                 placeholder="E-mail"
-                                                value={this.state.dadosForm.contatos.email}
+                                                value={this.props.email}
                                                 onChange={this.setDadosContato}
                                             />
                                         </div>
@@ -486,7 +464,7 @@ export default class Cadastro extends Component
                                                     id="dddTel"
                                                     required="required"
                                                     placeholder="DDD"
-                                                    value={this.state.dadosForm.contatos.dddTel}
+                                                    value={this.props.dddTel}
                                                     onChange={this.setDadosContato}    
                                                 />
                                             </div>
@@ -499,7 +477,7 @@ export default class Cadastro extends Component
                                                     id="telefone"
                                                     required="required"
                                                     placeholder="Telefone"
-                                                    value={this.state.dadosForm.contatos.telefone}
+                                                    value={this.props.telefone}
                                                     onChange={this.setDadosContato}
                                                 />
                                             </div>
@@ -518,7 +496,7 @@ export default class Cadastro extends Component
                                                     id="ddd_celular"
                                                     required="required"
                                                     placeholder="DDD"
-                                                    value={this.state.dadosForm.contatos.dddCel}
+                                                    value={this.props.dddCel}
                                                     onChange={this.setDadosContato}    
                                                 />
                                             </div>
@@ -531,7 +509,7 @@ export default class Cadastro extends Component
                                                     id="celular"
                                                     required="required"
                                                     placeholder="Celular"
-                                                    value={this.state.dadosForm.contatos.celular}
+                                                    value={this.props.celular}
                                                     onChange={this.setDadosContato}
                                                 />
                                             </div>
@@ -608,3 +586,38 @@ export default class Cadastro extends Component
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        cpf: state.clientes.cpf,
+        dataNasc: state.clientes.dataNasc,
+        nome: state.clientes.nome,
+        nomeMae: state.clientes.nomeMae,
+        sexo: state.clientes.sexo,
+        nacionalidade: state.clientes.nacionalidade,
+        estadoCivil: state.clientes.estadoCivil,
+        tipoDoc: state.clientes.tipoDoc,
+        identificacao: state.clientes.identificacao,
+        orgaoExpedidor: state.clientes.orgaoExpedidor,
+        dataExpedicao: state.clientes.dataExpedicao,
+        profissao: state.clientes.profissao,
+        rendaMensal: state.clientes.rendaMensal,
+        cep: state.clientes.cep,
+        endereco: state.clientes.endereco,
+        numero: state.clientes.numero,
+        complemento: state.clientes.complemento,
+        bairro: state.clientes.bairro,
+        uf: state.clientes.uf,
+        cidade: state.clientes.cidade,      
+        email: state.clientes.email,
+        dddTel: state.clientes.dddTel,
+        telefone:state.clientes.telefone,
+        dddCel: state.clientes.dddCel,
+        celular: state.clientes.celular,
+    }
+}
+
+
+const clientesConnect = connect(mapStateToProps)(Cadastro)
+
+export default clientesConnect
