@@ -5,56 +5,22 @@ import Footer from '../../../components/Footer'
 import consultaCep from '../../../Utils'
 
 import { connect } from 'react-redux'
+import { 
+    editCep,
+    editEndereco,
+    editNumero,
+    editComplemento,
+    editBairro,
+    editUf,
+    editCidade,
+} from '../../../actions/ClientesActions'
 
 export class Cadastro extends Component
 {
     constructor(props)
     {
         super(props)
-
-        /*this.state = {
-            dadosForm:{
-                segurado:{
-                    cpf: "",
-                    dataNasc: "",
-                    nome: "",
-                    nomeMae: "",
-                    sexo: "",
-                    nacionalidade: "brasileira",
-                    estadoCivil: "",
-                    tipoDoc: "",
-                    identificacao: "",
-                    orgaoExpedidor: "",
-                    dataExpedicao: "",
-                    profissao: "",
-                    rendaMensal: ""
-                },
-                endereco:{
-                    cep: "",
-                    endereco: "",
-                    numero: "",
-                    complemento: "",
-                    bairro: "",
-                    uf: "",
-                    cidade: "",                        
-                },
-                contatos:{
-                    email: "",
-                    dddTel: "",
-                    telefone:"",
-                    dddCel: "",
-                    celular: ""
-                },
-                dependentes:[
-                    {cpf:"", nomeDependente:"", nascDependente: "", parentesco:""},
-                    {cpf:"", nomeDependente:"", nascDependente: "", parentesco:""},
-                    {cpf:"", nomeDependente:"", nascDependente: "", parentesco:""},
-                ]
-            } 
-        }*/
-
         this.preencheEndereco = this.preencheEndereco.bind(this)
-
     }
 
     preencheEndereco(event, cep)
@@ -317,7 +283,7 @@ export class Cadastro extends Component
                                                     placeholder="Digite seu cep" 
                                                     aria-invalid="false"
                                                     value={this.props.cep}
-                                                    onChange={this.setDadosEndereco}
+                                                    onChange={(event)=>this.props.editCep(event.target.value)}
                                                 />
                                                 <span className="input-group-btn">
                                                     <a 
@@ -346,7 +312,7 @@ export class Cadastro extends Component
                                                 placeholder="Endereco"
                                                 aria-invalid="false"
                                                 value={this.props.endereco}
-                                                onChange={this.setDadosEndereco}
+                                                onChange={(event)=>this.props.editEndereco(event.target.value)}
                                             />
                                         </div>
                                     </div>
@@ -362,7 +328,7 @@ export class Cadastro extends Component
                                                 placeholder="Nº"
                                                 required=""
                                                 value={this.props.numero}
-                                                onChange={this.setDadosEndereco}    
+                                                onChange={(event)=>this.props.editNumero(event.target.value)}    
                                             />
                                         </div>
                                     </div>
@@ -377,7 +343,7 @@ export class Cadastro extends Component
                                                 id="complemento"
                                                 placeholder="Complemento"
                                                 value={this.props.complemento}
-                                                onChange={this.setDadosEndereco}    
+                                                onChange={(event)=>this.props.editComplemento(event.target.value)}    
                                             />
                                         </div>
                                     </div>
@@ -395,7 +361,7 @@ export class Cadastro extends Component
                                                 placeholder="Bairro"
                                                 aria-invalid="false"
                                                 value={this.props.bairro}
-                                                onChange={this.setDadosEndereco}
+                                                onChange={(event)=>this.props.editBairro(event.target.value)}
                                             />
                                         </div>
                                     </div>
@@ -411,7 +377,7 @@ export class Cadastro extends Component
                                                 placeholder="UF"
                                                 aria-invalid="false"
                                                 value={this.props.uf}
-                                                onChange={this.setDadosEndereco}
+                                                onChange={(event)=>this.props.editUf(event.target.value)}
                                             />
                                         </div>
                                     </div>
@@ -427,7 +393,7 @@ export class Cadastro extends Component
                                                 placeholder="Cidade"
                                                 aria-invalid="false"
                                                 value={this.props.cidade}
-                                                onChange={this.setDadosEndereco}
+                                                onChange={(event)=>this.props.editCidade(event.target.value)}
                                             />
                                         </div>
                                     </div>
@@ -618,6 +584,14 @@ const mapStateToProps = (state) => {
 }
 
 
-const clientesConnect = connect(mapStateToProps)(Cadastro)
+const clientesConnect = connect(mapStateToProps, {
+                                                    editCep, 
+                                                    editEndereco,
+                                                    editNumero,
+                                                    editComplemento,
+                                                    editBairro,
+                                                    editUf,
+                                                    editCidade,
+                                                })(Cadastro)
 
 export default clientesConnect
