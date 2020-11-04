@@ -68,7 +68,7 @@ export default class Contato extends Component {
         return (
 
             <Fragment>
-                <HeaderInterno titulo="Contato" />
+                <HeaderInterno tituloHeader="Contato" />
 
                 <div className="container container-pagina-interna clearfix">
                     <section>

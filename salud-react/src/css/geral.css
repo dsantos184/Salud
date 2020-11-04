@@ -496,12 +496,18 @@ section.footer .container .redes-sociais ul.navbar-nav li a{display: inline; flo
 
 section.copyright {background-color: #06C7CC; height: 50px; line-height: 50px; font-size:14px; font-weight: bold;}
 
+form label{font-weight: bold; font-size: 14px;}
+
 .container-form
 {
     padding: 50px 0;
 }
 
-form label{font-weight: bold; font-size: 14px;}
+.btn-quadrado
+{
+    border-radius: 0px !important;
+}
+
 
 /* scrollbar */
 /* width */
