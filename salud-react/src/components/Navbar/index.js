@@ -1,10 +1,16 @@
 import React from 'react'
 
 const Navbar = () => {
+
+
+    const palavra = "interpolada";
+ 
+
+
     return (
         <nav className="col navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand link-logo" href="#">
-                <img className="img-logo" src='/imagens/logo.png' alt="Salud" />
+            <a className="navbar-brand link-logo" href={`${process.env.REACT_APP_PUBLIC_URL}`}>
+                <img className="img-logo" src={`${process.env.REACT_APP_PUBLIC_URL}imagens/logo.png`} alt="Salud" />
             </a>
 
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -14,13 +20,13 @@ const Navbar = () => {
             <div className="container-menu collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
                     <li className="nav-item active">
-                        <a className="nav-link color-white" href="#institucional">Institucional <span className="sr-only">(current)</span></a>
+                        <a className="nav-link color-white" href={`${process.env.REACT_APP_PUBLIC_URL}#institucional`}>Institucional <span className="sr-only">(current)</span></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link color-white" href="#beneficios">Benefícios</a>
+                        <a className="nav-link color-white" href={`${process.env.REACT_APP_PUBLIC_URL}#beneficios`}>Benefícios</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link color-white" href="/contato">Contato</a>
+                        <a className="nav-link color-white" href={`${process.env.REACT_APP_PUBLIC_URL}contato`}>Contato</a>
                     </li>
                 </ul>
             </div>

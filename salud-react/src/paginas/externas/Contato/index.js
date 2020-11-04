@@ -20,17 +20,13 @@ export default class Contato extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
-
-
          
     }
 
     handleSubmit(event) {
-        event.preventDefault()
+        event.preventDefault() 
 
-        //se for post add linha abaixo (bug do)
-        const headers = { "Content-Type":"text/plain" }
-        axios.post(process.env.REACT_APP_API_URL + "enviaEmailContato", this.state, {headers})
+        axios.post(process.env.REACT_APP_API_URL + "enviaEmailContato", this.state )
         .then((response) => {
             alert(response.data.msg)
         }, (error) => {
@@ -74,7 +70,7 @@ export default class Contato extends Component {
             <Fragment>
                 <HeaderInterno titulo="Contato" />
 
-                <div className="container container-pagina-interna">
+                <div className="container container-pagina-interna clearfix">
                     <section>
                         <form onSubmit={this.handleSubmit}>
                             <div className="form-group">
