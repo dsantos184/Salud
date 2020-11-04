@@ -37,7 +37,7 @@ export default class SlideBeneficios extends Component {
 
     }
 
-    render() {       
+    render() {   
            
         return (
             <section id="beneficios" className="beneficios-home">
