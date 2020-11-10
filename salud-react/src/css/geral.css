@@ -508,6 +508,12 @@ form label{font-weight: bold; font-size: 14px;}
     border-radius: 0px !important;
 }
 
+.error-message
+{
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
 
 /* scrollbar */
 /* width */
