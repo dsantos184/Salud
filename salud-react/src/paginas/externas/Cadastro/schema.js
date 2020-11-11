@@ -1,5 +1,9 @@
 import yup from '../../../validation';
-import {validaCpf, unicCpf} from '../../../Utils'
+import {
+    validaCpf, 
+    unicCpf,
+    unicEmail
+} from '../../../Utils'
 
 
 
@@ -7,22 +11,41 @@ export default yup.object().shape({
     nome: yup.string().required(),
     cpf: yup.string().required()
     .test('cpf', 'CPF inválido', value =>{
-        const valido = validaCpf(value)
-        return valido     
+        
+        if( value )
+        {
+            const valido = validaCpf(value)
+            return valido     
+        }
      })
      .test('cpf', 'CPF já cadastrado', async value =>{
-        const unico = await unicCpf(value).then(resp=>{
+        
+        if( value )
+        {
+            const unico = await unicCpf(value).then(resp=>{
+                return resp.dados
+            })
+    
+            if( unico )
+            {
+                return false
+            }
+    
+            return true   
+        }
+     }),
+    email: yup.string().email().required().test('email', 'E-mail já cadastrado', async value =>{
+        const unico = await unicEmail(value).then(resp=>{
             return resp.dados
         })
-
+        
         if( unico )
         {
             return false
         }
 
         return true
-     }),
-    email: yup.string().email().required(),
+    }),
     dataNasc: yup.date().required(),
     sexo: yup.string().required(),
     ddd_telefone: yup.number().required().positive().integer(),

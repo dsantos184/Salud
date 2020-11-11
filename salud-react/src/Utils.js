@@ -1,7 +1,9 @@
 import axios from 'axios'
 
-export const consultaCep = async (cep)=>{
+export const consultaCep = async (value)=>{
    
+    const cep = value.replace(/[^0-9]/g, '')
+
     const url = `http://cep.republicavirtual.com.br/web_cep.php?cep=${cep}&formato=json`
 
     const req = await fetch(url)
@@ -50,6 +52,16 @@ export const unicCpf = async value =>{
     
     const cpf = value.replace(/[^0-9]/g, '')
     const url = `${process.env.REACT_APP_API_URL}clientes/verificaCpf/${cpf}`
+
+    const req = await fetch(url)
+    const json = await req.json()
+
+    return json
+}
+
+export const unicEmail = async value =>{
+    
+    const url = `${process.env.REACT_APP_API_URL}usuario/verificaEmail/${value}`
 
     const req = await fetch(url)
     const json = await req.json()
