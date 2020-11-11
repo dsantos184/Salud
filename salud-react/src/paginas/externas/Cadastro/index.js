@@ -2,7 +2,7 @@ import React, { Fragment, Component } from 'react'
 import HeaderInterno from '../../../components/HeaderInterno'
 import Card from '../../../components/Card'
 import Footer from '../../../components/Footer'
-import consultaCep from '../../../Utils'
+import {consultaCep} from '../../../Utils'
 
 import { Formik, Field, Form,ErrorMessage } from 'formik'
 import schema from './schema'
@@ -69,7 +69,12 @@ const Cadastro = props => {
                                         <div className="col-xs-12 col-lg-2">
                                             <div className="form-group">
                                                 <label>CPF: </label>
-                                                <Field type="number" name="cpf" className="form-control input-sm cpf_valido" />
+                                                <Field 
+                                                    type="text"
+                                                    name="cpf"
+                                                    className="form-control input-sm cpf_valido"
+                                                    maxLength="11"
+                                                />
                                                 <span className="error-message"><ErrorMessage name='cpf'/></span>
                                             </div>
                                         </div>
