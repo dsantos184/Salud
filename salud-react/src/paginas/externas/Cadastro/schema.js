@@ -58,5 +58,6 @@ export default yup.object().shape({
     cidade: yup.string().required(),
     uf: yup.string().min(2).required(),
     cep: yup.string().required(),
-
+    senha: yup.string().min(8).required(),
+    confirmaSenha: yup.string().oneOf([yup.ref('senha'), null],'Senha não confirmada')
 })

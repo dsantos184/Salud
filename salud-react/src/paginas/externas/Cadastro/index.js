@@ -10,7 +10,7 @@ import axios from 'axios'
 
 const Cadastro = props => {
 
-    function preencheEndereco(ev, cep, setFieldValue) {
+        function preencheEndereco(ev, cep, setFieldValue) {
         ev.preventDefault()
         consultaCep(cep)
             .then(data => {
@@ -55,11 +55,13 @@ const Cadastro = props => {
                             telefone: "",
                             dddCel: "",
                             celular: "",
-                            dependentes: [
+                            senha: "",
+                            confirmeSenha: ""
+                            /*/dependentes: [
                                 { cpf: "", nomeDependente: "", nascDependente: "", parentesco: "" },
                                 { cpf: "", nomeDependente: "", nascDependente: "", parentesco: "" },
                                 { cpf: "", nomeDependente: "", nascDependente: "", parentesco: "" },
-                            ]
+                            ]*/
                         }}
                         validationSchema = {schema}
                         render={({ values, setFieldValue }) => (
@@ -281,7 +283,7 @@ const Cadastro = props => {
                                         </div>
                                     </div>
                                 </Card>
-                                <button type="button" className="btn btn-primary btn-quadrado" id="btnInserirDependente">
+                                {/*}<button type="button" className="btn btn-primary btn-quadrado" id="btnInserirDependente">
                                     <i className="fa fa-plus-circle"></i> Adicionar Dependente
                                 </button>
 
@@ -348,9 +350,30 @@ const Cadastro = props => {
                                             </div>
                                         </div>
                                     </div>
+                                </Card>{*/}
+
+                                <Card textoHeader="Dados para Login">
+                                    <div className="row">
+                                        <div className="col-xs-12 col-lg-2 ">
+                                            <div className="form-group ">
+                                                <label>Senha: </label>
+                                                <Field type="password" name="senha" />
+                                                <span className="error-message"><ErrorMessage name='senha'/></span>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-xs-12 col-lg-2 ">
+                                            <div className="form-group ">
+                                                <label>Confirme a senha: </label>
+                                                <Field type="password" name="confirmaSenha" />
+                                                <span className="error-message"><ErrorMessage name='confirmaSenha'/></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </Card>
 
                                 <button type="submit" className="btn bg-red color-white btn-lg float-right">Cadastrar</button>
+                    
                             </Form>
                         )}
                     />

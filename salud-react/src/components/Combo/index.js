@@ -23,7 +23,6 @@ export default class Combo extends Component {
     }
  
     render() {
-
         return (
             <div className="col-lg-4 col-md-6">
                 <div className="box-plano">
@@ -52,7 +51,7 @@ export default class Combo extends Component {
                             { this.montaLiBeneficios() }
                         
                         <li>
-                            <a href={`/cadastro/${this.props.comboId}`} className={`btn-planos-home bg-btn-plano-${this.props.comboId} color-white`}>Quero este combo!</a>
+                            <a href={`/cadastro/${this.props.titulo}`} className={`btn-planos-home bg-btn-plano-${this.props.comboId} color-white`}>Quero este combo!</a>
                         </li>
                     </ul>
                 </div>
