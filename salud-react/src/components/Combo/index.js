@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { editDadosPlano } from '../../actions/PlanosEscolhidoActions'
+import {Redirect}  from 'react-router-dom'
 
 export class Combo extends Component {
    
     constructor(props)
     {
         super(props) 
+
+        this.state = {
+            redirect: false
+        }
     }   
 
     montaLiBeneficios(){
@@ -25,6 +30,13 @@ export class Combo extends Component {
     }
  
     render() {
+
+        if( this.state.redirect )
+        {
+            return <Redirect to={`/cadastro/${this.props.plano.titulo}`} />
+        }
+
+
         return (
             <div className="col-lg-4 col-md-6">
                 <div className="box-plano">
@@ -56,8 +68,10 @@ export class Combo extends Component {
                             <a 
                                 href={`/cadastro/${this.props.titulo}`} 
                                 className={`btn-planos-home bg-btn-plano-${this.props.comboId} color-white`}
-                                onClick = {(ev)=>{
+                                onClick = {(ev)=>{   
+                                    
                                     ev.preventDefault()
+
                                     const dadosPlano = {
                                         id: this.props.comboId,
                                         titulo: this.props.titulo,
@@ -65,9 +79,10 @@ export class Combo extends Component {
                                         beneficios: this.props.beneficios
                                     }
 
-                                    this.props.editDadosPlano(dadosPlano) 
+                                    this.props.editDadosPlano(dadosPlano)                                    
 
-                                    console.log(this.props)
+                                    this.setState({...this.state, redirect:true})
+
                                 }}
                             >
                                 Quero este combo!
@@ -92,6 +107,5 @@ const mapStateToProps = (state) =>{
 }
 
 const planoEscolhidoConnect = connect(mapStateToProps, { editDadosPlano })(Combo)
-
 
 export default planoEscolhidoConnect

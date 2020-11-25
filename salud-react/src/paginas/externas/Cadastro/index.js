@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react'
+import React, { Fragment } from 'react'
 import HeaderInterno from '../../../components/HeaderInterno'
 import Card from '../../../components/Card'
 import Footer from '../../../components/Footer'
@@ -7,8 +7,9 @@ import { consultaCep } from '../../../Utils'
 import { Formik, Field, Form,ErrorMessage } from 'formik'
 import schema from './schema'
 import axios from 'axios'
+import { connect } from 'react-redux'
 
-const Cadastro = props => {
+export const Cadastro = props => {
 
     console.log(props)
 
@@ -58,7 +59,8 @@ const Cadastro = props => {
                             dddCel: "",
                             celular: "",
                             senha: "",
-                            confirmeSenha: ""
+                            confirmeSenha: "",
+                            planoId: ""
                             /*/dependentes: [
                                 { cpf: "", nomeDependente: "", nascDependente: "", parentesco: "" },
                                 { cpf: "", nomeDependente: "", nascDependente: "", parentesco: "" },
@@ -375,7 +377,8 @@ const Cadastro = props => {
                                 </Card>
 
                                 <button type="submit" className="btn bg-red color-white btn-lg float-right">Cadastrar</button>
-                    
+                                <Field type="hidden" name="plano_id" value={props.plano.id} />
+                                 
                             </Form>
                         )}
                     />
@@ -386,4 +389,18 @@ const Cadastro = props => {
     )
 }
 
-export default Cadastro
+const mapStateToProps = (state) =>{   
+    return{        
+        plano:{
+            id: state.plano.id,
+            titulo: state.plano.titulo,
+            valor: state.plano.valor,
+            beneficios: state.plano.beneficios
+        }
+    }
+}
+
+const cadatroConnect = connect(mapStateToProps)(Cadastro)
+
+export default cadatroConnect
+
