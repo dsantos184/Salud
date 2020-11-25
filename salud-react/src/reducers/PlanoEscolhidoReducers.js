@@ -1,6 +1,4 @@
-import { Breadcrumb } from "react-bootstrap"
-
-const initialState = {
+const initialState = {    
     id: '',
     titulo: '',
     valor: '',
@@ -16,20 +14,19 @@ const PlanoEscolhidoReducers = (state=[], action) =>
     switch(action.type)
     {
         case 'editId':
-            return { ...state, id: action.payload.id }
+            return {...state, id: action.payload.id}
             break
         case 'editTitulo':
-            return { ...state, id: action.payload.titulo }
+            return {...state, titulo: action.payload.titulo}
             break
         case 'editValor':
-            return { ...state, id: action.payload.valor }
+            return {...state, valor: action.payload.valor}
             break
         case 'editBeneficios':
-            return { ...state, id: action.payload.beneficios }
+            return {...state, beneficio: action.payload.beneficios}
             break
         case 'editDadosPlano':
-                const {dadosPlano} = action.payload
-                return{...state, ...dadosPlano}
+                return {...action.payload}
             break
     } 
 }

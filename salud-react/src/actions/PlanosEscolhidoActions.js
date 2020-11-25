@@ -26,16 +26,9 @@ export const editBeneficios = (beneficios) =>{
     }
 }
 
-export const editBeneficios = (beneficios) =>{
-    return{
-        type: 'editBeneficios',
-        payload: {beneficios}
-    }
-}
-
 export const editDadosPlano = (dadosPlano) =>{
     return{
         type: 'editDadosPlano',
-        payload:{dadosPlano}
+        payload:{...dadosPlano}
     }
 }

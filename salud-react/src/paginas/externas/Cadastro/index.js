@@ -2,7 +2,7 @@ import React, { Fragment, Component } from 'react'
 import HeaderInterno from '../../../components/HeaderInterno'
 import Card from '../../../components/Card'
 import Footer from '../../../components/Footer'
-import {consultaCep} from '../../../Utils'
+import { consultaCep } from '../../../Utils'
 
 import { Formik, Field, Form,ErrorMessage } from 'formik'
 import schema from './schema'
@@ -10,16 +10,18 @@ import axios from 'axios'
 
 const Cadastro = props => {
 
-        function preencheEndereco(ev, cep, setFieldValue) {
+    console.log(props)
+
+    function preencheEndereco(ev, cep, setFieldValue) {
         ev.preventDefault()
         consultaCep(cep)
-            .then(data => {
-                const logradouro = `${data.tipo_logradouro} ${data.logradouro}`
-                setFieldValue('endereco', logradouro)
-                setFieldValue('bairro', data.bairro)
-                setFieldValue('cidade', data.cidade)
-                setFieldValue('uf', data.uf)
-            })
+        .then(data => {
+            const logradouro = `${data.tipo_logradouro} ${data.logradouro}`
+            setFieldValue('endereco', logradouro)
+            setFieldValue('bairro', data.bairro)
+            setFieldValue('cidade', data.cidade)
+            setFieldValue('uf', data.uf)
+        })
     }
 
     async function onSubmit(values, actions)
