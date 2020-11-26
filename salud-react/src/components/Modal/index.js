@@ -15,12 +15,10 @@ class ModalExample extends Component {
         this.setState({isOpen: !this.state.isOpen})       
     } 
 
-    render() {    
-        console.log("props="+this.props.isOpen)
-        console.log("state="+this.state.isOpen)
+    render() {     
         return ( 
             <div>
-                <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button>
+                {/* <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button> */}
                 <Modal isOpen={this.state.isOpen}  toggle={this.toggle} className={this.props.className}>
                     <ModalHeader className={this.props.classCssHeader} toggle={this.toggle}>{this.props.title}</ModalHeader>
                     <ModalBody>

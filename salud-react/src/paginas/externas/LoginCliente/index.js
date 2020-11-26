@@ -68,19 +68,15 @@ class Login extends Component {
                            
                             this.params.auth == "false" || this.state.erroLogin == true ?
 
-                            this.modalErroLogin()
-                                 /*
-                                <div>
+                            //this.modalErroLogin()
+                                  
                                 <Modal
                                     isOpen={true}
                                     title="Erro de login"
                                     classCssHeader="bg-red color-white"
                                 >
                                     <p>O usuário não existe na base de dados.</p>
-                                </Modal>
-                                <Alert color="primary">{Date('s')}</Alert>
-                                </div>
-                                */
+                                </Modal> 
                                 : ""
                                 
                         }
