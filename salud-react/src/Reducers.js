@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import ClientesReducers from './reducers/ClientesReducers'
+import PlanoEscolhidoReducers from './reducers/PlanoEscolhidoReducers'
 
 const Reducers = combineReducers({
-    clientes:ClientesReducers
+    plano: PlanoEscolhidoReducers 
 })
 
 export default Reducers

@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { editDadosPlano } from '../../actions/PlanosEscolhidoActions'
+import {Redirect}  from 'react-router-dom'
 
-export default class Combo extends Component {
+export class Combo extends Component {
    
     constructor(props)
     {
         super(props) 
+
+        this.state = {
+            redirect: false
+        }
     }   
 
     montaLiBeneficios(){
@@ -23,6 +30,12 @@ export default class Combo extends Component {
     }
  
     render() {
+
+        if( this.state.redirect )
+        {
+            return <Redirect to={`/cadastro/${this.props.plano.titulo}`} />
+        }
+
 
         return (
             <div className="col-lg-4 col-md-6">
@@ -52,7 +65,28 @@ export default class Combo extends Component {
                             { this.montaLiBeneficios() }
                         
                         <li>
-                            <a href="" className={`btn-planos-home bg-btn-plano-${this.props.comboId} color-white`}>Quero este combo!</a>
+                            <a 
+                                href={`/cadastro/${this.props.titulo}`} 
+                                className={`btn-planos-home bg-btn-plano-${this.props.comboId} color-white`}
+                                onClick = {(ev)=>{   
+                                    
+                                    ev.preventDefault()
+
+                                    const dadosPlano = {
+                                        id: this.props.comboId,
+                                        titulo: this.props.titulo,
+                                        valor: this.props.valor,
+                                        beneficios: this.props.beneficios
+                                    }
+
+                                    this.props.editDadosPlano(dadosPlano)                                    
+
+                                    this.setState({...this.state, redirect:true})
+
+                                }}
+                            >
+                                Quero este combo!
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -60,3 +94,18 @@ export default class Combo extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) =>{   
+    return{        
+        plano:{
+            id: state.plano.id,
+            titulo: state.plano.titulo,
+            valor: state.plano.valor,
+            beneficios: state.plano.beneficios
+        }
+    }
+}
+
+const planoEscolhidoConnect = connect(mapStateToProps, { editDadosPlano })(Combo)
+
+export default planoEscolhidoConnect
