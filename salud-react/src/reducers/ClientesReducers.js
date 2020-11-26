@@ -38,6 +38,9 @@ const clientesReducers = (state = [], action) => {
     }
 
     switch (action.type) {
+        case 'storeDadosCliente':
+            return { ...state, cliente: action.payload.cliente}
+            break
         case 'editCep':
             return { ...state, cep: action.payload.cep }
             break

@@ -8,6 +8,7 @@ import Planos from  '../../../components/Planos'
 import Combo from '../../../components/Combo'
 import SlideBeneficios from '../../../components/SlideBeneficios'
 import Footer from '../../../components/Footer'
+import Modal from '../../../components/Modal'
 
 export default class Home extends Component
 {
@@ -24,7 +25,8 @@ export default class Home extends Component
         return(
             <Fragment>
                 <Header/>
-                <main className="container-principal">
+                <main className="container-principal">                 
+
                     <Etapas>
                         <EtapaItem 
                             etapaId="primeiro-passo" 

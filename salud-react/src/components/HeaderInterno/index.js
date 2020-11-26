@@ -3,9 +3,9 @@ import Navbar from '../Navbar'
 import Breadcrumbs from '../Breadcrumbs'
 
 
-const HeaderInterno = ( props ) => {
-    return (
-        
+const HeaderInterno = ( props ) => { 
+    
+    return ( 
         <header className="container-header" style={{height:"auto"}}> 
  
             <Navbar />
@@ -13,7 +13,7 @@ const HeaderInterno = ( props ) => {
             <div className="titulo-pagina">
                 <section className="container">
                     <Breadcrumbs/>
-                    <h1 className="color-white">{props.titulo}</h1>
+                    <h1 className="color-white">{props.tituloHeader}</h1>
                 </section>
             </div>
         </header>
