@@ -11,8 +11,6 @@ import { connect } from 'react-redux'
 
 export const Cadastro = props => {
 
-    console.log(props)
-
     function preencheEndereco(ev, cep, setFieldValue) {
         ev.preventDefault()
         consultaCep(cep)
@@ -27,10 +25,15 @@ export const Cadastro = props => {
 
     async function onSubmit(values, actions)
     {
+        console.log(values)
+
+
         await axios.post(
             process.env.REACT_APP_API_URL + "cliente/cadastrar", values)
         .then(resp=>{
-            console.log(resp)
+            const {status, msg } = resp.data
+
+
         })
     }
 
@@ -60,7 +63,7 @@ export const Cadastro = props => {
                             celular: "",
                             senha: "",
                             confirmeSenha: "",
-                            planoId: ""
+                            plano_id: props.plano.id
                             /*/dependentes: [
                                 { cpf: "", nomeDependente: "", nascDependente: "", parentesco: "" },
                                 { cpf: "", nomeDependente: "", nascDependente: "", parentesco: "" },
@@ -287,7 +290,7 @@ export const Cadastro = props => {
                                         </div>
                                     </div>
                                 </Card>
-                                {/*}<button type="button" className="btn btn-primary btn-quadrado" id="btnInserirDependente">
+                                {/*ADICIONAR DEPENDENTE (NÃO REMOVER)  }<button type="button" className="btn btn-primary btn-quadrado" id="btnInserirDependente">
                                     <i className="fa fa-plus-circle"></i> Adicionar Dependente
                                 </button>
 
@@ -376,9 +379,7 @@ export const Cadastro = props => {
                                     </div>
                                 </Card>
 
-                                <button type="submit" className="btn bg-red color-white btn-lg float-right">Cadastrar</button>
-                                <Field type="hidden" name="plano_id" value={props.plano.id} />
-                                 
+                                <button type="submit" className="btn bg-red color-white btn-lg float-right">Cadastrar</button>                                                                 
                             </Form>
                         )}
                     />
