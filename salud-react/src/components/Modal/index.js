@@ -1,18 +1,18 @@
   
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { connect } from 'react-redux'
+import { exibeModal } from '../../actions/ModalActions'
 
 class ModalExample extends Component {
 
     constructor(props) {
         super(props)
-        
-        this.state = { isOpen: props.isOpen }
     }
  
 
     toggle = () => { 
-        this.setState({isOpen: !this.state.isOpen})       
+        this.props.exibeModal(!this.props.isOpen)       
     } 
 
     render() {     
@@ -39,5 +39,11 @@ class ModalExample extends Component {
     }
 }
 
+const mapStateToProps = (state) =>{
+    return{
+        isOpen: state.modal.isOpen
+    }
+}
 
-export default ModalExample;
+
+export default connect(mapStateToProps, { exibeModal })(ModalExample);

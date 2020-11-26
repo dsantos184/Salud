@@ -8,7 +8,7 @@ import Cadastro from '../paginas/externas/Cadastro'
 import Login from '../paginas/externas/LoginCliente'
 
 import { Autorizacao, Autenticacao } from './Autenticacao'
-import Modal from './../components/Modal'
+ 
 
 class PrivateRoute extends Component{
     constructor(props){
@@ -30,7 +30,7 @@ class PrivateRoute extends Component{
             return <Route path={this.props.path} component={this.props.component} />
         }else{
             
-          // return <Route path={this.props.path} component={Login}  />
+            //return <Route path={this.props.path} component={Login}  />
             return <Redirect to="/login-cliente?auth=false" />
         } 
     }

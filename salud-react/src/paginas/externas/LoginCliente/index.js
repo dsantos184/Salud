@@ -5,6 +5,7 @@ import Card from '../../../components/Card'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import axios from 'axios'
 import { connect } from 'react-redux'
+import { exibeModal } from '../../../actions/ModalActions'
 
 import { storeDadosCliente } from './../../../actions/ClientesActions'
 import Modal from '../../../components/Modal'
@@ -23,18 +24,24 @@ class Login extends Component {
 
     modalErroLogin = () => {
 
-        return <div>
-            <Modal 
-                isOpen={true}
-                title="Erro de Autenticação"
-                classCssHeader="bg-red"
-            >
-                <p>Você não está autenticado.</p>
-            </Modal>
-            <Alert color="danger">{Date('s')}</Alert>
-            
-        </div>
+        return <Modal
+            isOpen={true}
+            title="Erro de login"
+            classCssHeader="bg-red color-white"
+        >
+            <p>Email e senha incorretos.</p>
+        </Modal>
 
+    }
+
+    modalErroAutenticacao = () => {
+        return <Modal
+            isOpen={true}
+            title="Erro de Autenticação"
+            classCssHeader="bg-red color-white"
+        >
+            <p>Você não tem permissão para acessar essa página.</p>
+        </Modal>
     }
 
 
@@ -52,7 +59,8 @@ class Login extends Component {
                 nome: resp.dados.cliente_nome
             }
         } else {
-            this.setState({ erroLogin: true }); 
+            this.props.exibeModal(true)
+            this.setState({ erroLogin: true });
         }
     }
 
@@ -64,22 +72,9 @@ class Login extends Component {
                 <div className="container">
                     <section className="container-form">
 
-                        {
-                           
-                            this.params.auth == "false" || this.state.erroLogin == true ?
-
-                            //this.modalErroLogin()
-                                  
-                                <Modal
-                                    isOpen={true}
-                                    title="Erro de login"
-                                    classCssHeader="bg-red color-white"
-                                >
-                                    <p>O usuário não existe na base de dados.</p>
-                                </Modal> 
-                                : ""
-                                
-                        }
+                        { this.params.auth == "false" ? this.modalErroAutenticacao() : ''}
+                            
+                        { this.state.erroLogin == true ? this.modalErroLogin() : "" }
 
                         <Formik
                             onSubmit={this.onSubmit}
@@ -139,5 +134,10 @@ class Login extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        isOpen: state.modal.isOpen
+    }
+}
 
-export default connect(state => ({ cliente: state.clientes }), { storeDadosCliente })(Login); 
+export default connect(mapStateToProps, { exibeModal })(Login); 
