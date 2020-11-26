@@ -5,6 +5,7 @@ import Card from '../../../components/Card'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import axios from 'axios'
 import { connect } from 'react-redux'
+import { exibeModal } from '../../../actions/ModalActions'
 
 import { storeDadosCliente } from './../../../actions/ClientesActions'
 import Modal from '../../../components/Modal'
@@ -52,6 +53,7 @@ class Login extends Component {
                 nome: resp.dados.cliente_nome
             }
         } else {
+            this.props.exibeModal(true)
             this.setState({ erroLogin: true }); 
         }
     }
@@ -143,5 +145,10 @@ class Login extends Component {
     }
 }
 
+const mapStateToProps = (state) =>{
+    return{
+        isOpen: state.modal.isOpen
+    }
+}
 
-export default connect(state => ({ cliente: state.clientes }), { storeDadosCliente })(Login); 
+export default connect(mapStateToProps, { exibeModal })(Login); 

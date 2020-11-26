@@ -1,27 +1,25 @@
   
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { connect } from 'react-redux'
+import { exibeModal } from '../../actions/ModalActions'
 
 class ModalExample extends Component {
 
     constructor(props) {
         super(props)
-        
-        this.state = { isOpen: props.isOpen }
     }
  
 
     toggle = () => { 
-        this.setState({isOpen: !this.state.isOpen})       
+        this.props.exibeModal(!this.props.isOpen)       
     } 
 
     render() {    
-        console.log("props="+this.props.isOpen)
-        console.log("state="+this.state.isOpen)
         return ( 
             <div>
                 <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button>
-                <Modal isOpen={this.state.isOpen}  toggle={this.toggle} className={this.props.className}>
+                <Modal isOpen={this.props.isOpen}  toggle={this.toggle} className={this.props.className}>
                     <ModalHeader className={this.props.classCssHeader} toggle={this.toggle}>{this.props.title}</ModalHeader>
                     <ModalBody>
                     {this.props.children}
@@ -41,5 +39,11 @@ class ModalExample extends Component {
     }
 }
 
+const mapStateToProps = (state) =>{
+    return{
+        isOpen: state.modal.isOpen
+    }
+}
 
-export default ModalExample;
+
+export default connect(mapStateToProps, { exibeModal })(ModalExample);
