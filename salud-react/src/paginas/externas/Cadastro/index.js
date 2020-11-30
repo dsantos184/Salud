@@ -80,7 +80,7 @@ export class Cadastro extends Component {
                     })
                 }
                 else {
-                    
+                   actions.resetForm({values:''})
                 }
                 
                 this.setState({...this.state, exibeModal:true})
@@ -89,8 +89,7 @@ export class Cadastro extends Component {
     }
 
     render() {
-    
-        console.log(this.state)
+
         return (
             <Fragment>
                 <HeaderInterno tituloHeader="Formulário de cadastro" />
@@ -103,24 +102,24 @@ export class Cadastro extends Component {
                         <Formik
                             onSubmit={this.onSubmit}
                             initialValues={{
-                                cpf: "05952005756",
-                                dataNasc: "1985-03-14",
-                                nome: "Diogo",
-                                sexo: "M",
-                                cep: "21330650",
-                                endereco: "Rua Quiririm",
-                                numero: "902",
-                                complemento: "Teste",
-                                bairro: "Vila Valqueire",
-                                uf: "RJ",
-                                cidade: "Rio de Janeiro",
-                                email: "teste@teste.com.br",
-                                ddd_telefone: "21",
-                                telefone: "33333333",
-                                dddCel: "21",
-                                celular: "999999999",
-                                senha: "12345678",
-                                confirmeSenha: "12345678",
+                                cpf: "",
+                                dataNasc: "",
+                                nome: "",
+                                sexo: "",
+                                cep: "",
+                                endereco: "",
+                                numero: "",
+                                complemento: "",
+                                bairro: "",
+                                uf: "",
+                                cidade: "",
+                                email: "",
+                                ddd_telefone: "",
+                                telefone: "",
+                                dddCel: "",
+                                celular: "",
+                                senha: "",
+                                confirmeSenha: "",
                                 plano_id: this.props.plano.id
                                 /*/dependentes: [
                                     { cpf: "", nomeDependente: "", nascDependente: "", parentesco: "" },
