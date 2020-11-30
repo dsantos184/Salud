@@ -7,6 +7,8 @@ import Contato from '../paginas/externas/Contato'
 import Cadastro from '../paginas/externas/Cadastro'
 import Login from '../paginas/externas/LoginCliente'
 
+import Pagamento from '../paginas/externas/Pagamento'
+
 import { Autorizacao, Autenticacao } from './Autenticacao'
  
 
@@ -44,6 +46,7 @@ const Routes = (props) => (
         <Route path="/contato" component={Contato} />
         <Route path="/cadastro" component={Cadastro} />
         <Route path="/login-cliente" component={Login} />
+        <Route path="/pagamento" component={Pagamento} />
 
         <PrivateRoute path="/clientes/listar" component={() => <h1>Você ESTÁ autenticado!</h1>} />
 
