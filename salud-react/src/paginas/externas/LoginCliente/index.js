@@ -7,11 +7,8 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import { exibeModal } from '../../../actions/ModalActions'
 
-import { storeDadosCliente } from './../../../actions/ClientesActions'
 import Modal from '../../../components/Modal'
 import queryString from 'query-string';
-
-import { Alert } from 'reactstrap';
 
 class Login extends Component {
     constructor(props) {
