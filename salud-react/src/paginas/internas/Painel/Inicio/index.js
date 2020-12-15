@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
-
-class Inicio extends Component{
-    constructor(props){
+class Inicio extends Component {
+    constructor(props) {
         super(props)
     }
+ 
+    render() { 
 
-
-    render(){
-        return(
+        return (
             <h1>Inicio</h1>
         )
     }
 }
+
+export default Inicio

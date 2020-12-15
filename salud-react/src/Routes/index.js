@@ -6,48 +6,55 @@ import Home from '../paginas/externas/Home'
 import Contato from '../paginas/externas/Contato'
 import Cadastro from '../paginas/externas/Cadastro'
 import Login from '../paginas/externas/LoginCliente'
+import Inicio from '../paginas/internas/Painel/Inicio'
 
-import { Autorizacao, Autenticacao } from './Autenticacao'
+import { Autorizacao, Autenticacao } from '../apis/Salud/Autenticacao'
  
 
-class PrivateRoute extends Component{
-    constructor(props){
-        super(props);
-        this.state = { auth: false}
+
+class PrivateRoute extends Component {
+    constructor(props) {
+        super(props); 
+         
     }
 
-    componentWillMount(){        
+    render() { 
 
-        Autenticacao(this.props).then( resp => { 
-            this.setState({auth:resp})  
-            return resp
-        }) 
- 
-    }
-
-    render(){       
-        if( this.state.auth ){ 
+        if (this.props.auth) {
             return <Route path={this.props.path} component={this.props.component} />
-        }else{
-            
+        } else {
+
             //return <Route path={this.props.path} component={Login}  />
             return <Redirect to="/login-cliente?auth=false" />
-        } 
+        }
+
     }
 }
 
-const Routes = (props) => (
 
-    <Switch>
+class Routes extends Component {
+    constructor(props) {
+        super(props);        
+    }
 
-        <Route exact path="/" component={Home} />
-        <Route path="/contato" component={Contato} />
-        <Route path="/cadastro" component={Cadastro} />
-        <Route path="/login-cliente" component={Login} />
+    render() {
+        return (
+            <Switch>
 
-        <PrivateRoute path="/clientes/listar" component={() => <h1>Você ESTÁ autenticado!</h1>} />
+                <Route exact path="/" component={Home} />
+                <Route path="/contato" component={Contato} />
+                <Route path="/cadastro" component={Cadastro} />
+                <Route path="/login-cliente" component={Login} />
 
-    </Switch>
-)
+                <PrivateRoute path="/clientes/listar" component={() => <h1>Você ESTÁ autenticado!</h1>} />
 
-export default Routes
+                <PrivateRoute path="/painel/inicio" component={Inicio} />
+
+            </Switch>
+        )
+    }
+
+}
+ 
+
+export default   Routes 
