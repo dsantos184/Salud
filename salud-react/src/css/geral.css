@@ -24,6 +24,11 @@ body
     background-color: #d50043;
 }
 
+.bg-green
+{
+    background-color: #008b00;
+}
+
 .bg-light-blue
 {
     background-color: #44c5c0 ;

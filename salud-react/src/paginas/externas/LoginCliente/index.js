@@ -7,6 +7,7 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import { exibeModal } from '../../../actions/ModalActions'
 
+<<<<<<< HEAD
 import { storeDadosCliente } from './../../../actions/ClientesActions'
  import Modal from '../../../components/Modal'
 import queryString from 'query-string';
@@ -15,6 +16,11 @@ import { Alert } from 'reactstrap';
 import { Redirect } from 'react-router'
 
 
+=======
+import Modal from '../../../components/Modal'
+import queryString from 'query-string';
+
+>>>>>>> ef8fc51e113c9fac2e62d334475440b39c0fd1bf
 class Login extends Component {
     constructor(props) {
  

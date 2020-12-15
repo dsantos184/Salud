@@ -8,7 +8,9 @@ import Cadastro from '../paginas/externas/Cadastro'
 import Login from '../paginas/externas/LoginCliente'
 import Inicio from '../paginas/internas/Painel/Inicio'
 
-import { Autorizacao, Autenticacao } from '../apis/Salud/Autenticacao'
+import Pagamento from '../paginas/externas/Pagamento'
+
+import { Autorizacao, Autenticacao } from './Autenticacao'
  
 
 
@@ -40,6 +42,12 @@ class Routes extends Component {
     render() {
         return (
             <Switch>
+
+        <Route exact path="/" component={Home} />
+        <Route path="/contato" component={Contato} />
+        <Route path="/cadastro" component={Cadastro} />
+        <Route path="/login-cliente" component={Login} />
+        <Route path="/pagamento" component={Pagamento} />
 
                 <Route exact path="/" component={Home} />
                 <Route path="/contato" component={Contato} />
