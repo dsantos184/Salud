@@ -26,9 +26,9 @@ const PlanoEscolhidoReducers = (state=[], action) =>
             return {...state, beneficio: action.payload.beneficios}
             break
         case 'editDadosPlano':
-                return {...action.payload}
+                return {...state,...action.payload.dadosPlano}
             break
-        default: return  initialState
+        default: return  state
     } 
 }
 

@@ -10,6 +10,9 @@ import Login from '../paginas/externas/LoginCliente'
 import Pagamento from '../paginas/externas/Pagamento'
 
 import { Autorizacao, Autenticacao } from './Autenticacao'
+
+import Teste from '../teste-redux'
+import Teste2 from '../teste-redux2'
  
 
 class PrivateRoute extends Component{
@@ -47,6 +50,8 @@ const Routes = (props) => (
         <Route path="/cadastro" component={Cadastro} />
         <Route path="/login-cliente" component={Login} />
         <Route path="/pagamento" component={Pagamento} />
+        <Route path="/teste" component={Teste} />
+        <Route path="/teste2" component={Teste2} />
 
         <PrivateRoute path="/clientes/listar" component={() => <h1>Você ESTÁ autenticado!</h1>} />
 

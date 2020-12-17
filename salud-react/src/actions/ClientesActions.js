@@ -71,3 +71,10 @@ export const editCidade = (cidade) =>{
     }
 }
 
+
+export const editDadoscliente = (dadosCliente) =>{
+    return{
+        type: 'editDadoscliente',
+        payload: {dadosCliente}
+    }
+}

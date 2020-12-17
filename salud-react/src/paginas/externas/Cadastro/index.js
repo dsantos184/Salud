@@ -1,15 +1,19 @@
 import React, { Fragment, Component } from 'react'
-import HeaderInterno from '../../../components/HeaderInterno'
-import Card from '../../../components/Card'
-import Footer from '../../../components/Footer'
-import Modal from '../../../components/Modal'
-import { exibeModal } from '../../../actions/ModalActions'
-import { consultaCep } from '../../../Utils'
-
+import {Redirect}  from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import schema from './schema'
 import axios from 'axios'
 import { connect } from 'react-redux'
+
+import HeaderInterno from '../../../components/HeaderInterno'
+import Card from '../../../components/Card'
+import Footer from '../../../components/Footer'
+import Modal from '../../../components/Modal'
+import { consultaCep } from '../../../Utils'
+
+import { exibeModal } from '../../../actions/ModalActions'
+import { editDadoscliente } from '../../../actions/ClientesActions'
+
 
 export class Cadastro extends Component {
 
@@ -22,17 +26,16 @@ export class Cadastro extends Component {
             msg: '',
             bgColor: '',
             titulo: '',
+            redirPagameto: false
         }
 
         this.modal = this.modal.bind(this)
         this.preencheEndereco = this.preencheEndereco.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
-
     }
 
     modal(titulo, bgcolor, msg)
     {
-
         return <Modal
             isOpen={true}
             title={titulo}
@@ -40,7 +43,6 @@ export class Cadastro extends Component {
         >
             <p>{msg}</p>
         </Modal>
-
     }
 
     preencheEndereco(ev, cep, setFieldValue)
@@ -58,37 +60,41 @@ export class Cadastro extends Component {
 
     async onSubmit(values, actions)
     {
-        await axios.post(
-            process.env.REACT_APP_API_URL + "cliente/cadastrar", values)
-            .then(resp => {
-                const { status, msg } = resp.data
+        await axios.post(process.env.REACT_APP_API_URL + "cliente/cadastrar", values)
+        .then(resp => {
+            const { status, msg } = resp.data
 
+            if (status == 'erro')
+            {
                 this.setState({
                     ...this.state,
-                    bgColor: 'bg-green',
-                    titulo: 'Cadastro realizado com sucesso',
-                    msg: msg
+                    bgColor: 'bg-red',
+                    titulo: 'Erro ao efetuar o cadastro'
                 })
 
-
-                if (status == 'erro') {
-
-                    this.setState({
-                        ...this.state,
-                        bgColor: 'bg-red',
-                        titulo: 'rro ao efetuar o cadastro'
-                    })
-                }
-                else {
-                   actions.resetForm({values:''})
-                }
-                
-                this.setState({...this.state, exibeModal:true})
+                //seta informações do modal no redux
                 this.props.exibeModal(true)
-            })
+
+                this.setState({...this.state, exibeModal:true})
+
+            }
+            else {
+                
+                this.props.editDadoscliente(values)
+                
+                this.setState({...this.state, redirPagameto:true})
+                
+                actions.resetForm({values:''})
+            }
+        })
     }
 
     render() {
+
+        if( this.state.redirPagameto )
+        {
+            return <Redirect to="/pagamento" />
+        }
 
         return (
             <Fragment>
@@ -479,7 +485,9 @@ const mapStateToProps = (state) => {
     }
 }
 
-const cadatroConnect = connect(mapStateToProps, { exibeModal })(Cadastro)
+
+
+const cadatroConnect = connect(mapStateToProps, { editDadoscliente })(Cadastro)
 
 export default cadatroConnect
 
