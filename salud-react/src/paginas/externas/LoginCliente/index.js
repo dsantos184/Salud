@@ -6,22 +6,16 @@ import { Formik, Field, Form, ErrorMessage } from 'formik'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { exibeModal } from '../../../actions/ModalActions'
-
-<<<<<<< HEAD
-import { storeDadosCliente } from './../../../actions/ClientesActions'
- import Modal from '../../../components/Modal'
+import { autenticar } from './../../../actions/AutenticacaoActions'
+import Modal from '../../../components/Modal'
 import queryString from 'query-string';
 
 import { Alert } from 'reactstrap';
 import { Redirect } from 'react-router'
 
 
-=======
-import Modal from '../../../components/Modal'
-import queryString from 'query-string';
-
->>>>>>> ef8fc51e113c9fac2e62d334475440b39c0fd1bf
 class Login extends Component {
+
     constructor(props) {
  
         super(props)
@@ -78,18 +72,14 @@ class Login extends Component {
             localStorage.setItem('tokenDtExpiracao', resp.dados.updated_at.date)
 
             this.setState({...this.state,erroLogin:false})  
-            
-            //atualiza o redux
-            this.props.isAuthenticated(true)
-            this.props.tipoUsuario('cliente')     
-            
-                         
-        } else {
 
-            //atualiza o redux
-            this.props.isAuthenticated(false)
-            this.props.tipoUsuario('cliente') 
- 
+            //redux
+            this.props.autenticar(true) 
+            
+            console.log("Sucesso")
+            console.log( this.props )
+                         
+        } else { 
 
             this.setState({
                 ...this.state,
@@ -100,13 +90,12 @@ class Login extends Component {
                     classCss: "color-white bg-red"
                 }
             })
+
+            //redux
+            //this.props.autenticar(false)
             
         }
-        this.props.exibeModal(true)
-        
-        console.log("onSubmit")
-        console.log(this.props)
-
+        this.props.exibeModal(true)       
     }
 
     render() {
@@ -188,12 +177,12 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
- 
+const mapStateToProps = (state) => { 
 
-    return {
-        isOpen: state.modal.isOpen 
+    return {         
+        isOpen: state.modal.isOpen ,
+        autenticacao: state.autenticacao.autenticado
     }
 }
 
-export default connect(mapStateToProps, { exibeModal  })(Login); 
+export default connect(mapStateToProps, { exibeModal, autenticar })(Login); 

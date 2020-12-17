@@ -10,7 +10,10 @@ import Footer from '../../../components/Footer'
 import Modal from '../../../components/Modal'
  
 export default class Home extends Component
-{     
+{ 
+    
+  
+
     render()
     { 
         return(

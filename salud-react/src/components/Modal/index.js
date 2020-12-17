@@ -21,11 +21,7 @@ class ModalExample extends Component {
         return ( 
             <div>
                 {/* <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button> */}
-<<<<<<< HEAD
                 <Modal id={this.props.id}  isOpen={this.props.isOpen}  toggle={this.toggle}  className={this.props.className}>
-=======
-                <Modal isOpen={this.props.isOpen}  toggle={this.toggle} className={this.props.className}>
->>>>>>> ef8fc51e113c9fac2e62d334475440b39c0fd1bf
                     <ModalHeader className={this.props.classCssHeader} toggle={this.toggle}>{this.props.title}</ModalHeader>
                     <ModalBody>
                     {this.props.children}
