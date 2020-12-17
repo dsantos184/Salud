@@ -3,23 +3,25 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { connect } from 'react-redux'
 import { exibeModal } from '../../actions/ModalActions'
+import $ from 'jquery'
 
 class ModalExample extends Component {
 
     constructor(props) {
-        super(props)
+        super(props)     
     }
  
 
-    toggle = () => { 
+    toggle = () => {         
         this.props.exibeModal(!this.props.isOpen)       
     } 
 
     render() {     
+         
         return ( 
             <div>
                 {/* <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button> */}
-                <Modal isOpen={this.props.isOpen}  toggle={this.toggle} className={this.props.className}>
+                <Modal id={this.props.id}  isOpen={this.props.isOpen}  toggle={this.toggle}  className={this.props.className}>
                     <ModalHeader className={this.props.classCssHeader} toggle={this.toggle}>{this.props.title}</ModalHeader>
                     <ModalBody>
                     {this.props.children}
@@ -33,7 +35,7 @@ class ModalExample extends Component {
                      <Button color="secondary" onClick={this.props.clickBtnOk}>{this.props.textBtnOk}</Button>
                     : "" } 
                     </ModalFooter>
-                </Modal>
+                </Modal>                             
             </div>
         )
     }

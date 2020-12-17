@@ -1,61 +1,64 @@
 import React, { Component, Fragment, useEffect, useState } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 
+import { connect } from 'react-redux'
+import { autenticar } from './../actions/AutenticacaoActions'
+
 import Home from '../paginas/externas/Home'
 
 import Contato from '../paginas/externas/Contato'
 import Cadastro from '../paginas/externas/Cadastro'
 import Login from '../paginas/externas/LoginCliente'
+import Inicio from '../paginas/internas/Painel/Inicio'
 
 import Pagamento from '../paginas/externas/Pagamento'
 
-import { Autorizacao, Autenticacao } from './Autenticacao'
+import { Autorizacao, Autenticacao } from './../apis/Salud/Autenticacao'
 
-import Teste from '../teste-redux'
-import Teste2 from '../teste-redux2'
+import PrivateRoute from './PrivateRoute'
+import Forbiden from '../paginas/externas/Forbiden'
  
 
-class PrivateRoute extends Component{
-    constructor(props){
-        super(props);
-        this.state = { auth: false}
+class Routes extends Component {
+    constructor(props) {
+        super(props); 
     }
 
-    componentWillMount(){        
+    render() { 
+        console.log(this.props)
+        return (
+            <Switch>
 
-        Autenticacao(this.props).then( resp => { 
-            this.setState({auth:resp})  
-            return resp
-        }) 
- 
-    }
+                <Route exact path="/" component={Home} />
+                <Route path="/contato" component={Contato} />
+                <Route path="/cadastro" component={Cadastro} />
+                <Route path="/login-cliente" component={Login} />
+                <Route path="/pagamento" component={Pagamento} />
 
-    render(){       
-        if( this.state.auth ){ 
-            return <Route path={this.props.path} component={this.props.component} />
-        }else{
-            
-            //return <Route path={this.props.path} component={Login}  />
-            return <Redirect to="/login-cliente?auth=false" />
-        } 
+                <Route exact path="/" component={Home} />
+                <Route path="/contato" component={Contato} />
+                <Route path="/cadastro" component={Cadastro} />
+                <Route path="/login-cliente" component={Login} />
+                <Route path="/acesso-proibido" component={Forbiden}  />
+                <Route path="/pagamento" component={Pagamento} />
+
+                <PrivateRoute path="/clientes/listar" component={() => <h1>Você ESTÁ autenticado!</h1>} />
+
+                <PrivateRoute path="/painel/inicio" component={Inicio} />
+            </Switch>
+        )
     }
 }
 
-const Routes = (props) => (
+     
+        
 
-    <Switch>
 
-        <Route exact path="/" component={Home} />
-        <Route path="/contato" component={Contato} />
-        <Route path="/cadastro" component={Cadastro} />
-        <Route path="/login-cliente" component={Login} />
-        <Route path="/pagamento" component={Pagamento} />
-        <Route path="/teste" component={Teste} />
-        <Route path="/teste2" component={Teste2} />
+const mapStateToProps = (state) => {  
 
-        <PrivateRoute path="/clientes/listar" component={() => <h1>Você ESTÁ autenticado!</h1>} />
+    return {
+        autenticacao: state.autenticacao.autenticado 
+    }
+}
 
-    </Switch>
-)
-
-export default Routes
+export default connect(mapStateToProps, { autenticar })( Routes ); 

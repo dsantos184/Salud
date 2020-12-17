@@ -18,9 +18,7 @@ const Autenticacao =  ( props ) => {
         
 }
 
-
-const Autorizacao =  ( props ) => {
-    
+const Autorizacao =  ( props ) => {    
     return true
 }
 

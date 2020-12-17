@@ -8,11 +8,14 @@ import Planos from  '../../../components/Planos'
 import SlideBeneficios from '../../../components/SlideBeneficios'
 import Footer from '../../../components/Footer'
 import Modal from '../../../components/Modal'
-
+ 
 export default class Home extends Component
-{
+{ 
+    
+  
+
     render()
-    {
+    { 
         return(
             <Fragment>
                 <Header/>

@@ -6,43 +6,62 @@ import { Formik, Field, Form, ErrorMessage } from 'formik'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { exibeModal } from '../../../actions/ModalActions'
-
+import { autenticar } from './../../../actions/AutenticacaoActions'
 import Modal from '../../../components/Modal'
 import queryString from 'query-string';
 
+import { Alert } from 'reactstrap';
+import { Redirect } from 'react-router'
+
+
 class Login extends Component {
+
     constructor(props) {
-        //console.log(props)
+ 
         super(props)
         //pega parametros da URL
         this.params = queryString.parse(this.props.location.search);
-        this.state = { erroLogin: false }
+
+        this.state = {
+            erroLogin: '',
+            erroAuth: '',
+            modal : {
+                title: '',
+                classCss: '',
+                msg: ''
+            }
+        }
     }
 
-    modalErroLogin = () => {
+    componentDidMount() {
+        if( this.params.auth == "false" ){
+            this.setState({
+                ...this.state,
+                erroAuth:true,
+                modal: {
+                    title: "Erro de Autenticação",
+                    msg: "Você não está autorizado a acessar essa página!",
+                    classCss: "color-white bg-red"
+                }
+            })
+            this.props.exibeModal(true)
+        }
+        
+    }
+
+    renderModal(title, classCss, msg) {
 
         return <Modal
-            isOpen={true}
-            title="Erro de login"
-            classCssHeader="bg-red color-white"
+            title={title}
+            classCssHeader={`${classCss}`}
         >
-            <p>Email e senha incorretos.</p>
-        </Modal>
-
-    }
-
-    modalErroAutenticacao = () => {
-        return <Modal
-            isOpen={true}
-            title="Erro de Autenticação"
-            classCssHeader="bg-red color-white"
-        >
-            <p>Você não tem permissão para acessar essa página.</p>
+            <p>{msg}</p>
         </Modal>
     }
 
 
-    onSubmit = async (values, actions) => {
+
+    onSubmit = async (values, actions) => { 
 
         let resp = await axios.get(process.env.REACT_APP_API_URL + "clientes/login", { params: values }).then((resp) => resp.data)
 
@@ -52,13 +71,31 @@ class Login extends Component {
             localStorage.setItem('tipoUsuario', resp.dados.usuario_tipo_usuario)
             localStorage.setItem('tokenDtExpiracao', resp.dados.updated_at.date)
 
-            const cliente = {
-                nome: resp.dados.cliente_nome
-            }
-        } else {
-            this.props.exibeModal(true)
-            this.setState({ erroLogin: true });
+            this.setState({...this.state,erroLogin:false})  
+
+            //redux
+            this.props.autenticar(true) 
+            
+            console.log("Sucesso")
+            console.log( this.props )
+                         
+        } else { 
+
+            this.setState({
+                ...this.state,
+                erroLogin:true, 
+                modal: {
+                    title: "Erro de Login",
+                    msg: "CPF e/ou Senha incorretos!",
+                    classCss: "color-white bg-red"
+                }
+            })
+
+            //redux
+            //this.props.autenticar(false)
+            
         }
+        this.props.exibeModal(true)       
     }
 
     render() {
@@ -69,12 +106,21 @@ class Login extends Component {
                 <div className="container">
                     <section className="container-form">
 
-                        { this.params.auth == "false" ? this.modalErroAutenticacao() : ''}
-                            
-                        { this.state.erroLogin == true ? this.modalErroLogin() : "" }
+                        {/* RENDER MODAL ERRO LOGIN */}
+                        {this.state.erroLogin === true ?
+                        this.renderModal(this.state.modal.title, this.state.modal.classCss, this.state.modal.msg) :
+                         ""   
+                        }
+                        {/* REDIRECT PAINEL*/}
+                        { this.state.erroLogin === false ? <Redirect to="painel/inicio" /> : "" } 
+
+
+                        {/* RENDER MODAL ERRO AUTH */}
+                        {this.state.erroAuth == true ? this.renderModal(this.state.modal.title, this.state.modal.classCss, this.state.modal.msg) : ''}
+
 
                         <Formik
-                            onSubmit={this.onSubmit}
+                            onSubmit={  this.onSubmit }
                             initialValues={{
                                 cpf: "",
                                 senha: "",
@@ -131,10 +177,12 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        isOpen: state.modal.isOpen
+const mapStateToProps = (state) => { 
+
+    return {         
+        isOpen: state.modal.isOpen ,
+        autenticacao: state.autenticacao.autenticado
     }
 }
 
-export default connect(mapStateToProps, { exibeModal })(Login); 
+export default connect(mapStateToProps, { exibeModal, autenticar })(Login); 
