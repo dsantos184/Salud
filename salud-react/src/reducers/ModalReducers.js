@@ -15,7 +15,7 @@ const ModalReducers = (state = [], action) =>{
         case 'exibeModal':
             return {...state, isOpen: action.payload.isOpen}
             break
-        default: return initialState
+        default: return state
     }
 }
 

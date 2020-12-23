@@ -4,6 +4,8 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { autenticar } from './../actions/AutenticacaoActions'
 
+
+
 import Home from '../paginas/externas/Home'
 
 import Contato from '../paginas/externas/Contato'
@@ -17,6 +19,8 @@ import { Autorizacao, Autenticacao } from './../apis/Salud/Autenticacao'
 
 import PrivateRoute from './PrivateRoute'
 import Forbiden from '../paginas/externas/Forbiden'
+
+
  
 
 class Routes extends Component {
@@ -24,8 +28,7 @@ class Routes extends Component {
         super(props); 
     }
 
-    render() { 
-        console.log(this.props)
+    render() {  
         return (
             <Switch>
 
@@ -41,9 +44,10 @@ class Routes extends Component {
                 <Route path="/login-cliente" component={Login} />
                 <Route path="/acesso-proibido" component={Forbiden}  />
 
-                <PrivateRoute path="/clientes/listar" component={() => <h1>Você ESTÁ autenticado!</h1>} />
+                
 
-                <PrivateRoute path="/painel/inicio" component={Inicio} />
+                <PrivateRoute path="/painel/inicio" component={Inicio} /> 
+                <PrivateRoute path="/painel/clientes/listar" component={ () => <h1>Oi</h1> } />
 
             </Switch>
         )

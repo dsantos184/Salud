@@ -10,9 +10,14 @@ export default class Forbiden extends Component{
     render(){
         return(
             <Fragment>
-                <HeaderInterno tituloHeader="Contato" />
+                <HeaderInterno tituloHeader="ACESSO PROIBIDO" />
                 <main className="container-principal">    
-                <h1>PORIBIDO</h1>
+                    <div className="container container-pagina-interna clearfix">
+                        <section>
+                            <h1>ACESSO PROIBIDO</h1>
+                        </section>
+                    </div>
+                    
                     <Footer /> 
                 </main>
             </Fragment>

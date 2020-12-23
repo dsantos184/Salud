@@ -33,7 +33,8 @@ class Login extends Component {
         }
     }
 
-    componentDidMount() {
+    componentDidMount() {        
+        
         if( this.params.auth == "false" ){
             this.setState({
                 ...this.state,
@@ -66,18 +67,20 @@ class Login extends Component {
         let resp = await axios.get(process.env.REACT_APP_API_URL + "clientes/login", { params: values }).then((resp) => resp.data)
 
         if (resp.status == "sucesso") {
+ 
+            //redux
+            this.props.autenticar(true)
 
-            localStorage.setItem('token', resp.dados.usuario_token)
-            localStorage.setItem('tipoUsuario', resp.dados.usuario_tipo_usuario)
-            localStorage.setItem('tokenDtExpiracao', resp.dados.updated_at.date)
+            console.log("submit")
+            console.log(this.props.autenticacao)
+            
+            
+            localStorage.setItem('ApiSaludTokenApi', resp.dados.usuario_token)
+            localStorage.setItem('ApiSaludTipoUsuario', resp.dados.usuario_tipo_usuario)
+            localStorage.setItem('ApiSaludTokenDtExpiracao', resp.dados.updated_at.date)
 
             this.setState({...this.state,erroLogin:false})  
-
-            //redux
-            this.props.autenticar(true) 
-            
-            console.log("Sucesso")
-            console.log( this.props )
+ 
                          
         } else { 
 
@@ -177,11 +180,11 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = (state) => { 
-
+const mapStateToProps = (state) => {  
+    
     return {         
         isOpen: state.modal.isOpen ,
-        autenticacao: state.autenticacao.autenticado
+        autenticacao: state.autenticacao.autenticacao
     }
 }
 
