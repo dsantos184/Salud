@@ -10,19 +10,27 @@ export class Combo extends Component {
         super(props) 
 
         this.state = {
-            redirect: false
+            redirect: false,
+            plano:{
+                titulo: ''
+            }
         }
     }   
 
-    montaLiBeneficios(){
+    montaLiBeneficios()
+    {
         let rows = [<li key={0}></li>]
 
-        for(var i=1; i<this.props.totalBeneficios; i++){ 
-            if( this.props.beneficios[i] != undefined ){
+        for(var i=1; i<this.props.totalBeneficios; i++)
+        { 
+            if( this.props.beneficios[i] != undefined )
+            {
                 let nome  = this.props.beneficios[i].nome
                 let id = this.props.beneficios[i].id 
                 rows.push(<li key={i}>{nome}</li>)
-            }else{
+            }
+            else
+            {
                 rows.push(<li key={i}></li>)
             }         
         } 
@@ -33,9 +41,8 @@ export class Combo extends Component {
 
         if( this.state.redirect )
         {
-            return <Redirect to={`/cadastro/${this.props.plano.titulo}`} />
+            return <Redirect to={`/cadastro/${this.state.plano.titulo}`} />
         }
-
 
         return (
             <div className="col-lg-4 col-md-6">
@@ -81,8 +88,13 @@ export class Combo extends Component {
 
                                     this.props.editDadosPlano(dadosPlano)                                    
 
-                                    this.setState({...this.state, redirect:true})
-
+                                    this.setState(
+                                        {
+                                            ...this.state,
+                                            redirect:true,
+                                            plano:{titulo:this.props.titulo}
+                                        }
+                                    )
                                 }}
                             >
                                 Quero este combo!
@@ -95,15 +107,8 @@ export class Combo extends Component {
     }
 }
 
-const mapStateToProps = (state) =>{   
-    return{        
-        plano:{
-            id: state.plano.id,
-            titulo: state.plano.titulo,
-            valor: state.plano.valor,
-            beneficios: state.plano.beneficios
-        }
-    }
+const mapStateToProps = () =>{   
+    return{}
 }
 
 const planoEscolhidoConnect = connect(mapStateToProps, { editDadosPlano })(Combo)

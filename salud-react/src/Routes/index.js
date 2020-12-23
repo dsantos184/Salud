@@ -43,6 +43,7 @@ class Routes extends Component {
                 <Route path="/cadastro" component={Cadastro} />
                 <Route path="/login-cliente" component={Login} />
                 <Route path="/acesso-proibido" component={Forbiden}  />
+                <Route path="/pagamento" component={Pagamento} />
 
                 
 
@@ -52,8 +53,11 @@ class Routes extends Component {
             </Switch>
         )
     }
-
 }
+
+     
+        
+
 
 const mapStateToProps = (state) => {  
 

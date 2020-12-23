@@ -2,10 +2,16 @@ import React, { Component, Fragment } from 'react'
 import Card from '../../../components/Card'
 import HeaderInterno from '../../../components/HeaderInterno'
 import Footer from '../../../components/Footer'
-import { Form } from 'reactstrap'
+import { connect } from 'react-redux'
 
-export default class Pagamento extends Component
+export class Pagamento extends Component
 {
+    constructor(props)
+    {
+        super(props)
+    }
+
+    
     render()
     {
         return(
@@ -16,8 +22,8 @@ export default class Pagamento extends Component
                         <Card textoHeader="Dados do plano escolhido">
                             <div className="row">
                                 <div className="col-xs-12 col-lg-12">
-                                    <p><span>Combo:</span> Combo Individual</p>
-                                    <p><span>Valor:</span> R$ 19.90</p>
+                                    <p><span>Combo:</span> {this.props.dadosPlano.titulo}</p>
+                                    <p><span>Valor:</span> R$ {this.props.dadosPlano.valor}</p>
                                 </div>
                             </div>
                         </Card>
@@ -46,4 +52,36 @@ export default class Pagamento extends Component
         )
     }
 }
+
+const mapStateToProps = (state) =>{
+    return {
+        dadosCliente: {
+            cpf: state.cliente.cpf,
+            dataNasc: state.cliente.dataNasc,
+            nome: state.cliente.nome,
+            sexo: state.cliente.sexo,
+            cep: state.cliente.cep,
+            endereco: state.cliente.endereco,
+            numero: state.cliente.numero,
+            complemento: (!state.cliente.complemento)?"":state.cliente.complemento,
+            bairro: state.cliente.bairro,
+            uf: state.cliente.uf,
+            cidade: state.cliente.cidade,
+            email: state.cliente.email,
+            ddd_telefone: state.cliente.ddd_telefone,
+            telefone: state.cliente.telefone,
+            dddCel: state.cliente.dddCel,
+            celular: state.cliente.celular,
+        }, 
+        dadosPlano:{
+            id: state.plano.id,
+            titulo: state.plano.titulo,
+            valor: state.plano.valor,
+        }
+    }
+}
+
+const connetPagamento = connect(mapStateToProps)(Pagamento)
+
+export default connetPagamento
 
