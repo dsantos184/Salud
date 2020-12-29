@@ -24,8 +24,10 @@ class PrivateRoute extends Component {
         super(props);
     }
 
-    render() { 
-        alert(this.props.autenticacao)
+    render() {  
+
+        console.log("render")
+        console.log(this.props.autenticacao)
 
         if (this.props.autenticacao) {
             return <Route path={this.props.path} component={this.props.component} />
@@ -40,7 +42,7 @@ class PrivateRoute extends Component {
 const mapStateToProps = (state) => {  
 
     return {
-        autenticacao: state.autenticacao.autenticado 
+        autenticacao: state.autenticacao.autenticacao 
     }
 }
 
