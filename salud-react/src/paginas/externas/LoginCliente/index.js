@@ -33,7 +33,7 @@ class Login extends Component {
         }
     }
 
-    componentDidMount() {
+    /*componentDidMount() {
         if( this.params.auth == "false" ){
             this.setState({
                 ...this.state,
@@ -47,7 +47,7 @@ class Login extends Component {
             this.props.exibeModal(true)
         }
         
-    }
+    }*/
 
     renderModal(title, classCss, msg) {
 
@@ -65,19 +65,17 @@ class Login extends Component {
 
         let resp = await axios.get(process.env.REACT_APP_API_URL + "clientes/login", { params: values }).then((resp) => resp.data)
 
-        if (resp.status == "sucesso") {
+       if (resp.status == "sucesso") {
+            
+            this.props.autenticar(true) 
 
             localStorage.setItem('token', resp.dados.usuario_token)
             localStorage.setItem('tipoUsuario', resp.dados.usuario_tipo_usuario)
             localStorage.setItem('tokenDtExpiracao', resp.dados.updated_at.date)
 
-            this.setState({...this.state,erroLogin:false})  
+            this.setState({...this.state,erroLogin:false})
 
-            //redux
-            this.props.autenticar(true) 
-            
-            console.log("Sucesso")
-            console.log( this.props )
+            console.log(this.props)
                          
         } else { 
 
@@ -90,12 +88,12 @@ class Login extends Component {
                     classCss: "color-white bg-red"
                 }
             })
-
+            this.props.exibeModal(true)
             //redux
             //this.props.autenticar(false)
             
         }
-        this.props.exibeModal(true)       
+              
     }
 
     render() {
