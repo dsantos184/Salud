@@ -5,10 +5,11 @@ import Card from '../../../components/Card'
 import HeaderInterno from '../../../components/HeaderInterno'
 import Footer from '../../../components/Footer'
 import Modal from '../../../components/Modal'
+import axios from 'axios'
 
 import { connect } from 'react-redux'
 import { exibeModal }  from '../../../actions/ModalActions'
-
+import { FirstLastName } from '../../../Utils'
 export class Pagamento extends Component
 {
     constructor(props)
@@ -16,18 +17,31 @@ export class Pagamento extends Component
         super(props)
 
         this.state = {
-            confirmaContrato: false,
-            exibeModal: false,
+            sellerId:'b6010cf6-0ef1-4b67-bbd2-4af6a0783a64',
+            clientName: 'salud',
+            token:{
+                status: "",
+                data:{},
+                msg: ""
+            },
+            cadCliente:{
+                status: "",
+                data:{},
+                msg: ""
+            },
+            cardToken:{
+                status: "",
+                data:{},
+                msg: ""
+            },
+            dadosPagamento:{}
         }
 
         this.renderModal = this.renderModal.bind(this)
         this.submit = this.submit.bind(this)
-    }
-
-    aceiteContrato(e)
-    {
-        const confirm = e.target.checked
-        this.setState({...this.state, confirmaContrato: confirm})
+        this.tokenAcessoGentNet = this.tokenAcessoGentNet.bind(this)
+        this.cadastroCliente = this.cadastroCliente.bind(this)
+        this.tokenNumeroCartao = this.tokenNumeroCartao.bind(this)
     }
 
     renderModal(title, classCss, msg) {
@@ -38,34 +52,204 @@ export class Pagamento extends Component
         >
             <p>{msg}</p>
         </Modal>
+    }    
+    
+    tokenAcessoGentNet = async () =>{
+        const url = `${process.env.REACT_APP_APIGETNET_URL}gerarTokenAcesso`
+        await axios.get(url, {headers:{clientName: 'salud'}})
+        .then(resp=>{
+            //console.log(resp.data)
+            if( resp.status == 200 && resp.data.erro == 0 )
+            {
+                this.setState({
+                    ...this.state, 
+                    token:{
+                      status: 'success',
+                      data: {token:resp.data.dados.token.access_token},
+                      msg: resp.data.msg
+                    }
+                })
+            }
+            else
+            {
+                this.setState({
+                    ...this.state, 
+                    token:{
+                      status: 'error',
+                      data: {},
+                      msg: resp.data.msg
+                    }
+                })
+            }
+        })
+        .catch(error=>{
+            this.setState({
+                ...this.state, 
+                token:{
+                  status: 'error',
+                  data: {},
+                  msg: error
+                }
+            })
+        })
     }
 
-    handleState(e)
-    {
-        if( !this.state.confirmaContrato )
-        {
-            this.props.exibeModal(true)
-            this.setState({...this.state, exibeModal: true})
+    cadastroCliente = async () =>{
+        const {dadosCliente} = this.props
+        const objnome = FirstLastName(dadosCliente.nome)
+        const {sellerId} = this.state
+        const url = `${process.env.REACT_APP_APIGETNET_URL}cadastrarCliente`
+
+        const headers = {
+            sellerId: sellerId,
+            clientName: this.state.clientName,
+            Authorization: this.state.token.data.token
         }
-        else
-        {
-            const estado = this.state
-            estado.dadosPagamento[e.target.name] = e.target.value
-            this.setState({...this.state, estado})
+
+        //montando o objeto para enviar para a API da GetNet
+        const data = {
+            seller_id: sellerId,
+            customer_id: dadosCliente.cpf, 
+            first_name: (objnome.status == 'success')?objnome.data.firstName:"" ,
+            last_name: (objnome.status == 'success')?objnome.data.lastName:"",
+            document_type: "CPF",
+            document_number: dadosCliente.cpf,
+            birth_date: dadosCliente.dataNasc,
+            phone_number: dadosCliente.telefone,
+            celphone_number: dadosCliente.celular,
+            email: dadosCliente.email,
+            //observation: "O cliente tem interesse no plano x.",
+            address: 
+            {
+                street: dadosCliente.endereco,
+                number: dadosCliente.numero,
+                complement: dadosCliente.complemento,
+                district: dadosCliente.bairro,
+                city: dadosCliente.cidade,
+                state: dadosCliente.uf,
+                country: "Brasil",
+                postal_code: dadosCliente.cep
+            }
+        }
+        
+        await axios.post(url,data,{headers}).then(resp=>{            
+            if( resp.data.erro == 0 && resp.data.status == 200 )
+            {
+                this.setState({
+                    ...this.state,
+                    cadCliente:{
+                        status: "success",
+                        dados: resp.data.dados,
+                        msg: resp.data.msg
+                    }
+                })
+            }
+            else
+            {
+                this.setState({
+                    ...this.state,
+                    cadCliente:{
+                        status: "error",
+                        msg: "Erro ao cadastrar o cliente"
+                    }
+                })
+            }
+        })
+    }
+
+    async tokenNumeroCartao()
+    {
+        const sellerId = this.state.sellerId
+        const url = `${process.env.REACT_APP_APIGETNET_URL}tokenizarNumeroCartao`
+
+        const headers = {
+            Authorization: this.state.token,
+            sellerId: sellerId,
+        }
+        
+        const dados = {
+            card_number: this.state.dadosPagamento.numeroCartao,
+            customer_id: this.state.cadCliente.dados.customer_id
+        }
+
+        await axios.post(url,dados,{headers})
+        .then(resp=>{
+            console.log(resp)
+        })
+
+    }
+
+    cadastrarAssinatura()
+    {
+        const sellerId = this.state.sellerId
+
+        const headers = {
+            sellerId: sellerId,
+            Authorization: this.state.token
+        }
+
+        const {dadosCliente} = this.props
+
+        const dados = {
+            seller_id: sellerId,
+            customer_id: this.state.cadCliente.dados.customer_id,
+            plan_id: "",
+            order_id: "",
+            subscription:{
+                payment_type:{
+                    credit: {
+                        transaction_type: "FULL",
+                        number_installments: 1, //numero de parcelas
+                        soft_descriptor: 'Assinatura clube de benefícios Salud', //texto exibido na fatura do comprador
+                        billing_address:{ //endereço do comprador
+                            street: dadosCliente.endereco, //logradouro
+                            number: dadosCliente.numero,
+                            complement: dadosCliente.complemento,
+                            district: dadosCliente.bairro, //bairro
+                            city: dadosCliente.cidade,
+                            state: dadosCliente.uf,
+                            country: "BR",
+                            postal_code: dadosCliente.cep,
+                            card:{
+                                number_token: "", //número do cartão tokenizado
+                                cardholder_name: "", //nome do comprador impresso no cartão
+                                security_code: "", //codigo de segurança CVV ou CVC
+                                brand: "", //bandeira do cartão válidos: Mastercard, visa, Amex
+                                expiration_month: "", //mes de expiração do cartão com dois dígitos
+                                expiration_year: "", //ano de expiração do cartão com dois dígitos
+                                bin: "" //seis primeiros números do cartão 
+                            },
+                            installment_start_date: "", //string <YYYY-MM-DD> data de inínio de cobrança da assinatura
+                        }
+                    }
+                }
+            }
         }
     }
 
-    submit()
+    async submit(values, action)
     {
-        if( !this.state.confirmaContrato )
+        this.setState({
+            ...this.state,
+            dadosPagamento: values
+        })
+
+        //if( (this.props.dadosCliente.cpf && this.props.dadosCliente.cpf != "" ) && (this.props.dadosPlano.id && this.props.dadosPlano.id != "") )
         {
-            this.props.exibeModal(true)
-            this.setState({...this.state, exibeModal: true})
-        }
-        else
-        {
-            console.log("asssasa")
-           //mandar dados para a api
+            //gerar toke de acesso e o insere no estado
+            await this.tokenAcessoGentNet()
+
+            if( this.state.token.status == "success" )
+            {
+                await this.cadastroCliente()
+
+                console.log(this.state)
+
+                if( this.state.cadCliente.status == "success")
+                {
+                    this.tokenNumeroCartao() //função tokenização do numero do cartão de crédito
+                }
+            }
         }
     }
 
@@ -204,6 +388,7 @@ const mapStateToProps = (state) =>{
             id: state.plano.id,
             titulo: state.plano.titulo,
             valor: state.plano.valor,
+            idGetnet: state.plano.idGetnet
         }
     }
 }

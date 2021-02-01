@@ -91,6 +91,8 @@ export class Cadastro extends Component {
 
     render() {
 
+        console.log(this.props)
+
         if( this.state.redirPagameto )
         {
             return <Redirect to="/pagamento" />
@@ -480,6 +482,7 @@ const mapStateToProps = (state) => {
             id: state.plano.id,
             titulo: state.plano.titulo,
             valor: state.plano.valor,
+            idGetnet: state.plano.idGetnet,
             beneficios: state.plano.beneficios
         }
     }

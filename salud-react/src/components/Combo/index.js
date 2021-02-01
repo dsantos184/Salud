@@ -83,6 +83,7 @@ export class Combo extends Component {
                                         id: this.props.comboId,
                                         titulo: this.props.titulo,
                                         valor: this.props.valor,
+                                        idGetnet: this.props.idGetnet,
                                         beneficios: this.props.beneficios
                                     }
 

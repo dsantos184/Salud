@@ -68,3 +68,23 @@ export const unicEmail = async value =>{
 
     return json
 }
+
+export const FirstLastName = (nome) =>
+{
+    if( !nome  )
+    {
+        return {status: 'error', mensagem: "Nome não informado", data:{}}
+    }
+
+    const aNome = nome.split(" ")
+    const firstName = aNome[0]
+    const lastName = aNome[aNome.length - 1]
+
+    const nomeCompleto = {
+        firstName: firstName,
+        lastName: lastName
+    }
+
+    return {status:'success', mensagem:'sucesso', data: nomeCompleto}   
+   
+}

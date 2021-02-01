@@ -2,6 +2,7 @@ const initialState = {
     id: '',
     titulo: '',
     valor: '',
+    idGetnet: "",
     beneficios: []
 }
 

@@ -33,7 +33,7 @@ export default class Planos extends Component {
     }
 
     render(){
- 
+
         return (
             <section id="combos-home" className="planos-home">
     
@@ -66,7 +66,8 @@ export default class Planos extends Component {
                                 comboId ={plano.id}
                                 valor = {plano.valor}
                                 titulo = {plano.plano}
-                                beneficios = {plano.beneficios} 
+                                beneficios = {plano.beneficios}
+                                idGetnet = {plano.id_getnet} 
                                 totalBeneficios = {this.verificaMaiorQtdeBeneficios()}
                                 />
                                 ))
