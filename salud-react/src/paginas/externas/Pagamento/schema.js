@@ -5,6 +5,6 @@ export default yup.object().shape({
     numeroCartao: yup.string().min(16).required(),
     nomeCartao: yup.string().min(10).required(),
     validadeCartao: yup.string().min(5).required(),
-    codigoCartao: yup.string().min(3).required()
-
+    codigoCartao: yup.string().min(3).required(),
+    bandeiraCard: yup.string().required(),
 })

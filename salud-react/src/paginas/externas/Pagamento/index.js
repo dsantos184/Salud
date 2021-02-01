@@ -19,21 +19,9 @@ export class Pagamento extends Component
         this.state = {
             sellerId:'b6010cf6-0ef1-4b67-bbd2-4af6a0783a64',
             clientName: 'salud',
-            token:{
-                status: "",
-                data:{},
-                msg: ""
-            },
-            cadCliente:{
-                status: "",
-                data:{},
-                msg: ""
-            },
-            cardToken:{
-                status: "",
-                data:{},
-                msg: ""
-            },
+            token:{},
+            cadCliente:{},
+            cardToken:{},
             dadosPagamento:{}
         }
 
@@ -58,38 +46,9 @@ export class Pagamento extends Component
         const url = `${process.env.REACT_APP_APIGETNET_URL}gerarTokenAcesso`
         await axios.get(url, {headers:{clientName: 'salud'}})
         .then(resp=>{
-            //console.log(resp.data)
-            if( resp.status == 200 && resp.data.erro == 0 )
-            {
-                this.setState({
-                    ...this.state, 
-                    token:{
-                      status: 'success',
-                      data: {token:resp.data.dados.token.access_token},
-                      msg: resp.data.msg
-                    }
-                })
-            }
-            else
-            {
-                this.setState({
-                    ...this.state, 
-                    token:{
-                      status: 'error',
-                      data: {},
-                      msg: resp.data.msg
-                    }
-                })
-            }
-        })
-        .catch(error=>{
             this.setState({
-                ...this.state, 
-                token:{
-                  status: 'error',
-                  data: {},
-                  msg: error
-                }
+                ...this.state,
+                token: resp.data
             })
         })
     }
@@ -103,7 +62,7 @@ export class Pagamento extends Component
         const headers = {
             sellerId: sellerId,
             clientName: this.state.clientName,
-            Authorization: this.state.token.data.token
+            Authorization: this.state.token.dados.token.access_token
         }
 
         //montando o objeto para enviar para a API da GetNet
@@ -133,27 +92,10 @@ export class Pagamento extends Component
         }
         
         await axios.post(url,data,{headers}).then(resp=>{            
-            if( resp.data.erro == 0 && resp.data.status == 200 )
-            {
-                this.setState({
-                    ...this.state,
-                    cadCliente:{
-                        status: "success",
-                        dados: resp.data.dados,
-                        msg: resp.data.msg
-                    }
-                })
-            }
-            else
-            {
-                this.setState({
-                    ...this.state,
-                    cadCliente:{
-                        status: "error",
-                        msg: "Erro ao cadastrar o cliente"
-                    }
-                })
-            }
+            this.setState({
+                ...this.state,
+                cadCliente: resp.data
+            })
         })
     }
 
@@ -163,7 +105,8 @@ export class Pagamento extends Component
         const url = `${process.env.REACT_APP_APIGETNET_URL}tokenizarNumeroCartao`
 
         const headers = {
-            Authorization: this.state.token,
+            Authorization: this.state.token.dados.token.access_token,
+            clientName: this.state.clientName,
             sellerId: sellerId,
         }
         
@@ -174,9 +117,11 @@ export class Pagamento extends Component
 
         await axios.post(url,dados,{headers})
         .then(resp=>{
-            console.log(resp)
+            this.setState({
+                ...this.state,
+                cardToken: resp.data
+            })
         })
-
     }
 
     cadastrarAssinatura()
@@ -185,7 +130,7 @@ export class Pagamento extends Component
 
         const headers = {
             sellerId: sellerId,
-            Authorization: this.state.token
+            Authorization: this.state.token.dados.token.access_token
         }
 
         const {dadosCliente} = this.props
@@ -211,9 +156,9 @@ export class Pagamento extends Component
                             country: "BR",
                             postal_code: dadosCliente.cep,
                             card:{
-                                number_token: "", //número do cartão tokenizado
-                                cardholder_name: "", //nome do comprador impresso no cartão
-                                security_code: "", //codigo de segurança CVV ou CVC
+                                number_token: this.state.cardToken.dados.number_token, //número do cartão tokenizado
+                                cardholder_name: this.state.dadosPagamento.nomeCartao, //nome do comprador impresso no cartão
+                                security_code: this.state.dadosPagamento.codigoCartao, //codigo de segurança CVV ou CVC
                                 brand: "", //bandeira do cartão válidos: Mastercard, visa, Amex
                                 expiration_month: "", //mes de expiração do cartão com dois dígitos
                                 expiration_year: "", //ano de expiração do cartão com dois dígitos
@@ -239,15 +184,14 @@ export class Pagamento extends Component
             //gerar toke de acesso e o insere no estado
             await this.tokenAcessoGentNet()
 
-            if( this.state.token.status == "success" )
+            if( this.state.token.erro == 0 )
             {
                 await this.cadastroCliente()
-
-                console.log(this.state)
-
-                if( this.state.cadCliente.status == "success")
+                
+                if( this.state.cadCliente.erro == 0 )
                 {
-                    this.tokenNumeroCartao() //função tokenização do numero do cartão de crédito
+                    await this.tokenNumeroCartao() //função tokenização do numero do cartão de crédito
+                    console.log(this.state)
                 }
             }
         }
@@ -283,6 +227,7 @@ export class Pagamento extends Component
                                     nomeCartao: "",
                                     validadeCartao: "",
                                     codigoCartao: "",
+                                    bandeiraCard: ""
                                 }}
                                 validationSchema={schema}
                                 render={({values, setFieldValue})=>(
@@ -298,10 +243,62 @@ export class Pagamento extends Component
                                                 <label>
                                                     <a href="contrato_clube_minha_vida_mais.pdf">Li e aceito os termos do contrato</a>
                                                 </label>
-                                                <span className="error-message" style={{display: 'block'}}><ErrorMessage name='termosContrato' /></span>                                                
+                                                <span className="error-message" style={{display: 'block'}}><ErrorMessage name='termosContrato' /></span>
                                             </div>
                                         </div>
                                         <hr />
+                                        <div className="row">
+                                            <div className="col-xs-12 col-lg-6">
+                                                <label>Bandeira do cartão</label>
+                                            </div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-xs-4 col-lg-2">
+                                                <Field
+                                                    name="bandeiraCard"                                                   
+                                                    type="radio"
+                                                    value="Visa"
+                                                />
+                                                <img src="/imagens/visa.png"/>
+                                            </div>
+                                            <div className="col-xs-4 col-lg-2">
+                                                <Field
+                                                    name="bandeiraCard"                                                   
+                                                    type="radio"
+                                                    value="Mastercard"
+                                                />
+                                                <img src="/imagens/mastercard.png"/>
+                                            </div>
+                                            <div className="col-xs-4 col-lg-2">
+                                                <Field
+                                                    name="bandeiraCard"                                                   
+                                                    type="radio"
+                                                    value="Amex"
+                                                />
+                                                <img src="/imagens/amex.png"/>
+                                            </div>
+                                            <div className="col-xs-4 col-lg-2">
+                                                <Field
+                                                    name="bandeiraCard"                                                   
+                                                    type="radio"
+                                                    value="Elo"
+                                                />
+                                                <img src="/imagens/elo.png"/>
+                                            </div>
+                                            <div className="col-xs-4 col-lg-2">
+                                                <Field
+                                                    name="bandeiraCard"                                                   
+                                                    type="radio"
+                                                    value="Hipercard"
+                                                />
+                                                <label>Hipercard</label>
+                                            </div>            
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-xs-4 col-lg-2">
+                                                <span className="error-message"><ErrorMessage name='bandeiraCard' /></span>
+                                            </div>
+                                        </div>
                                         <div className="row">
                                             <div className="col-xs-12 col-lg-6">
                                                 <label>Número do cartão</label>                    
