@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
+import MaskedInput from 'react-maskedinput'
 import schema from './schema'
 import Card from '../../../components/Card'
 import HeaderInterno from '../../../components/HeaderInterno'
@@ -22,7 +23,7 @@ export class Pagamento extends Component
             token:{},
             cadCliente:{},
             cardToken:{},
-            dadosPagamento:{}
+            dadosPagamento:{},
         }
 
         this.renderModal = this.renderModal.bind(this)
@@ -30,6 +31,15 @@ export class Pagamento extends Component
         this.tokenAcessoGentNet = this.tokenAcessoGentNet.bind(this)
         this.cadastroCliente = this.cadastroCliente.bind(this)
         this.tokenNumeroCartao = this.tokenNumeroCartao.bind(this)
+        this.handleChangeField  = this.handleChangeField.bind(this)
+    }
+
+    handleChangeField(event)
+    {
+        this.setState({
+            ...this.state,
+            fieldInitialValues:{...this.state.fieldInitialValues, [event.target.name]: event.target.value}
+        })
     }
 
     renderModal(title, classCss, msg) {
@@ -174,6 +184,8 @@ export class Pagamento extends Component
 
     async submit(values, action)
     {
+        console.log(values)
+        
         this.setState({
             ...this.state,
             dadosPagamento: values
@@ -302,9 +314,11 @@ export class Pagamento extends Component
                                         <div className="row">
                                             <div className="col-xs-12 col-lg-6">
                                                 <label>Número do cartão</label>                    
-                                                <Field 
-                                                    className="form-control"                                         
-                                                    name="numeroCartao"                                                    
+                                                <MaskedInput 
+                                                    className="form-control"
+                                                    name="numeroCartao"
+                                                    mask="1111 1111 1111 1111"
+                                                    onChange={(val)=>setFieldValue("numeroCartao", val.target.value)}
                                                 />
                                                 <span className="error-message"><ErrorMessage name='numeroCartao' /></span>
                                             </div>
@@ -322,9 +336,11 @@ export class Pagamento extends Component
                                         <div className="row">
                                             <div className="col-xs-12 col-lg-3">
                                                 <label>validade</label>                    
-                                                <Field
+                                                <MaskedInput
                                                     className="form-control"                                                    
-                                                    name="validadeCartao"                                                   
+                                                    name="validadeCartao"
+                                                    mask="11/1111"                                                    
+                                                    onChange={(val)=>setFieldValue("validadeCartao", val.target.value)}
                                                 />
                                                 <span className="error-message"><ErrorMessage name='validadeCartao' /></span>
                                             </div>
@@ -332,7 +348,8 @@ export class Pagamento extends Component
                                                 <label>CVV</label>                    
                                                 <Field 
                                                     className="form-control"
-                                                    name="codigoCartao"                                                    
+                                                    name="codigoCartao"
+                                                    maxlength="3"
                                                 />
                                                 <span className="error-message"><ErrorMessage name='codigoCartao' /></span>
                                             </div>

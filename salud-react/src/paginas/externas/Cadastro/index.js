@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from 'react'
 import {Redirect}  from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
+import MaskedInput from 'react-maskedinput'
 import schema from './schema'
 import axios from 'axios'
 import { connect } from 'react-redux'
@@ -143,11 +144,12 @@ export class Cadastro extends Component {
                                             <div className="col-xs-12 col-lg-2">
                                                 <div className="form-group">
                                                     <label>CPF: </label>
-                                                    <Field
+                                                    <MaskedInput
                                                         type="text"
                                                         name="cpf"
                                                         className="form-control input-sm cpf_valido"
-                                                        maxLength="11"
+                                                        mask="111.111.111-11"
+                                                        onChange={(ev)=>setFieldValue('cpf', ev.target.value)}
                                                     />
                                                     <span className="error-message"><ErrorMessage name='cpf' /></span>
                                                 </div>
@@ -194,12 +196,13 @@ export class Cadastro extends Component {
                                                 <div className="form-group ">
                                                     <label>CEP</label>
                                                     <div className="input-group">
-                                                        <Field
+                                                        <MaskedInput
                                                             type="text"
-                                                            className="form-control  input-sm valid"
-                                                            maxLength="9"
+                                                            className="form-control  input-sm valid"                                                          
                                                             name="cep"
                                                             id="cep"
+                                                            mask="11111-111"
+                                                            onChange={(ev)=>setFieldValue('cep', ev.target.value)}
                                                         />
                                                         <span className="input-group-btn">
                                                             <a
@@ -310,21 +313,20 @@ export class Cadastro extends Component {
                                                 <div className="row">
                                                     <div className="col-xs-3 col-lg-4">
                                                         <label>DDD</label>
-                                                        <Field
-                                                            type="number"
+                                                        <Field                                                            
                                                             className="form-control input-sm"
                                                             name="ddd_telefone"
-                                                            maxLength="2"
+                                                            maxlength="2"
                                                         />
                                                         <span className="error-message"><ErrorMessage name='ddd_telefone' /></span>
                                                     </div>
                                                     <div className="col-xs-9 col-lg-8">
                                                         <label>Telefone</label>
-                                                        <Field
-                                                            type="number"
+                                                        <MaskedInput                                                            
                                                             className="form-control input-sm"
-                                                            name="telefone"
-                                                            maxLength="8"
+                                                            name="telefone"                                                            
+                                                            mask="1111-1111"
+                                                            onChange={(ev)=>setFieldValue('telefone', ev.target.value)}
                                                         />
                                                         <span className="error-message"><ErrorMessage name='telefone' /></span>
                                                     </div>
@@ -335,19 +337,20 @@ export class Cadastro extends Component {
                                                 <div className="row">
                                                     <div className=" col-xs-3 col-lg-4">
                                                         <label>DDD</label>
-                                                        <Field
-                                                            type="number"
+                                                        <Field                                                            
                                                             className="form-control input-sm"
                                                             name="dddCel"
+                                                            maxlength="2"
                                                         />
                                                         <span className="error-message"><ErrorMessage name='dddCel' /></span>
                                                     </div>
                                                     <div className=" col-xs-9 col-lg-8">
                                                         <label>Celular</label>
-                                                        <Field
-                                                            type="number"
+                                                        <MaskedInput                                                            
                                                             className="form-control input-sm"
                                                             name="celular"
+                                                            mask="11111-1111"
+                                                            onChange={(ev)=>setFieldValue('celular', ev.target.value)}
                                                         />
                                                         <span className="error-message"><ErrorMessage name='celular' /></span>
                                                     </div>
