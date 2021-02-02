@@ -159,8 +159,8 @@ export class Pagamento extends Component
                                 number_token: this.state.cardToken.dados.number_token, //número do cartão tokenizado
                                 cardholder_name: this.state.dadosPagamento.nomeCartao, //nome do comprador impresso no cartão
                                 security_code: this.state.dadosPagamento.codigoCartao, //codigo de segurança CVV ou CVC
-                                brand: "", //bandeira do cartão válidos: Mastercard, visa, Amex
-                                expiration_month: "", //mes de expiração do cartão com dois dígitos
+                                brand: this.state.dadosPagamento.bandeiraCard, //bandeira do cartão válidos: Mastercard, visa, Amex
+                                expiration_month:"" , //mes de expiração do cartão com dois dígitos
                                 expiration_year: "", //ano de expiração do cartão com dois dígitos
                                 bin: "" //seis primeiros números do cartão 
                             },
