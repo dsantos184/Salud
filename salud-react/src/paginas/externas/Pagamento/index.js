@@ -10,7 +10,7 @@ import axios from 'axios'
 
 import { connect } from 'react-redux'
 import { exibeModal }  from '../../../actions/ModalActions'
-import { FirstLastName } from '../../../Utils'
+import { FirstLastName, retiraCaracteresEspeciais } from '../../../Utils'
 export class Pagamento extends Component
 {
     constructor(props)
@@ -31,15 +31,6 @@ export class Pagamento extends Component
         this.tokenAcessoGentNet = this.tokenAcessoGentNet.bind(this)
         this.cadastroCliente = this.cadastroCliente.bind(this)
         this.tokenNumeroCartao = this.tokenNumeroCartao.bind(this)
-        this.handleChangeField  = this.handleChangeField.bind(this)
-    }
-
-    handleChangeField(event)
-    {
-        this.setState({
-            ...this.state,
-            fieldInitialValues:{...this.state.fieldInitialValues, [event.target.name]: event.target.value}
-        })
     }
 
     renderModal(title, classCss, msg) {
@@ -82,10 +73,10 @@ export class Pagamento extends Component
             first_name: (objnome.status == 'success')?objnome.data.firstName:"" ,
             last_name: (objnome.status == 'success')?objnome.data.lastName:"",
             document_type: "CPF",
-            document_number: dadosCliente.cpf,
+            document_number: retiraCaracteresEspeciais(dadosCliente.cpf),
             birth_date: dadosCliente.dataNasc,
-            phone_number: dadosCliente.telefone,
-            celphone_number: dadosCliente.celular,
+            phone_number: retiraCaracteresEspeciais(dadosCliente.telefone),
+            celphone_number: retiraCaracteresEspeciais(dadosCliente.celular),
             email: dadosCliente.email,
             //observation: "O cliente tem interesse no plano x.",
             address: 
@@ -113,6 +104,7 @@ export class Pagamento extends Component
     {
         const sellerId = this.state.sellerId
         const url = `${process.env.REACT_APP_APIGETNET_URL}tokenizarNumeroCartao`
+        const cardNumber = retiraCaracteresEspeciais(this.state.dadosPagamento.numeroCartao)
 
         const headers = {
             Authorization: this.state.token.dados.token.access_token,
@@ -121,7 +113,7 @@ export class Pagamento extends Component
         }
         
         const dados = {
-            card_number: this.state.dadosPagamento.numeroCartao,
+            card_number: cardNumber,
             customer_id: this.state.cadCliente.dados.customer_id
         }
 
@@ -183,9 +175,7 @@ export class Pagamento extends Component
     }
 
     async submit(values, action)
-    {
-        console.log(values)
-        
+    { 
         this.setState({
             ...this.state,
             dadosPagamento: values
@@ -200,10 +190,9 @@ export class Pagamento extends Component
             {
                 await this.cadastroCliente()
                 
-                if( this.state.cadCliente.erro == 0 )
+                //if( this.state.cadCliente.erro == 0 )
                 {
-                    await this.tokenNumeroCartao() //função tokenização do numero do cartão de crédito
-                    console.log(this.state)
+                    await this.tokenNumeroCartao() //função tokenização do numero do cartão de crédit
                 }
             }
         }

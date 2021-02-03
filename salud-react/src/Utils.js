@@ -69,8 +69,7 @@ export const unicEmail = async value =>{
     return json
 }
 
-export const FirstLastName = (nome) =>
-{
+export const FirstLastName = (nome) =>{
     if( !nome  )
     {
         return {status: 'error', mensagem: "Nome não informado", data:{}}
@@ -85,6 +84,11 @@ export const FirstLastName = (nome) =>
         lastName: lastName
     }
 
-    return {status:'success', mensagem:'sucesso', data: nomeCompleto}   
-   
+    return {status:'success', mensagem:'sucesso', data: nomeCompleto}      
 }
+
+export const retiraCaracteresEspeciais = (text) =>{
+    const newText = text.replace(/[^a-zA-z0-9s]/g, "")
+    return newText
+}
+

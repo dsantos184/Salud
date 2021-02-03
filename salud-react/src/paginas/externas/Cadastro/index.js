@@ -124,9 +124,9 @@ export class Cadastro extends Component {
                                 cidade: "",
                                 email: "",
                                 ddd_telefone: "21",
-                                telefone: "33333333",
+                                telefone: "3333-3333",
                                 dddCel: "21",
-                                celular: "999999999",
+                                celular: "",
                                 senha: "12345678",
                                 confirmaSenha: "12345678",
                                 plano_id: this.props.plano.id
