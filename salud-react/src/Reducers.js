@@ -12,5 +12,5 @@ const Reducers = combineReducers({
     autenticacao: AutenticacaoReducers,
     pedido: PedidosReducers
 })
- 
+
 export default Reducers

@@ -14,6 +14,7 @@ import { consultaCep } from '../../../Utils'
 
 import { exibeModal } from '../../../actions/ModalActions'
 import { editDadoscliente } from '../../../actions/ClientesActions'
+import { editDadosPedidos} from '../../../actions/PedidosActions'
 
 
 export class Cadastro extends Component {
@@ -64,10 +65,8 @@ export class Cadastro extends Component {
         await axios.post(process.env.REACT_APP_API_URL + "cliente/cadastrar", values)
         .then(resp => {
 
-            console.log(resp)
-
             const { status, msg } = resp.data
-
+           
             if (status == 'erro')
             {
                 this.setState({
@@ -83,8 +82,21 @@ export class Cadastro extends Component {
 
             }
             else {
+
+                const {pedido} = resp.data.dados
+
+                const dadosPedido = {
+                    cliente_id: pedido.cliente_id,
+                    created_at: pedido.created_at,
+                    id: pedido.id,
+                    meio_pagamento_id: pedido.meio_pagamento_id,
+                    plano_id: pedido.plano_id,
+                    vendedor_id: pedido.vendedor_id
+                }
                 
                 this.props.editDadoscliente(values)
+
+                this.props.editDadosPedidos(dadosPedido)
                 
                 this.setState({...this.state, redirPagameto:true})
                 

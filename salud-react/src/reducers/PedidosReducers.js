@@ -21,5 +21,6 @@ const PedidosResducres = (state = [], action) =>{
         default:
             return state
     }
-
 }
+
+export default PedidosResducres
