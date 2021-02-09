@@ -88,7 +88,50 @@ export const FirstLastName = (nome) =>{
 }
 
 export const retiraCaracteresEspeciais = (text) =>{
+    
+    if( text === '' )
+    {
+        return{
+            status:'error',
+            mensagem:"A string está vazia"
+        }
+    }
+    
     const newText = text.replace(/[^a-zA-z0-9s]/g, "")
-    return newText
+    return {
+        status:'success',
+        mensagem: 'Função executada com sucesso',
+        data:{
+            string: newText
+        }
+    }
+}
+
+export const partString = (text, posInicial, posFinal) =>{
+    if( text === '' )
+    {
+        return{
+            status:'error',
+            mensagem:"A string está vazia"
+        }
+    }
+
+    if( isNaN(posInicial) || isNaN(posFinal) )
+    {
+        return{
+            status:'error',
+            mensagem:"A posição inicial ou final deve ser um numero"
+        }
+    }
+
+    const newText = text.substring(posInicial, posFinal)
+
+    return {
+        status:'success',
+        mensagem: 'Função executada com sucesso',
+        data:{
+            string: newText
+        }
+    }
 }
 

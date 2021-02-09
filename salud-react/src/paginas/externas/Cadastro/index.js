@@ -63,6 +63,9 @@ export class Cadastro extends Component {
     {
         await axios.post(process.env.REACT_APP_API_URL + "cliente/cadastrar", values)
         .then(resp => {
+
+            console.log(resp)
+
             const { status, msg } = resp.data
 
             if (status == 'erro')
@@ -91,8 +94,6 @@ export class Cadastro extends Component {
     }
 
     render() {
-
-        console.log(this.props)
 
         if( this.state.redirPagameto )
         {

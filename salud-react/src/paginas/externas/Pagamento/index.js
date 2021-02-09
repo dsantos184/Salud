@@ -10,7 +10,11 @@ import axios from 'axios'
 
 import { connect } from 'react-redux'
 import { exibeModal }  from '../../../actions/ModalActions'
-import { FirstLastName, retiraCaracteresEspeciais } from '../../../Utils'
+import { 
+        FirstLastName,
+        retiraCaracteresEspeciais,
+        partString 
+    } from '../../../Utils'
 export class Pagamento extends Component
 {
     constructor(props)
@@ -56,122 +60,183 @@ export class Pagamento extends Component
 
     cadastroCliente = async () =>{
         const {dadosCliente} = this.props
-        const objnome = FirstLastName(dadosCliente.nome)
+        const objNome = FirstLastName(dadosCliente.nome)
         const {sellerId} = this.state
         const url = `${process.env.REACT_APP_APIGETNET_URL}cadastrarCliente`
+        const objCpf = retiraCaracteresEspeciais(dadosCliente.cpf)
 
-        const headers = {
-            sellerId: sellerId,
-            clientName: this.state.clientName,
-            Authorization: this.state.token.dados.token.access_token
-        }
-
-        //montando o objeto para enviar para a API da GetNet
-        const data = {
-            seller_id: sellerId,
-            customer_id: dadosCliente.cpf, 
-            first_name: (objnome.status == 'success')?objnome.data.firstName:"" ,
-            last_name: (objnome.status == 'success')?objnome.data.lastName:"",
-            document_type: "CPF",
-            document_number: retiraCaracteresEspeciais(dadosCliente.cpf),
-            birth_date: dadosCliente.dataNasc,
-            phone_number: retiraCaracteresEspeciais(dadosCliente.telefone),
-            celphone_number: retiraCaracteresEspeciais(dadosCliente.celular),
-            email: dadosCliente.email,
-            //observation: "O cliente tem interesse no plano x.",
-            address: 
-            {
-                street: dadosCliente.endereco,
-                number: dadosCliente.numero,
-                complement: dadosCliente.complemento,
-                district: dadosCliente.bairro,
-                city: dadosCliente.cidade,
-                state: dadosCliente.uf,
-                country: "Brasil",
-                postal_code: dadosCliente.cep
+        if(objCpf.status == "success" )
+        {
+            const headers = {
+                sellerId: sellerId,
+                clientName: this.state.clientName,
+                Authorization: this.state.token.dados.token.access_token
             }
-        }
-        
-        await axios.post(url,data,{headers}).then(resp=>{            
-            this.setState({
-                ...this.state,
-                cadCliente: resp.data
+
+            const cpf = objCpf.data.string
+
+            //montando o objeto para enviar para a API da GetNet
+            const data = {
+                seller_id: sellerId,
+                customer_id: dadosCliente.cpf, 
+                first_name: (objNome.status == 'success')?objNome.data.firstName:"" ,
+                last_name: (objNome.status == 'success')?objNome.data.lastName:"",
+                document_type: "CPF",
+                document_number: cpf,
+                birth_date: dadosCliente.dataNasc,
+                phone_number: dadosCliente.telefone,
+                celphone_number: dadosCliente.celular,
+                email: dadosCliente.email,
+                //observation: "O cliente tem interesse no plano x.",
+                address: 
+                {
+                    street: dadosCliente.endereco,
+                    number: dadosCliente.numero,
+                    complement: dadosCliente.complemento,
+                    district: dadosCliente.bairro,
+                    city: dadosCliente.cidade,
+                    state: dadosCliente.uf,
+                    country: "Brasil",
+                    postal_code: dadosCliente.cep
+                }
+            }
+            
+            await axios.post(url,data,{headers}).then(resp=>{            
+                this.setState({
+                    ...this.state,
+                    cadCliente: resp.data
+                })
             })
-        })
+        }
+        else
+        {
+            console.log(objCpf)
+        }
     }
 
     async tokenNumeroCartao()
     {
         const sellerId = this.state.sellerId
         const url = `${process.env.REACT_APP_APIGETNET_URL}tokenizarNumeroCartao`
-        const cardNumber = retiraCaracteresEspeciais(this.state.dadosPagamento.numeroCartao)
+        const objCardNumber = retiraCaracteresEspeciais(this.state.dadosPagamento.numeroCartao)
 
-        const headers = {
-            Authorization: this.state.token.dados.token.access_token,
-            clientName: this.state.clientName,
-            sellerId: sellerId,
-        }
-        
-        const dados = {
-            card_number: cardNumber,
-            customer_id: this.state.cadCliente.dados.customer_id
-        }
-
-        await axios.post(url,dados,{headers})
-        .then(resp=>{
+        if( objCardNumber.status == 'success')
+        {
             this.setState({
                 ...this.state,
-                cardToken: resp.data
+                dadosPagamento:{
+                    ...this.state.dadosPagamento,
+                    numeroCartao: objCardNumber.data.string
+                }
             })
-        })
+            
+            
+            const headers = {
+                Authorization: this.state.token.dados.token.access_token,
+                clientName: this.state.clientName,
+                sellerId: sellerId,
+            }
+            
+            const dados = {
+                card_number: objCardNumber.data.string,
+                customer_id: this.state.cadCliente.dados.customer_id
+            }
+    
+            await axios.post(url,dados,{headers})
+            .then(resp=>{
+                this.setState({
+                    ...this.state,
+                    cardToken: resp.data
+                })
+            })
+        }
+        else
+        {
+            console.log(objCardNumber.mensagem)
+        }
     }
 
     cadastrarAssinatura()
     {
         const sellerId = this.state.sellerId
+        const objDataExp = retiraCaracteresEspeciais(this.state.dadosPagamento.validadeCartao)
+        
+        if(objDataExp.status == "success" )
+        {
+            const objMesExp =  partString(objDataExp.data.string, 0, 2)
+            const objAnoExp =  partString(objDataExp.data.string, 5, 2)
+            const bin = partString(objDataExp.data.string, 5, 2)
 
-        const headers = {
-            sellerId: sellerId,
-            Authorization: this.state.token.dados.token.access_token
-        }
+            if(objAnoExp.status == "success" && objMesExp.status == "success" )
+            {
+                const headers = {
+                    sellerId: sellerId,
+                    Authorization: this.state.token.dados.token.access_token
+                }
 
-        const {dadosCliente} = this.props
+                if( this.state.dadosPagamento.numeroCartao != "" )
+                {
+                    const numeroCartao = this.state.dadosPagamento.numeroCartao
+                    const objBin = partString(objDataExp.data.string, 0, 0)
 
-        const dados = {
-            seller_id: sellerId,
-            customer_id: this.state.cadCliente.dados.customer_id,
-            plan_id: "",
-            order_id: "",
-            subscription:{
-                payment_type:{
-                    credit: {
-                        transaction_type: "FULL",
-                        number_installments: 1, //numero de parcelas
-                        soft_descriptor: 'Assinatura clube de benefícios Salud', //texto exibido na fatura do comprador
-                        billing_address:{ //endereço do comprador
-                            street: dadosCliente.endereco, //logradouro
-                            number: dadosCliente.numero,
-                            complement: dadosCliente.complemento,
-                            district: dadosCliente.bairro, //bairro
-                            city: dadosCliente.cidade,
-                            state: dadosCliente.uf,
-                            country: "BR",
-                            postal_code: dadosCliente.cep,
-                            card:{
-                                number_token: this.state.cardToken.dados.number_token, //número do cartão tokenizado
-                                cardholder_name: this.state.dadosPagamento.nomeCartao, //nome do comprador impresso no cartão
-                                security_code: this.state.dadosPagamento.codigoCartao, //codigo de segurança CVV ou CVC
-                                brand: this.state.dadosPagamento.bandeiraCard, //bandeira do cartão válidos: Mastercard, visa, Amex
-                                expiration_month:"" , //mes de expiração do cartão com dois dígitos
-                                expiration_year: "", //ano de expiração do cartão com dois dígitos
-                                bin: "" //seis primeiros números do cartão 
-                            },
-                            installment_start_date: "", //string <YYYY-MM-DD> data de inínio de cobrança da assinatura
+                    if( objBin.status == "success")
+                    {
+                        const bin = objBin.data.string
+
+                        const mesExp = objMesExp.data.string
+                        const anoExp = objAnoExp.data.string
+                
+                        const {dadosCliente} = this.props
+                
+                        const dadosCad = {
+                            seller_id: sellerId,
+                            customer_id: this.state.cadCliente.dados.customer_id,
+                            plan_id: this.props.dadosPlano.id,
+                            order_id: "",
+                            subscription:{
+                                payment_type:{
+                                    credit: {
+                                        transaction_type: "FULL",
+                                        number_installments: 1, //numero de parcelas
+                                        soft_descriptor: 'Assinatura clube de benefícios Salud', //texto exibido na fatura do comprador
+                                        billing_address:{ //endereço do comprador
+                                            street: dadosCliente.endereco, //logradouro
+                                            number: dadosCliente.numero,
+                                            complement: dadosCliente.complemento,
+                                            district: dadosCliente.bairro, //bairro
+                                            city: dadosCliente.cidade,
+                                            state: dadosCliente.uf,
+                                            country: "BR",
+                                            postal_code: dadosCliente.cep,
+                                            card:{
+                                                number_token: this.state.cardToken.dados.number_token, //número do cartão tokenizado
+                                                cardholder_name: this.state.dadosPagamento.nomeCartao, //nome do comprador impresso no cartão
+                                                security_code: this.state.dadosPagamento.codigoCartao, //codigo de segurança CVV ou CVC
+                                                brand: this.state.dadosPagamento.bandeiraCard, //bandeira do cartão válidos: Mastercard, visa, Amex
+                                                expiration_month: mesExp , //mes de expiração do cartão com dois dígitos
+                                                expiration_year: anoExp, //ano de expiração do cartão com dois dígitos
+                                                bin: bin //seis primeiros números do cartão 
+                                            },
+                                            installment_start_date: new Date(), //string <YYYY-MM-DD> data de inínio de cobrança da assinatura
+                                        }
+                                    }
+                                }
+                            }
                         }
+
+                        console.log(dadosCad)
+                    }
+                    else
+                    {
+                        //mensagem de erro
                     }
                 }
+                else
+                {
+                    //mensagem de erro
+                }
             }
-        }
+        }       
     }
 
     async submit(values, action)
@@ -186,13 +251,16 @@ export class Pagamento extends Component
             //gerar toke de acesso e o insere no estado
             await this.tokenAcessoGentNet()
 
-            if( this.state.token.erro == 0 )
+            //if( this.state.token.erro == 0 )
             {
                 await this.cadastroCliente()
-                
+
                 //if( this.state.cadCliente.erro == 0 )
                 {
+                    
                     await this.tokenNumeroCartao() //função tokenização do numero do cartão de crédit
+
+                    this.cadastrarAssinatura()
                 }
             }
         }
@@ -328,7 +396,7 @@ export class Pagamento extends Component
                                                 <MaskedInput
                                                     className="form-control"                                                    
                                                     name="validadeCartao"
-                                                    mask="11/1111"                                                    
+                                                    mask="11/11"                                                    
                                                     onChange={(val)=>setFieldValue("validadeCartao", val.target.value)}
                                                 />
                                                 <span className="error-message"><ErrorMessage name='validadeCartao' /></span>
