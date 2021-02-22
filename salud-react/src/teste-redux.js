@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+/*import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
@@ -64,4 +64,20 @@ const mapStateToProps = (state) =>{
 
 const connectTest = connect(mapStateToProps, { editDadoscliente})(Teste)
 
-export default connectTest
+export default connectTest*/
+
+
+import React from 'react'
+
+const Teste = (props) =>{
+
+    console.log(props.match.url)
+    
+    return(
+        <div>
+            <h1>asjdasikjdhsaikjdh</h1>
+        </div>
+    )    
+}
+
+export default Teste

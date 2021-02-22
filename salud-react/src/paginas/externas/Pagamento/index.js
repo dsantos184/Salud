@@ -28,6 +28,7 @@ export class Pagamento extends Component
             cadCliente:{},
             cardToken:{},
             dadosPagamento:{},
+            cadAssinatura:{}
         }
 
         this.renderModal = this.renderModal.bind(this)
@@ -75,10 +76,13 @@ export class Pagamento extends Component
 
             const cpf = objCpf.data.string
 
+            const { dadosPedido } = this.props
+            const customerId = `${dadosPedido.cliente_id}${dadosPedido.id}${dadosPedido.plano_id}`
+
             //montando o objeto para enviar para a API da GetNet
             const data = {
                 seller_id: sellerId,
-                customer_id: dadosCliente.cpf, 
+                customer_id:customerId , 
                 first_name: (objNome.status == 'success')?objNome.data.firstName:"" ,
                 last_name: (objNome.status == 'success')?objNome.data.lastName:"",
                 document_type: "CPF",
@@ -119,8 +123,8 @@ export class Pagamento extends Component
         const sellerId = this.state.sellerId
         const url = `${process.env.REACT_APP_APIGETNET_URL}tokenizarNumeroCartao`
         const objCardNumber = retiraCaracteresEspeciais(this.state.dadosPagamento.numeroCartao)
-
-        if( objCardNumber.status == 'success')
+        
+        if( objCardNumber.status == 'success' )
         {
             this.setState({
                 ...this.state,
@@ -128,15 +132,14 @@ export class Pagamento extends Component
                     ...this.state.dadosPagamento,
                     numeroCartao: objCardNumber.data.string
                 }
-            })
-            
+            })            
             
             const headers = {
                 Authorization: this.state.token.dados.token.access_token,
                 clientName: this.state.clientName,
                 sellerId: sellerId,
             }
-            
+
             const dados = {
                 card_number: objCardNumber.data.string,
                 customer_id: this.state.cadCliente.dados.customer_id
@@ -149,14 +152,17 @@ export class Pagamento extends Component
                     cardToken: resp.data
                 })
             })
+            .catch(error=>{
+                console.log(error)
+            })
         }
         else
         {
-            console.log(objCardNumber.mensagem)
+            console.log(`${objCardNumber.mensagem}` )
         }
     }
 
-    cadastrarAssinatura()
+    async cadastrarAssinatura()
     {
         const sellerId = this.state.sellerId
         const objDataExp = retiraCaracteresEspeciais(this.state.dadosPagamento.validadeCartao)
@@ -166,65 +172,79 @@ export class Pagamento extends Component
             const objMesExp =  partString(objDataExp.data.string, 0, 2)
             const objAnoExp =  partString(objDataExp.data.string, 5, 2)
             const bin = partString(objDataExp.data.string, 5, 2)
+            const url = `${process.env.REACT_APP_APIGETNET_URL}tokenizarNumeroCartao`
 
             if(objAnoExp.status == "success" && objMesExp.status == "success" )
             {
                 const headers = {
                     sellerId: sellerId,
+                    clientName: this.state.clientName,
                     Authorization: this.state.token.dados.token.access_token
                 }
 
                 if( this.state.dadosPagamento.numeroCartao != "" )
                 {
                     const numeroCartao = this.state.dadosPagamento.numeroCartao
-                    const objBin = partString(objDataExp.data.string, 0, 0)
+                    const objBin = partString(numeroCartao, 0, 6)
 
                     if( objBin.status == "success")
                     {
-                        const bin = objBin.data.string
+                        const dataAtual = new Date(Date.now()).toISOString()
+                        const objData = partString(dataAtual, 0, 10)
 
-                        const mesExp = objMesExp.data.string
-                        const anoExp = objAnoExp.data.string
-                
-                        const {dadosCliente} = this.props
-                
-                        const dadosCad = {
-                            seller_id: sellerId,
-                            customer_id: this.state.cadCliente.dados.customer_id,
-                            plan_id: this.props.dadosPlano.id,
-                            order_id: "",
-                            subscription:{
-                                payment_type:{
-                                    credit: {
-                                        transaction_type: "FULL",
-                                        number_installments: 1, //numero de parcelas
-                                        soft_descriptor: 'Assinatura clube de benefícios Salud', //texto exibido na fatura do comprador
-                                        billing_address:{ //endereço do comprador
-                                            street: dadosCliente.endereco, //logradouro
-                                            number: dadosCliente.numero,
-                                            complement: dadosCliente.complemento,
-                                            district: dadosCliente.bairro, //bairro
-                                            city: dadosCliente.cidade,
-                                            state: dadosCliente.uf,
-                                            country: "BR",
-                                            postal_code: dadosCliente.cep,
-                                            card:{
-                                                number_token: this.state.cardToken.dados.number_token, //número do cartão tokenizado
-                                                cardholder_name: this.state.dadosPagamento.nomeCartao, //nome do comprador impresso no cartão
-                                                security_code: this.state.dadosPagamento.codigoCartao, //codigo de segurança CVV ou CVC
-                                                brand: this.state.dadosPagamento.bandeiraCard, //bandeira do cartão válidos: Mastercard, visa, Amex
-                                                expiration_month: mesExp , //mes de expiração do cartão com dois dígitos
-                                                expiration_year: anoExp, //ano de expiração do cartão com dois dígitos
-                                                bin: bin //seis primeiros números do cartão 
-                                            },
-                                            installment_start_date: new Date(), //string <YYYY-MM-DD> data de inínio de cobrança da assinatura
+                        if( objData.status == "success" )
+                        {
+                            const bin = objBin.data.string
+
+                            const mesExp = objMesExp.data.string
+                            const anoExp = objAnoExp.data.string
+                    
+                            const {dadosCliente} = this.props
+
+                            const dadosAss = {
+                                seller_id: sellerId,
+                                customer_id: this.state.cadCliente.dados.customer_id,
+                                plan_id: this.props.dadosPlano.id,
+                                order_id: this.props.dadosPedido.id,
+                                subscription:{
+                                    payment_type:{
+                                        credit: {
+                                            transaction_type: "FULL",
+                                            number_installments: 1, //numero de parcelas
+                                            soft_descriptor: 'Assinatura clube de benefícios Salud', //texto exibido na fatura do comprador
+                                            billing_address:{ //endereço do comprador
+                                                street: dadosCliente.endereco, //logradouro
+                                                number: dadosCliente.numero,
+                                                complement: dadosCliente.complemento,
+                                                district: dadosCliente.bairro, //bairro
+                                                city: dadosCliente.cidade,
+                                                state: dadosCliente.uf,
+                                                country: "BR",
+                                                postal_code: dadosCliente.cep,
+                                                card:{
+                                                    number_token: this.state.cardToken.dados.number_token, //número do cartão tokenizado
+                                                    cardholder_name: this.state.dadosPagamento.nomeCartao, //nome do comprador impresso no cartão
+                                                    security_code: this.state.dadosPagamento.codigoCartao, //codigo de segurança CVV ou CVC
+                                                    brand: this.state.dadosPagamento.bandeiraCard, //bandeira do cartão válidos: Mastercard, visa, Amex
+                                                    expiration_month: mesExp , //mes de expiração do cartão com dois dígitos
+                                                    expiration_year: anoExp, //ano de expiração do cartão com dois dígitos
+                                                    bin: bin //seis primeiros números do cartão 
+                                                },
+                                                installment_start_date: objData.data.string, //string <YYYY-MM-DD> data de inínio de cobrança da assinatura
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
 
-                        console.log(dadosCad)
+                            await axios.post(url,dadosAss,{headers})
+                            .then(resp=>{
+                                this.setState({
+                                    ...this.state,
+                                    cadAssinatura: resp
+                                })
+                            })
+                        }
                     }
                     else
                     {
@@ -251,16 +271,17 @@ export class Pagamento extends Component
             //gerar toke de acesso e o insere no estado
             await this.tokenAcessoGentNet()
 
-            //if( this.state.token.erro == 0 )
+            if( this.state.token.erro == 0 )
             {
                 await this.cadastroCliente()
 
-                //if( this.state.cadCliente.erro == 0 )
+                if( this.state.cadCliente.erro == 0 )
                 {
-                    
                     await this.tokenNumeroCartao() //função tokenização do numero do cartão de crédit
 
-                    this.cadastrarAssinatura()
+                    await this.cadastrarAssinatura()
+
+                    console.log(this.state)
                 }
             }
         }
@@ -406,7 +427,7 @@ export class Pagamento extends Component
                                                 <Field 
                                                     className="form-control"
                                                     name="codigoCartao"
-                                                    maxlength="3"
+                                                    maxLength="3"
                                                 />
                                                 <span className="error-message"><ErrorMessage name='codigoCartao' /></span>
                                             </div>
@@ -460,6 +481,14 @@ const mapStateToProps = (state) =>{
             titulo: state.plano.titulo,
             valor: state.plano.valor,
             idGetnet: state.plano.idGetnet
+        },
+        dadosPedido:{
+            cliente_id: state.pedido.cliente_id,
+            created_at: state.pedido.created_at,
+            id: state.pedido.id,
+            meio_pagamento_id: state.pedido.meio_pagamento_id,
+            plano_id: state.pedido.plano_id,
+            vendedor_id: state.pedido.vendedor_id
         }
     }
 }

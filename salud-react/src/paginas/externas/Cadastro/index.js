@@ -14,7 +14,7 @@ import { consultaCep } from '../../../Utils'
 
 import { exibeModal } from '../../../actions/ModalActions'
 import { editDadoscliente } from '../../../actions/ClientesActions'
-import { editDadosPedidos} from '../../../actions/PedidosActions'
+import { editDadosPedido} from '../../../actions/PedidosActions'
 
 
 export class Cadastro extends Component {
@@ -95,8 +95,8 @@ export class Cadastro extends Component {
                 }
                 
                 this.props.editDadoscliente(values)
-
-                this.props.editDadosPedidos(dadosPedido)
+               
+                this.props.editDadosPedido(dadosPedido)
                 
                 this.setState({...this.state, redirPagameto:true})
                 
@@ -329,7 +329,7 @@ export class Cadastro extends Component {
                                                         <Field                                                            
                                                             className="form-control input-sm"
                                                             name="ddd_telefone"
-                                                            maxlength="2"
+                                                            maxLength="2"
                                                         />
                                                         <span className="error-message"><ErrorMessage name='ddd_telefone' /></span>
                                                     </div>
@@ -353,7 +353,7 @@ export class Cadastro extends Component {
                                                         <Field                                                            
                                                             className="form-control input-sm"
                                                             name="dddCel"
-                                                            maxlength="2"
+                                                            maxLength="2"
                                                         />
                                                         <span className="error-message"><ErrorMessage name='dddCel' /></span>
                                                     </div>
@@ -506,7 +506,7 @@ const mapStateToProps = (state) => {
 
 
 
-const cadatroConnect = connect(mapStateToProps, { editDadoscliente })(Cadastro)
+const cadatroConnect = connect(mapStateToProps, { editDadoscliente, editDadosPedido })(Cadastro)
 
 export default cadatroConnect
 
