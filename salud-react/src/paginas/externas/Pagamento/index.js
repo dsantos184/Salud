@@ -10,11 +10,15 @@ import axios from 'axios'
 
 import { connect } from 'react-redux'
 import { exibeModal }  from '../../../actions/ModalActions'
+import {editTransacao} from '../../../actions/TransacaoActions'
+
 import { 
-        FirstLastName,
-        retiraCaracteresEspeciais,
-        partString 
-    } from '../../../Utils'
+    FirstLastName,
+    retiraCaracteresEspeciais,
+    partString 
+} from '../../../Utils'
+
+
 export class Pagamento extends Component
 {
     constructor(props)
@@ -28,7 +32,8 @@ export class Pagamento extends Component
             cadCliente:{},
             cardToken:{},
             dadosPagamento:{},
-            cadAssinatura:{}
+            cadAssinatura:{},
+            redirect: false
         }
 
         this.renderModal = this.renderModal.bind(this)
@@ -277,7 +282,7 @@ export class Pagamento extends Component
 
         //if( (this.props.dadosCliente.cpf && this.props.dadosCliente.cpf != "" ) && (this.props.dadosPlano.id && this.props.dadosPlano.id != "") )
         {
-            //gerar toke de acesso e o insere no estado
+            //gerar token de acesso e o insere no estado
             await this.tokenAcessoGentNet()
 
             if( this.state.token.erro == 0 )
@@ -289,6 +294,28 @@ export class Pagamento extends Component
                     await this.tokenNumeroCartao() //função tokenização do numero do cartão de crédit
 
                     await this.cadastrarAssinatura()
+
+                    if( this.state.cadAssinatura.data.erro == 0 )
+                    {
+                        const statusTransacao = this.state.cadAssinatura.data.dados.status_details
+                        
+                        switch(statusTransacao)
+                        {
+                            case '00-transaction approved':
+                                this.props.editStatus('Transação Aprovada');
+                                this.setState({...this.state, redirect:true})
+                                break
+                                
+                        }
+                        /**
+                         * se der problema na transação, permanecer  na mesma página e exibir modal com a mensagem do problema
+                         * se a transação for aprovada, redirecionar para a página e exbirá mensagem de transação aprovada
+                         */
+                    }
+                    else
+                    {
+                        //mensagem de erro
+                    }
                 }
             }
         }
@@ -500,7 +527,7 @@ const mapStateToProps = (state) =>{
     }
 }
 
-const connetPagamento = connect(mapStateToProps, {exibeModal})(Pagamento)
+const connetPagamento = connect(mapStateToProps, {exibeModal, editTransacao})(Pagamento)
 
 export default connetPagamento
 
