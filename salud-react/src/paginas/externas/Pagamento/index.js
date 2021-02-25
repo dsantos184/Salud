@@ -106,6 +106,7 @@ export class Pagamento extends Component
             }
             
             await axios.post(url,data,{headers}).then(resp=>{            
+            
                 this.setState({
                     ...this.state,
                     cadCliente: resp.data
@@ -147,6 +148,7 @@ export class Pagamento extends Component
     
             await axios.post(url,dados,{headers})
             .then(resp=>{
+
                 this.setState({
                     ...this.state,
                     cardToken: resp.data
@@ -171,8 +173,7 @@ export class Pagamento extends Component
         {
             const objMesExp =  partString(objDataExp.data.string, 0, 2)
             const objAnoExp =  partString(objDataExp.data.string, 5, 2)
-            const bin = partString(objDataExp.data.string, 5, 2)
-            const url = `${process.env.REACT_APP_APIGETNET_URL}tokenizarNumeroCartao`
+            const url = `${process.env.REACT_APP_APIGETNET_URL}cadastrarAssinatura`
 
             if(objAnoExp.status == "success" && objMesExp.status == "success" )
             {
@@ -204,41 +205,49 @@ export class Pagamento extends Component
                             const dadosAss = {
                                 seller_id: sellerId,
                                 customer_id: this.state.cadCliente.dados.customer_id,
-                                plan_id: this.props.dadosPlano.id,
+                                plan_id: this.props.dadosPlano.idGetnet,
                                 order_id: this.props.dadosPedido.id,
-                                subscription:{
-                                    payment_type:{
-                                        credit: {
+                                subscription:
+                                {
+                                    payment_type: 
+                                    {
+                                        credit: 
+                                        {
                                             transaction_type: "FULL",
-                                            number_installments: 1, //numero de parcelas
-                                            soft_descriptor: 'Assinatura clube de benefícios Salud', //texto exibido na fatura do comprador
-                                            billing_address:{ //endereço do comprador
+                                            number_installments: 1,
+                                            soft_descriptor: "Assinatura clube de benefícios Salud",
+                                            billing_address: 
+                                            {
                                                 street: dadosCliente.endereco, //logradouro
                                                 number: dadosCliente.numero,
                                                 complement: dadosCliente.complemento,
-                                                district: dadosCliente.bairro, //bairro
+                                                district: dadosCliente.bairro,
                                                 city: dadosCliente.cidade,
                                                 state: dadosCliente.uf,
-                                                country: "BR",
+                                                country: "Brasil",
                                                 postal_code: dadosCliente.cep,
-                                                card:{
-                                                    number_token: this.state.cardToken.dados.number_token, //número do cartão tokenizado
-                                                    cardholder_name: this.state.dadosPagamento.nomeCartao, //nome do comprador impresso no cartão
-                                                    security_code: this.state.dadosPagamento.codigoCartao, //codigo de segurança CVV ou CVC
-                                                    brand: this.state.dadosPagamento.bandeiraCard, //bandeira do cartão válidos: Mastercard, visa, Amex
-                                                    expiration_month: mesExp , //mes de expiração do cartão com dois dígitos
-                                                    expiration_year: anoExp, //ano de expiração do cartão com dois dígitos
-                                                    bin: bin //seis primeiros números do cartão 
-                                                },
-                                                installment_start_date: objData.data.string, //string <YYYY-MM-DD> data de inínio de cobrança da assinatura
+                                            },
+                                            card: 
+                                            {
+                                                number_token: this.state.cardToken.dados.number_token, //número do cartão tokenizado
+                                                cardholder_name: this.state.dadosPagamento.nomeCartao, //nome do comprador impresso no cartão
+                                                security_code: this.state.dadosPagamento.codigoCartao, //codigo de segurança CVV ou CVC
+                                                brand: this.state.dadosPagamento.bandeiraCard, //bandeira do cartão válidos: Mastercard, visa, Amex
+                                                expiration_month: mesExp , //mes de expiração do cartão com dois dígitos
+                                                expiration_year: anoExp, //ano de expiração do cartão com dois dígitos
+                                                bin: bin
                                             }
                                         }
-                                    }
-                                }
+                                    },
+                                },
+                                installment_start_date: objData.data.string,
                             }
 
                             await axios.post(url,dadosAss,{headers})
                             .then(resp=>{
+                                
+                                console.log(resp)
+
                                 this.setState({
                                     ...this.state,
                                     cadAssinatura: resp
@@ -280,8 +289,6 @@ export class Pagamento extends Component
                     await this.tokenNumeroCartao() //função tokenização do numero do cartão de crédit
 
                     await this.cadastrarAssinatura()
-
-                    console.log(this.state)
                 }
             }
         }

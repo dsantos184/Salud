@@ -18,9 +18,6 @@ import { Autorizacao, Autenticacao } from './../apis/Salud/Autenticacao'
 import PrivateRoute from './PrivateRoute'
 import Forbiden from '../paginas/externas/Forbiden'
 
-
- 
-
 class Routes extends Component {
     constructor(props) {
         super(props); 
@@ -35,6 +32,7 @@ class Routes extends Component {
                 <Route exact path="/login-cliente" component={Login} />
                 <Route exact path="/acesso-proibido" component={Forbiden}  />
                 <Route exact path="/pagamento" component={Pagamento} />
+                <Route exact path="/teste" component={Teste} />
                 
                 <PrivateRoute path="/painel/inicio" component={Inicio} /> 
                 <PrivateRoute path="/painel/clientes/listar" component={ () => <h1>Oi</h1> } />
