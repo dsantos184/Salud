@@ -11,7 +11,7 @@ import Cadastro from '../paginas/externas/Cadastro'
 import Login from '../paginas/externas/LoginCliente'
 import Inicio from '../paginas/internas/Painel/Inicio'
 import Pagamento from '../paginas/externas/Pagamento'
-import Teste from '../teste-redux'
+import Transacao from '../paginas/externas/Transacao'
 
 import { Autorizacao, Autenticacao } from './../apis/Salud/Autenticacao'
 
@@ -32,7 +32,7 @@ class Routes extends Component {
                 <Route exact path="/login-cliente" component={Login} />
                 <Route exact path="/acesso-proibido" component={Forbiden}  />
                 <Route exact path="/pagamento" component={Pagamento} />
-                <Route exact path="/teste" component={Teste} />
+                <Route exact path="/transacao" component={Transacao} />
                 
                 <PrivateRoute path="/painel/inicio" component={Inicio} /> 
                 <PrivateRoute path="/painel/clientes/listar" component={ () => <h1>Oi</h1> } />

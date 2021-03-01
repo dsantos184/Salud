@@ -18,5 +18,6 @@ const TransacaoReducers = (state = [], action ) =>{
         default:
             return state
     }
-
 }
+
+export default TransacaoReducers

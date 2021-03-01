@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import {Redirect}  from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import MaskedInput from 'react-maskedinput'
 import schema from './schema'
@@ -33,7 +34,8 @@ export class Pagamento extends Component
             cardToken:{},
             dadosPagamento:{},
             cadAssinatura:{},
-            redirect: false
+            redirect: false,
+            exibeModal: false
         }
 
         this.renderModal = this.renderModal.bind(this)
@@ -41,6 +43,18 @@ export class Pagamento extends Component
         this.tokenAcessoGentNet = this.tokenAcessoGentNet.bind(this)
         this.cadastroCliente = this.cadastroCliente.bind(this)
         this.tokenNumeroCartao = this.tokenNumeroCartao.bind(this)
+        this.modal = this.modal.bind(this)
+    }
+
+    modal(titulo, bgcolor, msg)
+    {
+        return <Modal
+            isOpen={true}
+            title={titulo}
+            classCssHeader={`${bgcolor} color-white`}
+        >
+            <p>{msg}</p>
+        </Modal>
     }
 
     renderModal(title, classCss, msg) {
@@ -253,10 +267,22 @@ export class Pagamento extends Component
                                 
                                 console.log(resp)
 
-                                this.setState({
-                                    ...this.state,
-                                    cadAssinatura: resp
-                                })
+                                if( resp.data.dados.status == "success" )
+                                {
+                                    const status = "Transação aprovada"
+                                    const description = "Transação realizada com sucesso"
+                                    this.props.editTransacao({status:status, description:description})
+                                    this.setState({...this.state, redirect:true})
+                                }
+                                else
+                                {
+                                    const status = resp.data.dados.payment.error.details[0].description
+                                    const description = resp.data.dados.payment.error.details[0].description_detail
+                                    this.props.editTransacao({status:status, description:description})
+                                    this.props.exibeModal(true)
+                                    this.setState({...this.state, exibeModal:true})
+                                }
+                               
                             })
                         }
                     }
@@ -285,37 +311,17 @@ export class Pagamento extends Component
             //gerar token de acesso e o insere no estado
             await this.tokenAcessoGentNet()
 
+            console.log(this.state)
+
             if( this.state.token.erro == 0 )
             {
-                await this.cadastroCliente()
+                await this.cadastroCliente()                
 
                 if( this.state.cadCliente.erro == 0 )
                 {
                     await this.tokenNumeroCartao() //função tokenização do numero do cartão de crédit
 
-                    await this.cadastrarAssinatura()
-
-                    if( this.state.cadAssinatura.data.erro == 0 )
-                    {
-                        const statusTransacao = this.state.cadAssinatura.data.dados.status_details
-                        
-                        switch(statusTransacao)
-                        {
-                            case '00-transaction approved':
-                                this.props.editStatus('Transação Aprovada');
-                                this.setState({...this.state, redirect:true})
-                                break
-                                
-                        }
-                        /**
-                         * se der problema na transação, permanecer  na mesma página e exibir modal com a mensagem do problema
-                         * se a transação for aprovada, redirecionar para a página e exbirá mensagem de transação aprovada
-                         */
-                    }
-                    else
-                    {
-                        //mensagem de erro
-                    }
+                    this.cadastrarAssinatura()
                 }
             }
         }
@@ -323,13 +329,19 @@ export class Pagamento extends Component
 
     render()
     {
+
+        if( this.state.redirect )
+        {
+            return <Redirect to="/transacao" />
+        }
+     
         return(
             <Fragment>
                 <HeaderInterno tituloHeader="Formas de pagamento" />                                
                 <div className="container">
                     <section className="container-form">
                         {
-                            (this.state.exibeModal === true)?this.renderModal("Termos do contrato", "color-white bg-red", "A opção (Li e aceito os termos do contrato) deve ser marcada"):""
+                            (this.state.exibeModal === true)?this.modal("Erro na transacao", "color-white bg-red", "Deu merda na hora do pagamento"):""
                         }
                         
                         <Card textoHeader="Dados do plano escolhido">
