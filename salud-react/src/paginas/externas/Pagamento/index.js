@@ -33,7 +33,10 @@ export class Pagamento extends Component
             cadCliente:{},
             cardToken:{},
             dadosPagamento:{},
-            cadAssinatura:{},
+            dadosTransacao:{
+                status: "",
+                description: ""
+            },
             redirect: false,
             exibeModal: false
         }
@@ -280,7 +283,14 @@ export class Pagamento extends Component
                                     const description = resp.data.dados.payment.error.details[0].description_detail
                                     this.props.editTransacao({status:status, description:description})
                                     this.props.exibeModal(true)
-                                    this.setState({...this.state, exibeModal:true})
+                                    this.setState({
+                                        ...this.state, 
+                                        exibeModal:true,
+                                        dadosTransacao:{
+                                            status: status,
+                                            description: description
+                                        }
+                                    })
                                 }
                                
                             })
@@ -341,7 +351,7 @@ export class Pagamento extends Component
                 <div className="container">
                     <section className="container-form">
                         {
-                            (this.state.exibeModal === true)?this.modal("Erro na transacao", "color-white bg-red", "Deu merda na hora do pagamento"):""
+                            (this.state.exibeModal === true)?this.modal(this.state.dadosTransacao.status, "color-white bg-red",this.state.dadosTransacao.description):""
                         }
                         
                         <Card textoHeader="Dados do plano escolhido">

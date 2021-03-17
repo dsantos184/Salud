@@ -8,10 +8,12 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import Routes from './Routes';
 
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import store from './store';
+/*import { createStore } from 'redux'
 import Reducers from './Reducers' 
 
-const store = createStore(Reducers)
+const store = createStore(Reducers)*/
+
 
 export default class App extends Component {
 
