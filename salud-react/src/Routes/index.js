@@ -20,37 +20,38 @@ import Forbiden from '../paginas/externas/Forbiden'
 
 class Routes extends Component {
     constructor(props) {
-        super(props); 
+        super(props);
     }
 
-    render() {  
+    render() {
         return (
             <Switch>
                 <Route exact path="/" component={Home} />
+                <Route exact path="/apresentacao" component={Home} />
                 <Route exact path="/contato" component={Contato} />
                 <Route path="/cadastro" component={Cadastro} />
                 <Route exact path="/login-cliente" component={Login} />
-                <Route exact path="/acesso-proibido" component={Forbiden}  />
+                <Route exact path="/acesso-proibido" component={Forbiden} />
                 <Route exact path="/pagamento" component={Pagamento} />
                 <Route exact path="/transacao" component={Transacao} />
-                
-                <PrivateRoute path="/painel/inicio" component={Inicio} /> 
-                <PrivateRoute path="/painel/clientes/listar" component={ () => <h1>Oi</h1> } />
+
+                <PrivateRoute path="/painel/inicio" component={Inicio} />
+                <PrivateRoute path="/painel/clientes/listar" component={() => <h1>Oi</h1>} />
 
             </Switch>
         )
     }
 }
 
-     
-        
 
 
-const mapStateToProps = (state) => {  
+
+
+const mapStateToProps = (state) => {
 
     return {
-        autenticacao: state.autenticacao.autenticado 
+        autenticacao: state.autenticacao.autenticado
     }
 }
 
-export default connect(mapStateToProps, { autenticar })( Routes ); 
+export default connect(mapStateToProps, { autenticar })(Routes); 

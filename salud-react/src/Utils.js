@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-export const consultaCep = async (value)=>{
-   
+export const consultaCep = async (value) => {
+
     const cep = value.replace(/[^0-9]/g, '')
 
     const url = `http://cep.republicavirtual.com.br/web_cep.php?cep=${cep}&formato=json`
@@ -12,7 +12,7 @@ export const consultaCep = async (value)=>{
     return json
 }
 
-export const validaCpf = value =>{
+export const validaCpf = value => {
 
     const cpf = value.toString().replace(/[^0-9]/g, '')
 
@@ -28,28 +28,28 @@ export const validaCpf = value =>{
         cpf == "66666666666" ||
         cpf == "77777777777" ||
         cpf == "88888888888" ||
-        cpf == "99999999999" 
+        cpf == "99999999999"
     ) {
         return false
     }
     var soma = 0
     var resto
-    for (var i = 1; i <= 9; i++) 
-        soma = soma + parseInt(cpf.substring(i-1, i)) * (11 - i)
+    for (var i = 1; i <= 9; i++)
+        soma = soma + parseInt(cpf.substring(i - 1, i)) * (11 - i)
     resto = (soma * 10) % 11
-    if ((resto == 10) || (resto == 11))  resto = 0
-    if (resto != parseInt(cpf.substring(9, 10)) ) return false
+    if ((resto == 10) || (resto == 11)) resto = 0
+    if (resto != parseInt(cpf.substring(9, 10))) return false
     soma = 0
-    for (var i = 1; i <= 10; i++) 
-        soma = soma + parseInt(cpf.substring(i-1, i)) * (12 - i)
+    for (var i = 1; i <= 10; i++)
+        soma = soma + parseInt(cpf.substring(i - 1, i)) * (12 - i)
     resto = (soma * 10) % 11
-    if ((resto == 10) || (resto == 11))  resto = 0
-    if (resto != parseInt(cpf.substring(10, 11) ) ) return false
+    if ((resto == 10) || (resto == 11)) resto = 0
+    if (resto != parseInt(cpf.substring(10, 11))) return false
     return true
 }
 
-export const unicCpf = async value =>{
-    
+export const unicCpf = async value => {
+
     const cpf = value.replace(/[^0-9]/g, '')
     const url = `${process.env.REACT_APP_API_URL}clientes/verificaCpf/${cpf}`
 
@@ -59,8 +59,8 @@ export const unicCpf = async value =>{
     return json
 }
 
-export const unicEmail = async value =>{
-    
+export const unicEmail = async value => {
+
     const url = `${process.env.REACT_APP_API_URL}usuario/verificaEmail/${value}`
 
     const req = await fetch(url)
@@ -69,10 +69,9 @@ export const unicEmail = async value =>{
     return json
 }
 
-export const FirstLastName = (nome) =>{
-    if( !nome  )
-    {
-        return {status: 'error', mensagem: "Nome não informado", data:{}}
+export const FirstLastName = (nome) => {
+    if (!nome) {
+        return { status: 'error', mensagem: "Nome não informado", data: {} }
     }
 
     const aNome = nome.split(" ")
@@ -84,52 +83,49 @@ export const FirstLastName = (nome) =>{
         lastName: lastName
     }
 
-    return {status:'success', mensagem:'sucesso', data: nomeCompleto}      
+    return { status: 'success', mensagem: 'sucesso', data: nomeCompleto }
 }
 
-export const retiraCaracteresEspeciais = (text) =>{
-    
-    if( text === '' )
-    {
-        return{
-            status:'error',
-            mensagem:"A string está vazia"
+export const retiraCaracteresEspeciais = (text) => {
+
+    if (text === '') {
+        return {
+            status: 'error',
+            mensagem: "A string está vazia"
         }
     }
-    
+
     const newText = text.replace(/[^a-zA-z0-9s]/g, "")
     return {
-        status:'success',
+        status: 'success',
         mensagem: 'Função executada com sucesso',
-        data:{
+        data: {
             string: newText
         }
     }
 }
 
-export const partString = (text, posInicial, posFinal) =>{
-    if( text === '' )
-    {
-        return{
-            status:'error',
-            mensagem:"A string está vazia"
+export const partString = (text, posInicial, posFinal) => {
+    if (text === '') {
+        return {
+            status: 'error',
+            mensagem: "A string está vazia"
         }
     }
 
-    if( isNaN(posInicial) || isNaN(posFinal) )
-    {
-        return{
-            status:'error',
-            mensagem:"A posição inicial ou final deve ser um numero"
+    if (isNaN(posInicial) || isNaN(posFinal)) {
+        return {
+            status: 'error',
+            mensagem: "A posição inicial ou final deve ser um numero"
         }
     }
 
     const newText = text.substring(posInicial, posFinal)
 
     return {
-        status:'success',
+        status: 'success',
         mensagem: 'Função executada com sucesso',
-        data:{
+        data: {
             string: newText
         }
     }

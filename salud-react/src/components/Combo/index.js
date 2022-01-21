@@ -1,46 +1,40 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { editDadosPlano } from '../../actions/PlanosEscolhidoActions'
-import {Redirect}  from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 export class Combo extends Component {
-   
-    constructor(props)
-    {
-        super(props) 
+
+    constructor(props) {
+        super(props)
 
         this.state = {
             redirect: false,
-            plano:{
+            plano: {
                 titulo: ''
             }
         }
-    }   
+    }
 
-    montaLiBeneficios()
-    {
+    montaLiBeneficios() {
         let rows = [<li key={0}></li>]
 
-        for(var i=1; i<this.props.totalBeneficios; i++)
-        { 
-            if( this.props.beneficios[i] != undefined )
-            {
-                let nome  = this.props.beneficios[i].nome
-                let id = this.props.beneficios[i].id 
+        for (var i = 1; i < this.props.totalBeneficios; i++) {
+            if (this.props.beneficios[i] != undefined) {
+                let nome = this.props.beneficios[i].nome
+                let id = this.props.beneficios[i].id
                 rows.push(<li key={i}>{nome}</li>)
             }
-            else
-            {
+            else {
                 rows.push(<li key={i}></li>)
-            }         
-        } 
+            }
+        }
         return rows
     }
- 
+
     render() {
 
-        if( this.state.redirect )
-        {
+        if (this.state.redirect) {
             return <Redirect to={`/cadastro/${this.state.plano.titulo}`} />
         }
 
@@ -61,22 +55,28 @@ export class Combo extends Component {
 
                         <div className="circulo-topo-plano ">
                             <div className="texto">
-                                <div className="texto-maior">{`R$ ${this.props.valor}`}</div>
-                                <div className="texto-menor">/mes</div>
+                                {
+                                    (window.location.href !== 'http://localhost:3000/apresentacao')
+                                        ?
+                                        <div><div className="texto-maior">{`R$ ${this.props.valor}`}</div><div className="texto-menor">/mes</div></div>
+                                        :
+                                        <div className="texto-maior" style={{ fontSize: '16px' }}>A Consultar</div>
+                                }
+
                             </div>
                         </div>
                         <span className="titulo-topo-plano">{this.props.titulo}</span>
                     </div>
-                    <ul id="lista-plano" className="lista-plano">  
-                                         
-                            { this.montaLiBeneficios() }
-                        
+                    <ul id="lista-plano" className="lista-plano">
+
+                        {this.montaLiBeneficios()}
+
                         <li>
-                            <a 
-                                href={`/cadastro/${this.props.titulo}`} 
+                            <a
+                                href={`/cadastro/${this.props.titulo}`}
                                 className={`btn-planos-home bg-btn-plano-${this.props.comboId} color-white`}
-                                onClick = {(ev)=>{   
-                                    
+                                onClick={(ev) => {
+
                                     ev.preventDefault()
 
                                     const dadosPlano = {
@@ -87,13 +87,13 @@ export class Combo extends Component {
                                         beneficios: this.props.beneficios
                                     }
 
-                                    this.props.editDadosPlano(dadosPlano)                                    
+                                    this.props.editDadosPlano(dadosPlano)
 
                                     this.setState(
                                         {
                                             ...this.state,
-                                            redirect:true,
-                                            plano:{titulo:this.props.titulo}
+                                            redirect: true,
+                                            plano: { titulo: this.props.titulo }
                                         }
                                     )
                                 }}
@@ -108,8 +108,8 @@ export class Combo extends Component {
     }
 }
 
-const mapStateToProps = () =>{   
-    return{}
+const mapStateToProps = () => {
+    return {}
 }
 
 const planoEscolhidoConnect = connect(mapStateToProps, { editDadosPlano })(Combo)

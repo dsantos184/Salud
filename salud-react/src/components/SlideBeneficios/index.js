@@ -1,16 +1,26 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { connect } from 'react-redux'
+import { exibeModal } from '../../actions/ModalActions'
 
-export default class SlideBeneficios extends Component {
+import Modal from '../Modal'
 
-    
+
+class SlideBeneficios extends Component {
+
+
     constructor(props) {
-        super(props);      
+        super(props);
 
         this.state = {
-            beneficios: []
-        }     
-        
+            beneficios: [],
+            modal: {
+                title: '',
+                classCss: '',
+                msg: ''
+            }
+        }
+
     }
 
     componentDidMount() {
@@ -31,16 +41,44 @@ export default class SlideBeneficios extends Component {
 
     getBeneficios = async () => {
         let data = await axios.get(process.env.REACT_APP_API_URL + "beneficios/listar")
-        .then( (resp) => resp.data );
-       
-        this.setState({  beneficios: data.dados })
+            .then((resp) => resp.data);
+
+        this.setState({ beneficios: data.dados })
 
     }
 
-    render() {   
-           
+
+    renderModal(title, classCss, msg) {
+
+        return <Modal
+            title={title}
+            classCssHeader={`${classCss}`}
+        >
+            <p>{msg}</p>
+        </Modal>
+    }
+
+    onClick = (event) => {
+        event.preventDefault()
+
+        this.setState({
+            ...this.state,
+            modal: {
+                title: "Cobertura",
+                msg: "Texto de cobertura dos benefícios",
+                classCss: "color-white bg-green"
+            }
+        })
+
+        this.props.exibeModal(true)
+    }
+
+
+    render() {
+
         return (
             <section id="beneficios" className="beneficios-home">
+                {this.renderModal(this.state.modal.title, this.state.modal.classCss, this.state.modal.msg)}
                 <div className="container">
                     <div className="slide-beneficios-home">
                         <h2 className="color-red">Benefícios</h2>
@@ -91,8 +129,11 @@ export default class SlideBeneficios extends Component {
                                                                     ) : ''
                                                                 }
 
-                                                                <a className="btn bg-btn-plano-1 color-white btn-lg" href="#">Escolha o seu combo</a>
-                                                                <a className="btn bg-light-blue color-white btn-lg" target="_blank" href={`${beneficio.link}`}>Regulamento</a>
+                                                                <div className='container-btn-beneficios'>
+                                                                    <a className="btn bg-btn-plano-1 color-white btn-lg" href="#">Escolha o seu combo</a>
+                                                                    <a className="btn bg-light-blue color-white btn-lg" target="_blank" href={`${beneficio.link}`}>Regulamento</a>
+                                                                    <a className="btn bg-red color-white btn-lg" href="#" onClick={this.onClick}>Cobertura</a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -109,3 +150,12 @@ export default class SlideBeneficios extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+
+    return {
+        isOpen: state.modal.isOpen,
+    }
+}
+
+export default connect(mapStateToProps, { exibeModal })(SlideBeneficios); 

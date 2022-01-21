@@ -9,11 +9,6 @@ import Routes from './Routes';
 
 import { Provider } from 'react-redux'
 import store from './store';
-/*import { createStore } from 'redux'
-import Reducers from './Reducers' 
-
-const store = createStore(Reducers)*/
-
 
 export default class App extends Component {
 

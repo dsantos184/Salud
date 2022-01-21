@@ -17,7 +17,7 @@ import { Redirect } from 'react-router'
 class Login extends Component {
 
     constructor(props) {
- 
+
         super(props)
         //pega parametros da URL
         this.params = queryString.parse(this.props.location.search);
@@ -25,7 +25,7 @@ class Login extends Component {
         this.state = {
             erroLogin: '',
             erroAuth: '',
-            modal : {
+            modal: {
                 title: '',
                 classCss: '',
                 msg: ''
@@ -33,12 +33,12 @@ class Login extends Component {
         }
     }
 
-    componentDidMount() {        
-        
-        if( this.params.auth == "false" ){
+    componentDidMount() {
+
+        if (this.params.auth == "false") {
             this.setState({
                 ...this.state,
-                erroAuth:true,
+                erroAuth: true,
                 modal: {
                     title: "Erro de Autenticação",
                     msg: "Você não está autorizado a acessar essa página!",
@@ -47,7 +47,7 @@ class Login extends Component {
             })
             this.props.exibeModal(true)
         }
-        
+
     }
 
     renderModal(title, classCss, msg) {
@@ -62,31 +62,30 @@ class Login extends Component {
 
 
 
-    onSubmit = async (values, actions) => { 
+    onSubmit = async (values, actions) => {
 
         let resp = await axios.get(process.env.REACT_APP_API_URL + "clientes/login", { params: values }).then((resp) => resp.data)
 
         if (resp.status == "sucesso") {
- 
+
             //redux
             this.props.autenticar(true)
 
-            console.log("submit")
             console.log(this.props.autenticacao)
-            
-            
+
+
             localStorage.setItem('ApiSaludTokenApi', resp.dados.usuario_token)
             localStorage.setItem('ApiSaludTipoUsuario', resp.dados.usuario_tipo_usuario)
             localStorage.setItem('ApiSaludTokenDtExpiracao', resp.dados.updated_at.date)
 
-            this.setState({...this.state,erroLogin:false})  
- 
-                         
-        } else { 
+            this.setState({ ...this.state, erroLogin: false })
+
+
+        } else {
 
             this.setState({
                 ...this.state,
-                erroLogin:true, 
+                erroLogin: true,
                 modal: {
                     title: "Erro de Login",
                     msg: "CPF e/ou Senha incorretos!",
@@ -96,9 +95,9 @@ class Login extends Component {
             this.props.exibeModal(true)
             //redux
             //this.props.autenticar(false)
-            
+
         }
-              
+
     }
 
     render() {
@@ -111,11 +110,11 @@ class Login extends Component {
 
                         {/* RENDER MODAL ERRO LOGIN */}
                         {this.state.erroLogin === true ?
-                        this.renderModal(this.state.modal.title, this.state.modal.classCss, this.state.modal.msg) :
-                         ""   
+                            this.renderModal(this.state.modal.title, this.state.modal.classCss, this.state.modal.msg) :
+                            ""
                         }
                         {/* REDIRECT PAINEL*/}
-                        { this.state.erroLogin === false ? <Redirect to="painel/inicio" /> : "" } 
+                        {this.state.erroLogin === false ? <Redirect to="painel/inicio" /> : ""}
 
 
                         {/* RENDER MODAL ERRO AUTH */}
@@ -123,7 +122,7 @@ class Login extends Component {
 
 
                         <Formik
-                            onSubmit={  this.onSubmit }
+                            onSubmit={this.onSubmit}
                             initialValues={{
                                 cpf: "",
                                 senha: "",
@@ -180,10 +179,10 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = (state) => {  
-    
-    return {         
-        isOpen: state.modal.isOpen ,
+const mapStateToProps = (state) => {
+
+    return {
+        isOpen: state.modal.isOpen,
         autenticacao: state.autenticacao.autenticacao
     }
 }
