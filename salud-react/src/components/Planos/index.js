@@ -61,11 +61,6 @@ export default class Planos extends Component {
                         <div className="row">
 
                             {this.state.planos.map(plano => (
-
-
-
-
-
                                 <Combo
                                     key={plano.id}
                                     comboId={plano.id}
@@ -77,7 +72,6 @@ export default class Planos extends Component {
                                 />
                             ))
                             }
-                            {console.log()}
                         </div>
                     </div>
                 </div>

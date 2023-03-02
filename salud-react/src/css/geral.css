@@ -650,6 +650,11 @@ ul.slide-menu-items li:hover {
     margin-left: 10px;
 }
 
+.logo-rede-mais-saude {
+    width: 100px;
+    margin-bottom: 1rem;
+}
+
 ul.slide-menu-items li:hover .texto-item-slide-home {
     color: white !important;
 }

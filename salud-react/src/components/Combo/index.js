@@ -19,7 +19,7 @@ export class Combo extends Component {
     montaLiBeneficios() {
         let rows = [<li key={0}></li>]
 
-        for (var i = 1; i < this.props.totalBeneficios; i++) {
+        for (var i = 0; i < this.props.totalBeneficios; i++) {
             if (this.props.beneficios[i] != undefined) {
                 let nome = this.props.beneficios[i].nome
                 let id = this.props.beneficios[i].id

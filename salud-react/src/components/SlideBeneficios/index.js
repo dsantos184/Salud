@@ -5,9 +5,7 @@ import { exibeModal } from '../../actions/ModalActions'
 
 import Modal from '../Modal'
 
-
 class SlideBeneficios extends Component {
-
 
     constructor(props) {
         super(props);
@@ -20,7 +18,6 @@ class SlideBeneficios extends Component {
                 msg: ''
             }
         }
-
     }
 
     componentDidMount() {
@@ -44,9 +41,7 @@ class SlideBeneficios extends Component {
             .then((resp) => resp.data);
 
         this.setState({ beneficios: data.dados })
-
     }
-
 
     renderModal(title, classCss, msg) {
 
@@ -124,6 +119,12 @@ class SlideBeneficios extends Component {
                                                                 <h4 className="color-dark-blue">{beneficio.titulo}</h4>
                                                                 <p>{beneficio.descricao}</p>
                                                                 {
+                                                                    beneficio.id === 1
+                                                                        ? <img className='logo-rede-mais-saude' src='/imagens/logo-rede-mais-saude.png' />
+                                                                        : ''
+                                                                }
+
+                                                                {
                                                                     (beneficio.comum_todos == 1) ? (
                                                                         <p className="frase-final">Benefício presente em todos os combos</p>
                                                                     ) : ''
@@ -158,4 +159,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { exibeModal })(SlideBeneficios); 
+export default connect(mapStateToProps, { exibeModal })(SlideBeneficios);
