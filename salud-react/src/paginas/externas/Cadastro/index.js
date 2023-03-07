@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react'
-import {Redirect}  from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import MaskedInput from 'react-maskedinput'
 import schema from './schema'
@@ -14,13 +14,12 @@ import { consultaCep } from '../../../Utils'
 
 import { exibeModal } from '../../../actions/ModalActions'
 import { editDadoscliente } from '../../../actions/ClientesActions'
-import { editDadosPedido} from '../../../actions/PedidosActions'
+import { editDadosPedido } from '../../../actions/PedidosActions'
 
 
 export class Cadastro extends Component {
 
-    constructor(props)
-    {
+    constructor(props) {
         super(props)
 
         this.state = {
@@ -36,8 +35,7 @@ export class Cadastro extends Component {
         this.onSubmit = this.onSubmit.bind(this)
     }
 
-    modal(titulo, bgcolor, msg)
-    {
+    modal(titulo, bgcolor, msg) {
         return <Modal
             isOpen={true}
             title={titulo}
@@ -47,8 +45,7 @@ export class Cadastro extends Component {
         </Modal>
     }
 
-    preencheEndereco(ev, cep, setFieldValue)
-    {
+    preencheEndereco(ev, cep, setFieldValue) {
         ev.preventDefault()
         consultaCep(cep)
             .then(data => {
@@ -60,55 +57,52 @@ export class Cadastro extends Component {
             })
     }
 
-    async onSubmit(values, actions)
-    {
+    async onSubmit(values, actions) {
         await axios.post(process.env.REACT_APP_API_URL + "cliente/cadastrar", values)
-        .then(resp => {
+            .then(resp => {
 
-            const { status, msg } = resp.data
-           
-            if (status == 'erro')
-            {
-                this.setState({
-                    ...this.state,
-                    bgColor: 'bg-red',
-                    titulo: 'Erro ao efetuar o cadastro'
-                })
+                const { status, msg } = resp.data
 
-                //seta informações do modal no redux
-                this.props.exibeModal(true)
+                if (status == 'erro') {
+                    this.setState({
+                        ...this.state,
+                        bgColor: 'bg-red',
+                        titulo: 'Erro ao efetuar o cadastro'
+                    })
 
-                this.setState({...this.state, exibeModal:true})
+                    //seta informações do modal no redux
+                    this.props.exibeModal(true)
 
-            }
-            else {
+                    this.setState({ ...this.state, exibeModal: true })
 
-                const {pedido} = resp.data.dados
-
-                const dadosPedido = {
-                    cliente_id: pedido.cliente_id,
-                    created_at: pedido.created_at,
-                    id: pedido.id,
-                    meio_pagamento_id: pedido.meio_pagamento_id,
-                    plano_id: pedido.plano_id,
-                    vendedor_id: pedido.vendedor_id
                 }
-                
-                this.props.editDadoscliente(values)
-               
-                this.props.editDadosPedido(dadosPedido)
-                
-                this.setState({...this.state, redirPagameto:true})
-                
-                actions.resetForm({values:''})
-            }
-        })
+                else {
+
+                    const { pedido } = resp.data.dados
+
+                    const dadosPedido = {
+                        cliente_id: pedido.cliente_id,
+                        created_at: pedido.created_at,
+                        id: pedido.id,
+                        meio_pagamento_id: pedido.meio_pagamento_id,
+                        plano_id: pedido.plano_id,
+                        vendedor_id: pedido.vendedor_id
+                    }
+
+                    this.props.editDadoscliente(values)
+
+                    this.props.editDadosPedido(dadosPedido)
+
+                    this.setState({ ...this.state, redirPagameto: true })
+
+                    actions.resetForm({ values: '' })
+                }
+            })
     }
 
     render() {
 
-        if( this.state.redirPagameto )
-        {
+        if (this.state.redirPagameto) {
             return <Redirect to="/pagamento" />
         }
 
@@ -162,7 +156,7 @@ export class Cadastro extends Component {
                                                         name="cpf"
                                                         className="form-control input-sm cpf_valido"
                                                         mask="111.111.111-11"
-                                                        onChange={(ev)=>setFieldValue('cpf', ev.target.value)}
+                                                        onChange={(ev) => setFieldValue('cpf', ev.target.value)}
                                                     />
                                                     <span className="error-message"><ErrorMessage name='cpf' /></span>
                                                 </div>
@@ -211,11 +205,11 @@ export class Cadastro extends Component {
                                                     <div className="input-group">
                                                         <MaskedInput
                                                             type="text"
-                                                            className="form-control  input-sm valid"                                                          
+                                                            className="form-control  input-sm valid"
                                                             name="cep"
                                                             id="cep"
                                                             mask="11111-111"
-                                                            onChange={(ev)=>setFieldValue('cep', ev.target.value)}
+                                                            onChange={(ev) => setFieldValue('cep', ev.target.value)}
                                                         />
                                                         <span className="input-group-btn">
                                                             <a
@@ -225,7 +219,7 @@ export class Cadastro extends Component {
                                                                 onClick={(ev) => this.preencheEndereco(ev, values.cep, setFieldValue)}
                                                             >
                                                                 Pesquisar
-                                                        </a>
+                                                            </a>
                                                         </span>
                                                         <span className="error-message"><ErrorMessage name='cep' /></span>
                                                     </div>
@@ -326,7 +320,7 @@ export class Cadastro extends Component {
                                                 <div className="row">
                                                     <div className="col-xs-3 col-lg-4">
                                                         <label>DDD</label>
-                                                        <Field                                                            
+                                                        <Field
                                                             className="form-control input-sm"
                                                             name="ddd_telefone"
                                                             maxLength="2"
@@ -335,11 +329,11 @@ export class Cadastro extends Component {
                                                     </div>
                                                     <div className="col-xs-9 col-lg-8">
                                                         <label>Telefone</label>
-                                                        <MaskedInput                                                            
+                                                        <MaskedInput
                                                             className="form-control input-sm"
-                                                            name="telefone"                                                            
+                                                            name="telefone"
                                                             mask="1111-1111"
-                                                            onChange={(ev)=>setFieldValue('telefone', ev.target.value)}
+                                                            onChange={(ev) => setFieldValue('telefone', ev.target.value)}
                                                         />
                                                         <span className="error-message"><ErrorMessage name='telefone' /></span>
                                                     </div>
@@ -350,7 +344,7 @@ export class Cadastro extends Component {
                                                 <div className="row">
                                                     <div className=" col-xs-3 col-lg-4">
                                                         <label>DDD</label>
-                                                        <Field                                                            
+                                                        <Field
                                                             className="form-control input-sm"
                                                             name="dddCel"
                                                             maxLength="2"
@@ -359,11 +353,11 @@ export class Cadastro extends Component {
                                                     </div>
                                                     <div className=" col-xs-9 col-lg-8">
                                                         <label>Celular</label>
-                                                        <MaskedInput                                                            
+                                                        <MaskedInput
                                                             className="form-control input-sm"
                                                             name="celular"
                                                             mask="11111-1111"
-                                                            onChange={(ev)=>setFieldValue('celular', ev.target.value)}
+                                                            onChange={(ev) => setFieldValue('celular', ev.target.value)}
                                                         />
                                                         <span className="error-message"><ErrorMessage name='celular' /></span>
                                                     </div>
@@ -446,7 +440,7 @@ export class Cadastro extends Component {
                                                 <p>
                                                     Caso seu cadastro tenha sido feito por intermédio de um vendedor,
                                                     informe o código do mesmo no campo abaixo.
-                                            </p>
+                                                </p>
                                                 <span className="obs">OBS: dado não obrigatório</span>
                                             </div>
                                         </div>
@@ -462,7 +456,7 @@ export class Cadastro extends Component {
 
                                     <Card textoHeader="Dados para Login">
                                         <div className="row">
-                                            <div className="col-xs-12 col-lg-2 ">
+                                            <div className="col-xs-6 col-lg-3 ">
                                                 <div className="form-group ">
                                                     <label>Senha: </label>
                                                     <Field type="password" name="senha" />
@@ -470,7 +464,7 @@ export class Cadastro extends Component {
                                                 </div>
                                             </div>
 
-                                            <div className="col-xs-12 col-lg-2 ">
+                                            <div className="col-xs-6 col-lg-3 ">
                                                 <div className="form-group ">
                                                     <label>Confirme a senha: </label>
                                                     <Field type="password" name="confirmaSenha" />
