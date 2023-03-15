@@ -318,30 +318,6 @@ export class Cadastro extends Component {
 
                                             <div className="col-md-12 col-lg-4">
                                                 <div className="row">
-                                                    <div className="col-xs-3 col-lg-4">
-                                                        <label>DDD</label>
-                                                        <Field
-                                                            className="form-control input-sm"
-                                                            name="ddd_telefone"
-                                                            maxLength="2"
-                                                        />
-                                                        <span className="error-message"><ErrorMessage name='ddd_telefone' /></span>
-                                                    </div>
-                                                    <div className="col-xs-9 col-lg-8">
-                                                        <label>Telefone</label>
-                                                        <MaskedInput
-                                                            className="form-control input-sm"
-                                                            name="telefone"
-                                                            mask="1111-1111"
-                                                            onChange={(ev) => setFieldValue('telefone', ev.target.value)}
-                                                        />
-                                                        <span className="error-message"><ErrorMessage name='telefone' /></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-md-12 col-lg-4">
-                                                <div className="row">
                                                     <div className=" col-xs-3 col-lg-4">
                                                         <label>DDD</label>
                                                         <Field
@@ -360,6 +336,30 @@ export class Cadastro extends Component {
                                                             onChange={(ev) => setFieldValue('celular', ev.target.value)}
                                                         />
                                                         <span className="error-message"><ErrorMessage name='celular' /></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="col-md-12 col-lg-4">
+                                                <div className="row">
+                                                    <div className="col-xs-3 col-lg-4">
+                                                        <label>DDD</label>
+                                                        <Field
+                                                            className="form-control input-sm"
+                                                            name="ddd_telefone"
+                                                            maxLength="2"
+                                                        />
+                                                        <span className="error-message"><ErrorMessage name='ddd_telefone' /></span>
+                                                    </div>
+                                                    <div className="col-xs-9 col-lg-8">
+                                                        <label>Telefone</label>
+                                                        <MaskedInput
+                                                            className="form-control input-sm"
+                                                            name="telefone"
+                                                            mask="1111-1111"
+                                                            onChange={(ev) => setFieldValue('telefone', ev.target.value)}
+                                                        />
+                                                        <span className="error-message"><ErrorMessage name='telefone' /></span>
                                                     </div>
                                                 </div>
                                             </div>
