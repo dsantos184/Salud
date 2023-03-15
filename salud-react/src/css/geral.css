@@ -163,11 +163,11 @@ body {
 }
 
 .container-carousel-familia {
-    background-image: url('/imagens/para-sua-familia.png');
+    background-image: url('/public/imagens/para-sua-familia.png');
 }
 
 .container-carousel-empresa {
-    background-image: url('/imagens/para-sua-empresa.png');
+    background-image: url('/public/imagens/para-sua-empresa.png');
 }
 
 .lead {
@@ -294,7 +294,7 @@ body {
 }
 
 .breadcrumbs span.anterior {
-    background: url('/imagens/icone-seta-breadcrumbs.png') no-repeat right center;
+    background: url('/public/imagens/icone-seta-breadcrumbs.png') no-repeat right center;
     padding: 0 10px 0 0;
     margin-right: 3px;
 }
@@ -797,7 +797,7 @@ section.footer .container h3 {
 }
 
 section.footer .container ul.menu-footer {
-    list-style: square inside url("/imagens/icone-seta-footer.jpg");
+    list-style: square inside url("/public/imagens/icone-seta-footer.jpg");
     width: 360px;
 }
 
@@ -894,7 +894,7 @@ form label {
 @media (max-width: 992px) {
 
     .navbar-light .navbar-toggler-icon {
-        background-image: url('/imagens//btn-menu-mobile.png');
+        background-image: url('/public/imagens//btn-menu-mobile.png');
     }
 
     .container-sociais {
