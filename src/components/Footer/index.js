@@ -9,12 +9,20 @@ const Footer = () => {
                         <div className="col-lg-3">
                             <img className="logo-footer" src="./imagens/logo.png" />
                             <p className="color-white">
-                                Av. das Américas 17.150 – Bloco 1 – Sala 525 <br />
-                                Recreio dos Bandeirantes, Rio de Janeiro, RJ<br />
-                                CEP: 22790-704
+                                Avenida das Américas 12900, Loja SS106  <br />
+                                Barra da Tijuca, Rio de Janeiro, RJ<br />
+                                CEP: 22790-022
                             </p>
 
                             <div className="row">
+
+                                <div className="col-lg-12 col-sm-6">
+                                    <div className="contato-footer">
+                                        <span className="color-white">CNPJ: 35.842.745/0001-82</span>
+                                    </div>
+                                </div>
+
+
                                 <div className="col-lg-12 col-sm-6">
                                     <div className="contato-footer">
                                         <img src="./imagens/icone-telefone-footer.png" alt="telefone" /> <span className="color-white">(21) 2496-5644</span>
@@ -45,7 +53,7 @@ const Footer = () => {
             </section>
             <section className="copyright">
                 <div className="container text-center color-dark-blue">
-                    Copyright 2020. Todos os direitos reservados. Salud. CNPJ: 35.842.745/0001-82
+                    Copyright 2020. Todos os direitos reservados. Secuidae.
                 </div>
             </section>
         </Fragment>
