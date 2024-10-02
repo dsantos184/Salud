@@ -25,13 +25,13 @@ const Footer = () => {
 
                                 <div className="col-lg-12 col-sm-6">
                                     <div className="contato-footer">
-                                        <img src="./imagens/icone-telefone-footer.png" alt="telefone" /> <span className="color-white">(21) 2496-5644</span>
+                                        <img src="./imagens/icone-telefone-footer.png" alt="telefone" /> <span className="color-white">(21) 3369-9571</span>
                                     </div>
                                 </div>
 
                                 <div className="col-lg-12 col-sm-6">
                                     <div className="contato-footer">
-                                        <img src="./imagens/icone-email-footer.png" alt="Facebook" /> <span className="color-white">contato@salud.com.br</span>
+                                        <img src="./imagens/icone-email-footer.png" alt="Facebook" /> <span className="color-white">atendimento@secuidae.com.br</span>
                                     </div>
                                 </div>
                             </div>
