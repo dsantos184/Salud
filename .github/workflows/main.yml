@@ -15,7 +15,7 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-          SOURCE: "./"
+          SOURCE: "build/"
           REMOTE_HOST: ${{secrets.AWS_HOST}}
           REMOTE_USER: ${{secrets.AWS_USERNAME}}
           TARGET: "/var/www/html/"
