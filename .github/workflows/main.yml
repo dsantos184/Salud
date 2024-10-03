@@ -25,6 +25,15 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Debug - List files in build directory
+        run: ls -la build/
+
+      - name: Debug - Check disk usage
+        run: df -h
+
+      - name: Debug - Check memory usage
+        run: free -m
+
       - name: Copy files with SSH
         uses: easingthemes/ssh-deploy@main
         env:
