@@ -1,0 +1,22 @@
+name: Deploy Salud to AWS EC2
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    name: Deploy Salud to AWS EC2
+    runs-on: self-hosted
+    steps:
+      - name: Checkout the files
+        uses: actions/checkout@v3
+
+      - name: Copy files with SSH
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          SOURCE: "./"
+          REMOTE_HOST: ${{secrets.AWS_HOST}}
+          REMOTE_USER: ${{secrets.AWS_USERNAME}}
+          TARGET: "/var/www/html/"
+          EXCLUDE: ".htaccess"
