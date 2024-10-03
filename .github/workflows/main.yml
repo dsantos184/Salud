@@ -32,7 +32,7 @@ jobs:
         run: df -h
 
       - name: Debug - Check memory usage
-        run: free -m
+        run: free -m 
 
       - name: Copy files with SSH
         uses: easingthemes/ssh-deploy@main
