@@ -13,7 +13,7 @@ yup.setLocale({
     string:
     {
         email: "E-mail inválido",
-        min: 'Deve ser maior que ${min}',
+        min: (min) => `Deve ser maior que ${min}`,
     }
 })
 
