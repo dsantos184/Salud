@@ -125,13 +125,14 @@ class SlideBeneficios extends Component {
                                                                 }
 
                                                                 {
+                                                                    /*
                                                                     (beneficio.comum_todos == 1) ? (
                                                                         <p className="frase-final">Benefício presente em todos os combos</p>
-                                                                    ) : ''
+                                                                    ) : ''*/
                                                                 }
 
                                                                 <div className='container-btn-beneficios'>
-                                                                    <a className="btn bg-btn-plano-1 color-white btn-lg" href="#">Escolha o seu combo</a>
+                                                                    <a className="btn bg-btn-plano-1 color-white btn-lg" href="#">Eu Quero</a>
                                                                     <a className="btn bg-light-blue color-white btn-lg" target="_blank" href={`${beneficio.link}`}>Regulamento</a>
                                                                     <a className="btn bg-red color-white btn-lg" href="#" onClick={this.onClick}>Cobertura</a>
                                                                 </div>
