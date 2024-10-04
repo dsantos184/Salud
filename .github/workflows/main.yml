@@ -22,8 +22,16 @@ jobs:
       - name: Install dependencies
         run: npm install 
 
-      - name: Build project with CI=false
-        run: CI=false npm run build
+      - name: Load environment variables from .env file
+        run: |
+          if [ -f .env.production ]; then
+            export $(cat .env.production | xargs)
+          fi
+
+      - name: Build project with environment variables
+        env:
+          CI: false
+        run: npm run build
 
       - name: Debug - List files in build directory
         run: ls -la build/
