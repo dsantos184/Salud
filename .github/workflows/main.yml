@@ -2,7 +2,7 @@ name: Deploy Salud to AWS EC2
 on:
   push:
     branches:
-      - master
+      - teste-gha
 jobs:
   deploy:
     name: Deploy Salud to AWS EC2
