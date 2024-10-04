@@ -28,7 +28,7 @@ jobs:
       - name: Debug - List files in build directory
         run: ls -la build/
 
-      - name: Debug - Check disk usage
+      - name: Debug -- Check disk usage
         run: df -h
 
       - name: Debug - Check memory usage
