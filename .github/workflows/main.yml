@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: npm install 
 
-      - name: Load environment variables from .env file
+      - name: Load environment variables from .env.production file
         run: |
           if [ -f .env.production ]; then
             export $(cat .env.production | xargs)
