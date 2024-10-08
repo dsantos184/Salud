@@ -1,11 +1,11 @@
-name: Deploy Salud to AWS EC2
+name: Deploy Salud to AWS EC2 
 on:
   push:
     branches:
       - master
 jobs:
   deploy:
-    name: Deploy Salud to AWS EC2
+    name: Deploy Salud to AWS EC2 - ${{ github.event.created }}
     runs-on: self-hosted
     steps:
       - name: Checkout the files
