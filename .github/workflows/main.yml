@@ -41,11 +41,14 @@ jobs:
       - name: Install dependencies
         run: npm install 
       
-      - name: Debug - Check memory usage after install
+      - name: Debug - Check memory usage after npm install
         run: free -m
 
       - name: Build project with CI=false
         run: CI=false npm run build
+
+      - name: Debug - Check memory usage after build
+        run: free -m 
 
       - name: Debug - List files in build directory
         run: ls -la build/
