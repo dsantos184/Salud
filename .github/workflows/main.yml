@@ -33,10 +33,16 @@ jobs:
         run: echo "${{secrets.ENV_PRODUCTION}}" > .env.production
       
       - name: Update caniuse-lite database
-        run: npx update-browserslist-db@latest      
+        run: npx update-browserslist-db@latest    
+        
+      - name: Debug - Check memory usage before install
+        run: free -m
 
       - name: Install dependencies
-        run: npm install        
+        run: npm install 
+      
+      - name: Debug - Check memory usage after install
+        run: free -m
 
       - name: Build project with CI=false
         run: CI=false npm run build
@@ -47,7 +53,7 @@ jobs:
       - name: Debug -- Check disk usage
         run: df -h
 
-      - name: Debug - Check memory usage
+      - name: Debug - Check memory usage after build
         run: free -m 
 
       - name: Copy files with SSH
