@@ -34,30 +34,26 @@ jobs:
       
       - name: Update caniuse-lite database
         run: npx update-browserslist-db@latest    
-        
-      - name: Debug - Check memory usage before install
-        run: free -m
 
-      - name: Install dependencies
-        run: npm install 
+      - name: Monitor memory usage during npm install
+        run: |
+          (while true; do free -m; sleep 15; done) &
+          MONITOR_PID=$!
+          npm install
+          kill $MONITOR_PID
       
-      - name: Debug - Check memory usage after npm install
-        run: free -m
-
-      - name: Build project with CI=false
-        run: CI=false npm run build
-
-      - name: Debug - Check memory usage after build
-        run: free -m 
+      - name: Monitor memory usage during build
+        run: |
+          (while true; do free -m; sleep 15; done) &
+          MONITOR_PID=$!
+          CI=false npm run build
+          kill $MONITOR_PID
 
       - name: Debug - List files in build directory
         run: ls -la build/
 
       - name: Debug -- Check disk usage
         run: df -h
-
-      - name: Debug - Check memory usage after build
-        run: free -m 
 
       - name: Copy files with SSH
         uses: easingthemes/ssh-deploy@main
