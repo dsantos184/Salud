@@ -1,6 +1,9 @@
 import React, { Fragment} from 'react'
 
 const Footer = () => {
+
+    const currentYear = new Date().getFullYear();
+
     return (
         <Fragment>
             <section className="footer bg-dark-blue">
@@ -53,7 +56,7 @@ const Footer = () => {
             </section>
             <section className="copyright">
                 <div className="container text-center color-dark-blue">
-                    Copyright 2020. Todos os direitos reservados. Secuidae.
+                    Copyright {currentYear}. Todos os direitos reservados. Secuidae.
                 </div>
             </section>
         </Fragment>
