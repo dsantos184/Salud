@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import Combo from "../Combo/index"
 import axios from 'axios'
-import cors from 'cors'
-
+import config from './../../config'
 
 export default class Planos extends Component {
 
@@ -54,7 +53,7 @@ export default class Planos extends Component {
                         <div className="row">
                             <div className="col">
                                 <h2 className="color-red text-center">Benefícios</h2>
-                                <h3 className="color-white text-center">Escolha o seu combo:</h3>
+                                <h3 className="color-white text-center">As vantagens do {config.NOME_FANTASIA} são muitas!</h3>
                             </div>
                         </div>
 
@@ -65,7 +64,8 @@ export default class Planos extends Component {
                                     key={plano.id}
                                     comboId={plano.id}
                                     valor={plano.valor}
-                                    titulo={plano.plano}
+                                    /*titulo={plano.plano}*/
+                                    titulo="Benefícios"
                                     beneficios={plano.beneficios}
                                     idGetnet={plano.id_getnet}
                                     totalBeneficios={this.verificaMaiorQtdeBeneficios()}

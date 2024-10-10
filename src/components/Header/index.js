@@ -22,7 +22,7 @@ export default class Header extends Component
                                         <h1 className="display-4 color-light-blue titulo">Para Você</h1>
                                         <p className="lead color-white">Saúde e proteção para o bem de todos da sua família</p>
                                         <a className="btn bg-light-blue color-white btn-lg" href={`${process.env.REACT_APP_PUBLIC_URL}#como-funciona`}>Como funciona?</a>
-                                        <a className="btn bg-red color-white btn-lg" href={`${process.env.REACT_APP_PUBLIC_URL}#combos-home`}>Escolha o seu combo</a>
+                                        <a className="btn bg-red color-white btn-lg" style={{ marginLeft: 10 + 'px' }} href={`${process.env.REACT_APP_PUBLIC_URL}#combos-home`}>Escolha o seu combo</a>
                                     </div>
                                 </div>
                                 <div className="carousel-item container-carousel-empresa">
@@ -30,7 +30,7 @@ export default class Header extends Component
                                         <h1 className="display-4 color-light-blue titulo">Para sua empresa</h1>
                                         <p className="lead color-white">Saúde e proteção para o bem de todos os seus colaboradores</p>
                                         <a className="btn bg-light-blue color-white btn-lg" href={`${process.env.REACT_APP_PUBLIC_URL}#como-funciona`}>Como funciona?</a>
-                                        <a className="btn bg-red color-white btn-lg" href={`${process.env.REACT_APP_PUBLIC_URL}contato`}>Entre em contato</a>
+                                        <a className="btn bg-red color-white btn-lg" style={{ marginLeft: 10 + 'px' }} href={`${process.env.REACT_APP_PUBLIC_URL}contato`}>Entre em contato</a>
                                     </div>
                                 </div>
                             </div>

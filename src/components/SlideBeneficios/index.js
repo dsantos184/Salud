@@ -40,6 +40,8 @@ class SlideBeneficios extends Component {
         let data = await axios.get(process.env.REACT_APP_API_URL + "beneficios/listar")
             .then((resp) => resp.data);
 
+        console.log(data.dados)
+
         this.setState({ beneficios: data.dados })
     }
 
@@ -133,7 +135,7 @@ class SlideBeneficios extends Component {
 
                                                                 <div className='container-btn-beneficios'>
                                                                     <a className="btn bg-btn-plano-1 color-white btn-lg" href="#">Eu Quero</a>
-                                                                    <a className="btn bg-light-blue color-white btn-lg" target="_blank" href={`${beneficio.link}`}>Regulamento</a>
+                                                                    <a className="btn bg-light-blue color-white btn-lg" target="_blank" href={`${beneficio.link}`} rel="noreferrer">Regulamento</a>
                                                                     <a className="btn bg-red color-white btn-lg" href="#" onClick={this.onClick}>Cobertura</a>
                                                                 </div>
                                                             </div>

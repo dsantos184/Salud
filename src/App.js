@@ -8,7 +8,7 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import Routes from './Routes';
 
 import { Provider } from 'react-redux'
-import store from './store';
+import store from './store'; 
 
 export default class App extends Component {
 

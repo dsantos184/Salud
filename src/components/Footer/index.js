@@ -1,4 +1,5 @@
 import React, { Fragment} from 'react'
+import config from './../../config'
 
 const Footer = () => {
 
@@ -10,31 +11,31 @@ const Footer = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3">
-                            <img className="logo-footer" src="./imagens/logo.png" />
+                            <img className="logo-footer" src="./imagens/logo.png" alt="Logo" />
                             <p className="color-white">
-                                Avenida das Américas 12900, Loja SS106  <br />
-                                Barra da Tijuca, Rio de Janeiro, RJ<br />
-                                CEP: 22790-022
+                                {config.LOGRADOURO} {config.NUMERO}, {config.COMPLEMENTO}  <br />
+                                {config.BAIRRO}, {config.CIDADE}, {config.UF}<br />
+                                CEP: {config.CEP}
                             </p>
 
                             <div className="row">
 
                                 <div className="col-lg-12 col-sm-6">
                                     <div className="contato-footer">
-                                        <span className="color-white">CNPJ: 35.842.745/0001-82</span>
+                                        <span className="color-white">CNPJ: {config.CNPJ}</span>
                                     </div>
                                 </div>
 
 
                                 <div className="col-lg-12 col-sm-6">
                                     <div className="contato-footer">
-                                        <img src="./imagens/icone-telefone-footer.png" alt="telefone" /> <span className="color-white">(21) 3369-9571</span>
+                                        <img src="./imagens/icone-telefone-footer.png" alt="telefone" /> <span className="color-white">{config.TELEFONE}</span>
                                     </div>
                                 </div>
 
                                 <div className="col-lg-12 col-sm-6">
                                     <div className="contato-footer">
-                                        <img src="./imagens/icone-email-footer.png" alt="Facebook" /> <span className="color-white">atendimento@secuidae.com.br</span>
+                                        <img src="./imagens/icone-email-footer.png" alt="Facebook" /> <span className="color-white">{config.EMAIL}</span>
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +44,7 @@ const Footer = () => {
                         <div className="col-lg-6 menu-footer">
                             <h3 className="color-light-blue">Explore</h3>
                             <ul className="menu-footer">
-                                <li><a className="color-white" href="">Página Inicial</a></li>
+                                <li><a className="color-white" href={`${process.env.REACT_APP_PUBLIC_URL}`}>Página Inicial</a></li>
                                 <li><a className="color-white" href={`${process.env.REACT_APP_PUBLIC_URL}#beneficios`}>Benefícios</a></li>
                                 <li><a className="color-white" href={`${process.env.REACT_APP_PUBLIC_URL}#institucional`}>Institucional</a></li>
                                 <li><a className="color-white" href={`${process.env.REACT_APP_PUBLIC_URL}#combos-home`}>Combos</a></li>
@@ -56,7 +57,7 @@ const Footer = () => {
             </section>
             <section className="copyright">
                 <div className="container text-center color-dark-blue">
-                    Copyright {currentYear}. Todos os direitos reservados. Secuidae.
+                    Copyright {currentYear}. Todos os direitos reservados. {config.NOME_FANTASIA}.
                 </div>
             </section>
         </Fragment>

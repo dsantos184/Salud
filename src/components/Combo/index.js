@@ -20,9 +20,9 @@ export class Combo extends Component {
         let rows = [<li key={0}></li>]
 
         for (var i = 0; i < this.props.totalBeneficios; i++) {
-            if (this.props.beneficios[i] != undefined) {
+            if (this.props.beneficios[i] !== undefined) {
                 let nome = this.props.beneficios[i].nome
-                let id = this.props.beneficios[i].id
+                //let id = this.props.beneficios[i].id
                 rows.push(<li key={i}>{nome}</li>)
             }
             else {
@@ -39,7 +39,7 @@ export class Combo extends Component {
         }
 
         return (
-            <div className="col-lg-4 col-md-6">
+            <div className="col-lg-12 col-md-6">
                 <div className="box-plano">
                     <div className="topo-plano  text-center">
                         <svg id="Layer_1" data-name="Layer 1" className="shadow-svg-topo-plano" xmlns="http://www.w3.org/2000/svg"
@@ -98,7 +98,8 @@ export class Combo extends Component {
                                     )
                                 }}
                             >
-                                Quero este combo!
+                                Quero contratar agora!
+
                             </a>
                         </li>
                     </ul>
